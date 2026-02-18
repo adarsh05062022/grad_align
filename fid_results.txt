@@ -1,0 +1,28 @@
+unlearned_class7_v1_with_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_with_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED (N_real=3925, N_gen=1000)
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED (N_real=419, N_gen=100)
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = FAILED
+unlearned_class7_v1_without_angle_accumulation | ALL CLASSES | FID = 66.1726
+unlearned_class7_v1_without_angle_accumulation | FORGOTTEN CLASS ONLY | FID = 253.3791
+unlearned_class7_v1_with_angle_accumulation | ALL CLASSES | FID = 66.1726
+unlearned_class7_v1_with_angle_accumulation | FORGOTTEN CLASS ONLY | FID = 253.3791
+unlearned_class7_v1_with_angle_accumulation | ALL CLASSES | FID = 66.1726
+unlearned_class7_v1_with_angle_accumulation | FORGOTTEN CLASS ONLY | FID = 253.3791
+unlearned_class7_v1_with_angle_accumulation | ALL CLASSES | FID = 66.1726
+unlearned_class7_v1_with_angle_accumulation | FORGOTTEN CLASS ONLY | FID = 253.3791
