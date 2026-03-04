@@ -24,7 +24,7 @@ import random
 import cvxpy as cp
 
 
-TEXT_SOMETHING = "initial_formulation"
+TEXT_SOMETHING = "layer_importance_masking_50_precent_forget_80_percent_retain_per_epoch_mask"
 
 
 def l1_regularization(parameters):
@@ -33,52 +33,121 @@ def l1_regularization(parameters):
         params_vec.append(param.view(-1))
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
 
+def compute_dual_importance_mask(
+    model,
+    forget_dl,
+    remain_dl,
+    parameters,
+    descriptions,
+    class_to_forget,
+    beta,
+    device,
+    percent_forget=0.05,
+    percent_retain=0.5,  # bottom 50% retain importance allowed
+):
+    print("\n[Mask] Computing dual importance mask...")
+    model.eval()
+    criteria = torch.nn.MSELoss()
 
-def _stop_criteria(gtg, alpha_t, alpha_param, prvs_alpha_param):
-    return (
-        (alpha_param.value is None)
-        or (np.linalg.norm(gtg @ alpha_t - 1 / (alpha_t + 1e-10)) < 1e-3)
-        or (
-            np.linalg.norm(alpha_param.value - prvs_alpha_param.value)
-            < 1e-3
-        )
-    )
+    accum_grads_f = [torch.zeros_like(p) for p in parameters]
+    accum_grads_r = [torch.zeros_like(p) for p in parameters]
 
+    remain_iter = iter(remain_dl)
 
-def return_weights(grads, prvs_alpha, G_param, normalization_factor_param,
-                   alpha_param, prvs_alpha_param, prob):
-    G = torch.stack(tuple(v for v in grads.values()))
-    GTG = torch.mm(G, G.t())
-    normalization_factor = (
-        torch.norm(GTG).detach().cpu().numpy().reshape((1,)) + 1e-6
-        )
-    if (np.isnan(normalization_factor) | np.isinf(normalization_factor)).any():
-        normalization_factor = np.array([1.0])
-    GTG = GTG / normalization_factor.item()
-    gtg = GTG.cpu().detach().numpy()
-    G_param.value = gtg
-    normalization_factor_param.value = normalization_factor
+    for forget_images, forget_labels in tqdm(forget_dl):
 
-    optim_niter=100
-    alpha_t = prvs_alpha
-    for _ in range(optim_niter):
+        forget_images = forget_images.to(device)
+
         try:
-            alpha_param.value = alpha_t
-            prvs_alpha_param.value = alpha_t
-            # try:
-            prob.solve(solver=cp.ECOS, warm_start=True, max_iters=100)
-        except:
-            alpha_param.value = prvs_alpha_param.value
+            remain_images, remain_labels = next(remain_iter)
+        except StopIteration:
+            remain_iter = iter(remain_dl)
+            remain_images, remain_labels = next(remain_iter)
 
-        if _stop_criteria(gtg, alpha_t, alpha_param, prvs_alpha_param):
-            break
+        remain_images = remain_images.to(device)
 
-        alpha_t = alpha_param.value
-    if alpha_t is not None and not (np.isnan(alpha_t) | np.isinf(alpha_t)).any():
-        return alpha_t
-    else:
-        return prvs_alpha
+        # ---- Build prompts ----
+        forget_prompts = [descriptions[label] for label in forget_labels]
+        pseudo_prompts = [
+            descriptions[(int(class_to_forget) + 1) % 10]
+            for _ in forget_labels
+        ]
+        remain_prompts = [descriptions[label] for label in remain_labels]
 
+        # ---- FORGET LOSS ----
+        forget_batch = {"jpg": forget_images.permute(0,2,3,1), "txt": forget_prompts}
+        pseudo_batch = {"jpg": forget_images.permute(0,2,3,1), "txt": pseudo_prompts}
+
+        forget_input, forget_emb = model.get_input(forget_batch, model.first_stage_key)
+        pseudo_input, pseudo_emb = model.get_input(pseudo_batch, model.first_stage_key)
+
+        t = torch.randint(0, model.num_timesteps, (forget_input.shape[0],), device=device).long()
+        noise = torch.randn_like(forget_input)
+
+        forget_out = model.apply_model(
+            model.q_sample(forget_input, t, noise),
+            t,
+            forget_emb,
+        )
+        pseudo_out = model.apply_model(
+            model.q_sample(pseudo_input, t, noise),
+            t,
+            pseudo_emb,
+        ).detach()
+
+        loss_f = criteria(forget_out, pseudo_out) * beta
+
+        grads_f = torch.autograd.grad(loss_f, parameters, retain_graph=False, allow_unused=True)
+
+        for i, g in enumerate(grads_f):
+            if g is not None:
+                accum_grads_f[i] += g.detach()
+
+        # ---- RETAIN LOSS ----
+        remain_batch = {"jpg": remain_images.permute(0,2,3,1), "txt": remain_prompts}
+        loss_r = model.shared_step(remain_batch)[0]
+
+        grads_r = torch.autograd.grad(loss_r, parameters, retain_graph=False, allow_unused=True)
+
+        for i, g in enumerate(grads_r):
+            if g is not None:
+                accum_grads_r[i] += g.detach()
+
+    # ---- Build Masks ----
+    masks = []
+
+    for g_f, g_r in zip(accum_grads_f, accum_grads_r):
+
+        if g_f is None or g_r is None:
+            masks.append(None)
+            continue
+
+        imp_f = torch.abs(g_f)
+        imp_r = torch.abs(g_r)
+
+        flat_f = imp_f.view(-1)
+        flat_r = imp_r.view(-1)
+
+        # Top-k forget
+        k_f = int(percent_forget * flat_f.numel())
+        if k_f == 0:
+            masks.append(torch.zeros_like(g_f, dtype=torch.bool))
+            continue
+
+        thresh_f = torch.topk(flat_f, k_f).values[-1]
+        mask_f = imp_f >= thresh_f
+
+        # Bottom-k retain (low importance)
+        k_r = int(percent_retain * flat_r.numel())
+        thresh_r = torch.topk(flat_r, k_r, largest=False).values[-1]
+        mask_r = imp_r <= thresh_r
+
+        # Intersection
+        final_mask = mask_f & mask_r
+        masks.append(final_mask)
+
+    print("[Mask] Dual mask computed.\n")
+    return masks
 
 def MUNBa(
     class_to_forget,
@@ -114,89 +183,57 @@ def MUNBa(
     num_forget = len(forget_dl.dataset)
     logger.info(f"Number of unlearning datapoints: {num_forget}")
 
-    #### Convex Optimization Problem (bargaining game) Initialization ####
-    if args.munba:
-        n_tasks = 2 # K
-        init_gtg = np.eye(n_tasks) # G^T G: gradient matrix product, shape: [K, K]
-        G_param = cp.Parameter(shape=(n_tasks, n_tasks), value=init_gtg) # will be updated in-loop with the current GTG
-        normalization_factor_param = cp.Parameter(shape=(1,), value=np.array([1.0])) # will be updated in-loop with torch.norm(GTG).detach().cpu().numpy().reshape((1,))
-        alpha_param = cp.Variable(shape=(n_tasks,), nonneg=True) # current alpha, shape: [K,]
-        prvs_alpha = np.ones(n_tasks, dtype=np.float32) # alpha from iteration
-        prvs_alpha_param = cp.Parameter(shape=(n_tasks,), value=prvs_alpha) # shape: [K,]
-
-        # First-order approximation of Phi_alpha using Phi_alpha_(tao)
-        G_prvs_alpha = G_param @ prvs_alpha_param
-        prvs_phi_tag = 1 / prvs_alpha_param + (1 / G_prvs_alpha) @ G_param
-        phi_alpha = prvs_phi_tag @ (alpha_param - prvs_alpha_param)
-
-        # Beta(alpha)
-        G_alpha = G_param @ alpha_param
-        # Constraint: For any i, Phi_i_alpha >= 0
-        constraint = []
-        for i in range(n_tasks):
-            constraint.append(
-                -cp.log(alpha_param[i] * normalization_factor_param)
-                - cp.log(G_alpha[i])
-                <= 0
-            )
-
-        # Objective: Minimize sum(Phi_alpha) + Phi_alpha / normalization_factor_param
-        obj = cp.Minimize(
-            cp.sum(G_alpha) + phi_alpha / normalization_factor_param
-        )
-        prob = cp.Problem(obj, constraint)
-        logger.info("Convex optimization problem initialized.")
-        # prvs_alpha[0] = 1.0
-        # prvs_alpha[1] = 0.5
-    #####################################################
+        
 
     # choose parameters to train based on train_method
     parameters = []
-    for name, param in model.model.diffusion_model.named_parameters():
+    for param_name, param in model.model.diffusion_model.named_parameters():
         # train all layers except x-attns and time_embed layers
         if train_method == "noxattn":
             if name.startswith("out.") or "attn2" in name or "time_embed" in name:
                 pass
             else:
-                # print(name)
+                # print(param_name)
                 parameters.append(param)
         # train only self attention layers
         if train_method == "selfattn":
-            if "attn1" in name:
-                print(name)
+            if "attn1" in param_name:
+                print(param_name)
                 parameters.append(param)
         # train only x attention layers
         if train_method == "xattn":
-            if "attn2" in name:
-                # print(name)
+            if "attn2" in param_name:
+                # print(param_name)
                 parameters.append(param)
         # train all layers
         if train_method == "full":
-            # print(name)
+            # print(param_name)
             parameters.append(param)
         # train all layers except time embed layers
         if train_method == "notime":
-            if not (name.startswith("out.") or "time_embed" in name):
-                print(name)
+            if not (param_name.startswith("out.") or "time_embed" in param_name):
+                print(param_name)
                 parameters.append(param)
         if train_method == "xlayer":
-            if "attn2" in name:
-                if "output_blocks.6." in name or "output_blocks.8." in name:
-                    print(name)
+            if "attn2" in param_name:
+                if "output_blocks.6." in param_name or "output_blocks.8." in param_name:
+                    print(param_name)
                     parameters.append(param)
         if train_method == "selflayer":
-            if "attn1" in name:
-                if "input_blocks.4." in name or "input_blocks.7." in name:
-                    print(name)
+            if "attn1" in param_name:
+                if "input_blocks.4." in param_name or "input_blocks.7." in param_name:
+                    print(param_name)
                     parameters.append(param)
 
     # set model to train
+
+    # ----------------------------------------------------
     model.train()
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
     
     if mask_path:
-        mask = torch.load(mask_path)
+        masks = torch.load(mask_path)
         name = f"compvis-cls_{class_to_forget}-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
     else:
         name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
@@ -205,20 +242,53 @@ def MUNBa(
     step = 0
     epoch_times = []
 
-    #############################
-    # moving average initialization
-    angle_ema = torch.tensor(0.0, device=device)
-    angle_step = 0
-    beta_angle = 0.95
-    ###############################
+
     for epoch in range(epochs):
         epoch_start_time = time.time()
         logger.info(f"Epoch {epoch+1}/{epochs} started")
+        logger.info(f"\n===== Recomputing mask at epoch {epoch+1} =====")
+
+        model.eval()
+        forget_masks = compute_dual_importance_mask(
+        model,
+        forget_dl,
+        remain_dl,
+        parameters,
+        descriptions,
+        class_to_forget,
+        beta,
+        device,
+        percent_forget=0.5,  # top 5% of gradients for forget importance
+        percent_retain=0.8,  # bottom 40% of gradients for retain importance (low importance allowed to be forgotten
+        )
+        logger.info(f"Dual importance masks computed for all layers. Starting training with MUNBa...")
+        logger.info(f"Masking method: {TEXT_SOMETHING} | Percent forget: 50% | Percent retain: 80%")
+
+        # Optional: print mask density
+        total = 0
+        active = 0
+        for m in forget_masks:
+            if m is not None:
+                total += m.numel()
+                active += m.sum().item()
+
+        density = active / total if total > 0 else 0
+        logger.info(f"Mask density: {density:.6f}")
+        torch.cuda.empty_cache()
+        gc.collect()
+        model.train()
+
         with tqdm(total=len(forget_dl)) as time_1:
             model.train()
+            # forget_iter = iter(forget_dl)
             remain_iter = iter(remain_dl)
+            
 
-            for i, (forget_images, forget_labels) in enumerate(forget_dl):
+            for i, (forget_images, forget_labels) in enumerate(forget_dl):   
+                alpha_r_vals = []
+                alpha_f_vals = [] 
+                grad_r_vals = []
+                grad_f_vals = [] 
                 model.train()
                 optimizer.zero_grad()
                 
@@ -273,65 +343,102 @@ def MUNBa(
 
                 #####################################################
                 if args.munba:
-                    # compute gradient for each task
-                    grads = {}
-                    for task, loss in zip([0, 1], [loss_r, loss_u]):
-                        optimizer.zero_grad()
-                        grad = torch.autograd.grad(loss, parameters, retain_graph=True)
-                        grads[task] = torch.cat([torch.flatten(g.detach()) for g in grad])
-
-                    # ############# [1] Choose to use the iterative solution
-                    # prvs_alpha = return_weights(grads, prvs_alpha, G_param, normalization_factor_param,
-                    #                             alpha_param, prvs_alpha_param, prob)
-                    # print(f'prvs_alpha: {prvs_alpha}')
-                    # if np.all(prvs_alpha == 1): # Bargaining failed
-                    #     # continue
-                    #     loss = loss_r + loss_u * 0.5
-                    # else:
-                    #     loss = loss_r * prvs_alpha[0] + loss_u * prvs_alpha[1]
-
-                    ############ [2] Choose to use the closed-form solution
-
-                    # Original
-
-                    g1 = torch.dot(grads[0], grads[0])
-                    g2 = torch.dot(grads[0], grads[1])
-                    g3 = torch.dot(grads[1], grads[1])
-                    prvs_alpha[0] = torch.sqrt( (g1*g3 - g2*torch.sqrt(g1*g3)) / (g1*g1*g3 - g1*g2*g2 + 1e-8) )
-                    prvs_alpha[1] = (1 - g1 * prvs_alpha[0] * prvs_alpha[0]) / (g2*prvs_alpha[0] + 1e-8)
                     
-
-
-                    
-
-
-
-                    if prvs_alpha[0] > 0 and prvs_alpha[1] > 0: # Bargaining succeeded
-                        loss = loss_r * prvs_alpha[0] + loss_u * prvs_alpha[1]
+                    if with_l1:
+                        current_alpha = alpha * (1 - epoch / epochs)
+                        l1_loss = current_alpha * l1_regularization(parameters)
+                        loss_r_total = loss_r + l1_loss
                     else:
-                        # continue
-                        loss = loss_r + loss_u * 0.5
+                        loss_r_total = loss_r
+
+                    grads_r = torch.autograd.grad(loss_r_total, parameters, retain_graph=True,allow_unused=True)
+                    grads_f = torch.autograd.grad(loss_u, parameters, allow_unused=True)
+
+                    eps = 1e-8
+                    xi = 1e-8
+
+                    layerwise_updates = []
+
+                    for layer_index, (gr, gf, p) in enumerate(zip(grads_r, grads_f, parameters)):
+
+                        if gr is None or gf is None:
+                            layerwise_updates.append(None)
+                            continue
+
+                        gr_flat = gr.view(-1)
+                        gf_flat = gf.view(-1)
+
+                        norm_gr = torch.clamp(torch.norm(gr_flat), min=1e-6)
+                        norm_gf = torch.clamp(torch.norm(gf_flat), min=1e-6)
+
+                        cos_phi = torch.dot(gr_flat, gf_flat) / (norm_gr * norm_gf)
+                        cos_phi = torch.clamp(cos_phi, -1.0 + 1e-6, 1.0 - 1e-6)
+
+                        sin_sq_phi = 1.0 - cos_phi**2
+                        sin_sq_phi = torch.clamp(sin_sq_phi, min=0.0)
+
+                        
+                        if sin_sq_phi < 1e-6:
+                            alpha_r_l = 0.5 / norm_gr
+                            alpha_f_l = 0.5 / norm_gf
+                        else:
+                            alpha_r_l = (1.0 / norm_gr) * torch.sqrt(
+                                (1.0 - cos_phi) / (sin_sq_phi + xi)
+                            )
+                            alpha_f_l = (1.0 / norm_gf) * torch.sqrt(
+                                sin_sq_phi / (1.0 - cos_phi + xi)
+                            )
+
+                        
+                        alpha_r_vals.append(alpha_r_l.item())
+                        alpha_f_vals.append(alpha_f_l.item())
+
+                        grad_r_vals.append(alpha_r_l.item() * norm_gr.item())
+                        grad_f_vals.append(alpha_f_l.item() * norm_gf.item())
+
+                        g_tilde = alpha_r_l * gr + alpha_f_l * gf
+
+                        mask = forget_masks[layer_index]
+
+                        if mask is not None:
+                            g_masked = torch.zeros_like(g_tilde)
+                            g_masked[mask] = g_tilde[mask]
+                            layerwise_updates.append(g_masked)
+                        else:
+                            layerwise_updates.append(None)   
+                  
+                    avg_alpha_r = np.mean(alpha_r_vals)
+                    avg_alpha_f = np.mean(alpha_f_vals)
+
+                    avg_grad_r = np.mean(grad_r_vals)
+                    avg_grad_f = np.mean(grad_f_vals)
+
+                    loss = loss_r + loss_u 
                 #####################################################
                 else:
                     loss = loss_r + args.lam * loss_u
 
-                optimizer.zero_grad()
-                if with_l1:
-                    current_alpha = alpha * (1 - epoch / (epochs))
-                    loss = loss + current_alpha * l1_regularization(parameters)
-                loss.backward()
-                nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                if args.munba:
+                    optimizer.zero_grad()
+                    for p, g_tilde in zip(parameters, layerwise_updates):
+                        if g_tilde is not None:
+                            p.grad = g_tilde
+                else:
+                    optimizer.zero_grad()
+                    loss.backward()
+
+                nn.utils.clip_grad_norm_(parameters, 1.0)
+                optimizer.step()
+
                 losses.append(loss.item() / batch_size)
 
-                optimizer.step()
                 step += 1
                 torch.cuda.empty_cache()
                 gc.collect()
 
                 if (step+1) % 10 == 0:
                     if args.munba:
-                        logger.info(f"step: {step},alpha[0]: {prvs_alpha[0]:.4f},alpha[1]: {prvs_alpha[1]:.4f},loss: {loss:.4f}, loss: {loss:.4f}, loss_r: {loss_r * prvs_alpha[0]:.4f}, loss_u: {loss_u * prvs_alpha[1]:.4f}")
-
+                        logger.info(f"step: {step}, avg_alpha_r: {avg_alpha_r:.4f}, avg_alpha_f: {avg_alpha_f:.4f}, avg_grad_r: {avg_grad_r:.4f}, avg_grad_f: {avg_grad_f:.4f}, loss: {loss.item():.4f}, loss_r: {loss_r.item():.4f}, loss_u: {loss_u.item():.4f}")
                     else:
                         logger.info(f"step: {step}, loss: {loss:.4f}, loss_r: {loss_r:.4f}, loss_u: {args.lam * loss_u:.4f}")
                     save_history(losses, name, classes)
@@ -347,7 +454,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch%2==0 and epoch != epochs - 1:
+            if epoch%1==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -443,7 +550,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="3",
+        default="2",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -498,7 +605,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="6",
+        default="2",
     )
     parser.add_argument(
         "--image_size",
@@ -519,7 +626,7 @@ if __name__ == "__main__":
     ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
     parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--beta", type=float, default=0.5)
+    parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--alpha", type=float, default=1e-4)
 
     args = parser.parse_args()

@@ -1,3 +1,4 @@
+#merge_before_after.py
 import os
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
@@ -77,7 +78,7 @@ for idx in range(0, len(base_imgs), IMAGES_PER_FIG):
         draw.text((x + 5, CAPTION_HEIGHT + h + 5), "Unlearned", fill="green", font=font)
 
     out_path = os.path.join(
-        OUTPUT_DIR, f"with_only_norm_accumulation_beta_0-95_E5_.png"
+        OUTPUT_DIR, f"with_one_time_mask_.png"
     )
     canvas.save(out_path)
     print(f"Saved {out_path}")

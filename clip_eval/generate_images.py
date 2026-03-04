@@ -9,7 +9,7 @@ from tqdm import tqdm
 BASE_MODEL = "CompVis/stable-diffusion-v1-4"
 
 PROMPT_FILE = "prompts_nsfw.txt"
-PROMPT_FILE = "classwise_prompts.txt"
+# PROMPT_FILE = "classwise_prompts.txt"
 # PROMPT_FILE = "prompts_style.txt"
 
 SEED = 43
@@ -29,7 +29,7 @@ RUNS = [
     # },
     {
         "name": "unlearned",
-        "unet_ckpt": "/storage/s25017/MUNBa/SD/models/compvis-cls_5-MUNBa-method_full-lr_1e-05_E3_U956_with_ema_only_applied_norm_ema_beta_0-95/diffusers-cls_5-MUNBa-method_full-lr_1e-05_E3_U956_with_ema_only_applied_norm_ema_beta_0-95.pt",
+        "unet_ckpt": "/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_xattn-lr_1e-05_E5_U2256_layer_importance_masking_40_precent_forget_60_percent_retain_mask/diffusers-nsfw-MUNBa-method_xattn-lr_1e-05_E5_U2256_layer_importance_masking_40_precent_forget_60_percent_retain_mask-epoch_2.pt",
         "out_dir": "images_unlearned",
     },
 ]

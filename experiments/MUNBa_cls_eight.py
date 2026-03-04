@@ -1,3 +1,4 @@
+# Top k% masking with one time nash calculation
 import argparse
 import os
 from time import sleep
@@ -21,10 +22,10 @@ import gc
 import time
 import random
 
-import cvxpy as cp
 
 
-TEXT_SOMETHING = "layer_wise_Beta_0_9"
+
+TEXT_SOMETHING = "layer_importance_masking_10_percent_per_epoch_mask_fisher_once_nash_softmax_updated"
 
 
 def l1_regularization(parameters):
@@ -32,6 +33,204 @@ def l1_regularization(parameters):
     for param in parameters:
         params_vec.append(param.view(-1))
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
+
+
+def flatten_grads(parameters, grads):
+    """
+    Flatten ALL grads into ONE contiguous tensor.
+    Zero-fills missing grads so indexing stays aligned with global_mask_flat.
+    """
+    parts = []
+    for p, g in zip(parameters, grads):
+        if g is not None:
+            parts.append(g.detach().reshape(-1))
+        else:
+            parts.append(torch.zeros(p.numel(), device=p.device))
+    return torch.cat(parts)  # single contiguous tensor
+
+
+def unpack_update_to_grads(parameters, flat_update, numel_list):
+    """
+    Write flat_update back into p.grad in one pass.
+    """
+    offset = 0
+    for p, numel in zip(parameters, numel_list):
+        chunk = flat_update[offset:offset + numel].view_as(p)
+        if p.grad is None:
+            p.grad = chunk.clone()
+        else:
+            p.grad.copy_(chunk)
+        offset += numel
+
+
+def compute_dual_importance_mask(
+    model,
+    forget_dl,
+    remain_dl,
+    parameters,
+    descriptions,
+    class_to_forget,
+    beta,
+    device,
+    target_density = 0.05,        # exact % parameters to update per layer
+    lambda_tradeoff = 1.0 
+):
+    logger.info("Lambda tradeoff for Nash weighting: %.2f", lambda_tradeoff)
+       
+    print("\n[Mask] Computing dual importance mask...")
+    model.eval()
+    criteria = torch.nn.MSELoss()
+
+    accum_fisher_f = [torch.zeros_like(p) for p in parameters]
+    accum_fisher_r = [torch.zeros_like(p) for p in parameters]
+
+    remain_iter = iter(remain_dl)
+
+    for forget_images, forget_labels in tqdm(forget_dl):
+
+        forget_images = forget_images.to(device)
+
+        try:
+            remain_images, remain_labels = next(remain_iter)
+        except StopIteration:
+            remain_iter = iter(remain_dl)
+            remain_images, remain_labels = next(remain_iter)
+
+        remain_images = remain_images.to(device)
+
+        # ---- Build prompts ----
+        forget_prompts = [descriptions[label] for label in forget_labels]
+        pseudo_prompts = [
+            descriptions[(int(class_to_forget) + 1) % 10]
+            for _ in forget_labels
+        ]
+        remain_prompts = [descriptions[label] for label in remain_labels]
+
+        # ---- FORGET LOSS ----
+        forget_batch = {"jpg": forget_images.permute(0,2,3,1), "txt": forget_prompts}
+        pseudo_batch = {"jpg": forget_images.permute(0,2,3,1), "txt": pseudo_prompts}
+
+        forget_input, forget_emb = model.get_input(forget_batch, model.first_stage_key)
+        pseudo_input, pseudo_emb = model.get_input(pseudo_batch, model.first_stage_key)
+
+        t = torch.randint(0, model.num_timesteps, (forget_input.shape[0],), device=device).long()
+        noise = torch.randn_like(forget_input)
+
+        forget_out = model.apply_model(
+            model.q_sample(forget_input, t, noise),
+            t,
+            forget_emb,
+        )
+        pseudo_out = model.apply_model(
+            model.q_sample(pseudo_input, t, noise),
+            t,
+            pseudo_emb,
+        ).detach()
+
+        loss_f = criteria(forget_out, pseudo_out) * beta
+
+        grads_f = torch.autograd.grad(loss_f, parameters, retain_graph=False, allow_unused=True)
+
+        del forget_out, pseudo_out, forget_input, pseudo_input, loss_f
+
+        for i, g in enumerate(grads_f):
+            if g is not None:
+                accum_fisher_f[i] += g.detach() ** 2
+
+        # ---- RETAIN LOSS ----
+        remain_batch = {"jpg": remain_images.permute(0,2,3,1), "txt": remain_prompts}
+        loss_r = model.shared_step(remain_batch)[0]
+
+        grads_r = torch.autograd.grad(loss_r, parameters, retain_graph=False, allow_unused=True)
+
+        for i, g in enumerate(grads_r):
+            if g is not None:
+                accum_fisher_r[i] += g.detach() ** 2
+
+        del loss_r, grads_r  # Explicit cleanup
+
+    num_batches = len(forget_dl)
+
+    for i in range(len(accum_fisher_f)):
+        accum_fisher_f[i] /= num_batches
+        accum_fisher_r[i] /= num_batches
+
+    # ---- GLOBAL TOP-K MASKING ----
+
+    all_scores = []
+    layer_shapes = []
+
+    # First pass: compute scores and store flattened versions
+    for g_f, g_r in zip(accum_fisher_f, accum_fisher_r):
+
+        if g_f is None or g_r is None:
+            all_scores.append(None)
+            layer_shapes.append(None)
+            continue
+
+        # Z-score normalization
+        mu_f = g_f.mean()
+        std_f = g_f.std()
+
+        mu_r = g_r.mean()
+        std_r = g_r.std()
+
+        z_f = (g_f - mu_f) / (std_f + 1e-8)
+        z_r = (g_r - mu_r) / (std_r + 1e-8)
+
+        score = z_f - lambda_tradeoff * z_r
+
+        all_scores.append(score.view(-1))
+        layer_shapes.append(score.shape)
+
+    # Concatenate all layer scores
+    valid_scores = [s for s in all_scores if s is not None]
+    global_scores = torch.cat(valid_scores)
+    logger.info(f"Global scores computed. Total parameters considered: {global_scores.numel()}")
+
+    
+
+    # Global top-k
+    k = int(target_density * global_scores.numel())
+
+    if k == 0:
+        return [None] * len(accum_fisher_f),None
+
+    # ---- Normalize scores ----
+    scores_norm = global_scores - global_scores.mean()
+    scores_norm = scores_norm / (global_scores.std() + 1e-8)
+
+    temperature = 0.1
+
+    # ---- Add Gumbel noise (NO multinomial) ----
+    gumbel_noise = -torch.log(-torch.log(torch.rand_like(scores_norm) + 1e-8) + 1e-8)
+
+    noisy_scores = scores_norm / temperature + gumbel_noise
+
+    # ---- Select top-k deterministically ----
+    indices = torch.topk(noisy_scores, k).indices
+
+    mask_flat = torch.zeros_like(global_scores, dtype=torch.bool)
+    mask_flat[indices] = True
+
+    # ---- Build masks per layer ----
+    masks = []
+    start = 0 
+    for score_flat, shape in zip(all_scores, layer_shapes):
+
+        if score_flat is None:
+            masks.append(None)
+            continue
+
+        numel = score_flat.numel()
+        layer_mask_flat = mask_flat[start:start + numel]
+        masks.append(layer_mask_flat.view(shape))
+
+        start += numel
+    print("[Mask] Dual mask computed.\n")
+    del accum_fisher_f, accum_fisher_r, all_scores, global_scores
+    torch.cuda.empty_cache()
+    return masks,mask_flat
 
 def MUNBa(
     class_to_forget,
@@ -74,7 +273,7 @@ def MUNBa(
     for param_name, param in model.model.diffusion_model.named_parameters():
         # train all layers except x-attns and time_embed layers
         if train_method == "noxattn":
-            if name.startswith("out.") or "attn2" in name or "time_embed" in name:
+            if param_name.startswith("out.") or "attn2" in param_name or "time_embed" in param_name:
                 pass
             else:
                 # print(param_name)
@@ -110,37 +309,63 @@ def MUNBa(
                     parameters.append(param)
 
     # set model to train
+
+    # ----------------------------------------------------
     model.train()
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
     
-    if mask_path:
-        mask = torch.load(mask_path)
-        name = f"compvis-cls_{class_to_forget}-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
-    else:
-        name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
+    
+    name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
 
     # TRAINING CODE
     step = 0
     epoch_times = []
+    # Pre-compute numel_list once — reused every step
+    numel_list = [p.numel() for p in parameters]
 
+    # Compute mask ONCE before training, not inside epoch loop
+    logger.info("Computing importance mask (once, before training)...")
+    mask_start_time = time.time()
+    model.eval()
+    mask, mask_flat = compute_dual_importance_mask(
+        model,
+        forget_dl,
+        remain_dl,
+        parameters,
+        descriptions,
+        class_to_forget,
+        beta,
+        device,
+        target_density=0.10,
+        lambda_tradeoff=1.0
+    )
+    mask_time = time.time() - mask_start_time
+    logger.info(f"Mask computed in {mask_time:.2f}s ({mask_time/60:.2f} min)")
+
+    total = mask_flat.numel()
+    active = mask_flat.sum().item()
+    logger.info(f"Mask density: {active/total:.6f} ({active}/{total} params active)")
+    model.train()
+
+
+
+    logger.info(f"Dual importance masks computed for all layers. Starting training with MUNBa...")
 
     for epoch in range(epochs):
         epoch_start_time = time.time()
         logger.info(f"Epoch {epoch+1}/{epochs} started")
+        
+
         with tqdm(total=len(forget_dl)) as time_1:
-            model.train()
+            # model.train()
             # forget_iter = iter(forget_dl)
             remain_iter = iter(remain_dl)
             
 
             for i, (forget_images, forget_labels) in enumerate(forget_dl):   
-                alpha_r_vals = []
-                alpha_f_vals = [] 
-                grad_r_vals = []
-                grad_f_vals = [] 
+                
                 model.train()
-                optimizer.zero_grad()
                 
 
                 try:
@@ -193,6 +418,13 @@ def MUNBa(
 
                 #####################################################
                 if args.munba:
+                    alpha_r = torch.tensor(0.0, device=device)
+                    alpha_f = torch.tensor(0.0, device=device)
+                    grad_r_norm = 0.0
+                    grad_f_norm = 0.0
+                    cos_value = 0.0
+                    update_norm = 0.0
+                    optimizer.zero_grad()
                     
                     if with_l1:
                         current_alpha = alpha * (1 - epoch / epochs)
@@ -201,91 +433,109 @@ def MUNBa(
                     else:
                         loss_r_total = loss_r
 
-                    grads_r = torch.autograd.grad(loss_r_total, parameters, retain_graph=True,allow_unused=True)
+                    grads_r = torch.autograd.grad(loss_r_total, parameters,allow_unused=True)
                     grads_f = torch.autograd.grad(loss_u, parameters, allow_unused=True)
 
-                    eps = 1e-8
-                    xi = 1e-8
+                    grads_r = [g.detach() if g is not None else None for g in grads_r]
+                    grads_f = [g.detach() if g is not None else None for g in grads_f]
 
-                    layerwise_updates = []
 
-                    for gr, gf, p in zip(grads_r, grads_f, parameters):
 
-                        if gr is None or gf is None:
-                            layerwise_updates.append(None)
-                            continue
+                    # FIX: ONE flatten → ONE gather → compute Nash → ONE scatter
+                    # Replaces 2*N gather + N cat + 2*N scatter across layers
 
-                        gr_flat = gr.view(-1)
-                        gf_flat = gf.view(-1)
+                    # Step A: flatten all grads into two contiguous vectors
+                    gr_flat = flatten_grads(parameters, grads_r)
+                    gf_flat = flatten_grads(parameters, grads_f)
 
-                        norm_gr = torch.clamp(torch.norm(gr_flat), min=1e-6)
-                        norm_gf = torch.clamp(torch.norm(gf_flat), min=1e-6)
+                    # Step B: ONE boolean index on contiguous memory
+                    gr_masked = gr_flat[mask_flat]
+                    gf_masked = gf_flat[mask_flat]
 
-                        cos_phi = torch.dot(gr_flat, gf_flat) / (norm_gr * norm_gf)
-                        cos_phi = torch.clamp(cos_phi, -1.0 + 1e-6, 1.0 - 1e-6)
+                    if gr_masked.numel() == 0:
+                        del gr_flat, gf_flat, gr_masked, gf_masked
+                        continue
 
-                        sin_sq_phi = 1.0 - cos_phi**2
+                    # Step C: Nash weight computation (identical logic)
+                    norm_gr = torch.clamp(torch.norm(gr_masked), min=1e-6)
+                    norm_gf = torch.clamp(torch.norm(gf_masked), min=1e-6)
+                    cos_phi = torch.clamp(
+                        torch.dot(gr_masked, gf_masked) / (norm_gr * norm_gf),
+                        -1.0 + 1e-6, 1.0 - 1e-6
+                    )
+                    sin_sq_phi = torch.clamp(1.0 - cos_phi ** 2, min=0.0)
 
-                        # coeff = torch.sqrt((1.0 - cos_phi) / (sin_sq_phi + xi))
-                        if sin_sq_phi < 1e-6:
-                            alpha_r_l = 0.5 / norm_gr
-                            alpha_f_l = 0.5 / norm_gf
-                        else:
-                            coeff = torch.sqrt((1.0 - cos_phi) / (sin_sq_phi + xi))
-                            alpha_r_l = coeff / norm_gr
-                            alpha_f_l = coeff / norm_gf
+                    grad_r_norm = norm_gr.item()
+                    grad_f_norm = norm_gf.item()
+                    cos_value = cos_phi.item()
 
-                        
-                        alpha_r_vals.append(alpha_r_l.item())
-                        alpha_f_vals.append(alpha_f_l.item())
+                    if sin_sq_phi < 1e-6:
+                        alpha_r = 0.5 / norm_gr
+                        alpha_f = 0.5 / norm_gf
+                    else:
+                        alpha_r = (1.0 / norm_gr) * torch.sqrt(
+                            (1.0 - cos_phi) / (sin_sq_phi + 1e-8)
+                        )
+                        alpha_f = (1.0 / norm_gf) * torch.sqrt(
+                            sin_sq_phi * (1.0 - cos_phi)
+                        )
 
-                        grad_r_vals.append(alpha_r_l.item() * norm_gr.item())
-                        grad_f_vals.append(alpha_f_l.item() * norm_gf.item())
+                    update_norm = torch.norm(alpha_r * gr_masked + alpha_f * gf_masked).item()
 
-                        g_tilde = alpha_r_l * gr + alpha_f_l * gf
+                    # Step D: build full update vector, zeros outside mask
+                    update_full = torch.zeros_like(gr_flat)
+                    update_full[mask_flat] = alpha_r * gr_masked + alpha_f * gf_masked
 
-                        layerwise_updates.append(g_tilde)       
-                  
-                    avg_alpha_r = np.mean(alpha_r_vals)
-                    avg_alpha_f = np.mean(alpha_f_vals)
+                    del gr_flat, gf_flat, gr_masked, gf_masked
 
-                    avg_grad_r = np.mean(grad_r_vals)
-                    avg_grad_f = np.mean(grad_f_vals)
+                    # Step E: ONE unpack into p.grad — replaces N per-layer scatter ops
+                    unpack_update_to_grads(parameters, update_full, numel_list)
+                    del update_full
+
+
+                    
 
                     loss = loss_r + loss_u 
                 #####################################################
                 else:
                     loss = loss_r + args.lam * loss_u
 
-                if args.munba:
-                    optimizer.zero_grad()
-                    for p, g_tilde in zip(parameters, layerwise_updates):
-                        if g_tilde is not None:
-                            p.grad = g_tilde
-                else:
-                    optimizer.zero_grad()
-                    loss.backward()
-
+                
                 nn.utils.clip_grad_norm_(parameters, 1.0)
                 optimizer.step()
 
                 losses.append(loss.item() / batch_size)
 
                 step += 1
-                torch.cuda.empty_cache()
-                gc.collect()
+                
 
-                if (step+1) % 10 == 0:
-                    if args.munba:
-                        logger.info(f"step: {step}, avg_alpha_r: {avg_alpha_r:.4f}, avg_alpha_f: {avg_alpha_f:.4f}, avg_grad_r: {avg_grad_r:.4f}, avg_grad_f: {avg_grad_f:.4f}, loss: {loss.item():.4f}, loss_r: {loss_r.item():.4f}, loss_u: {loss_u.item():.4f}")
-                    else:
-                        logger.info(f"step: {step}, loss: {loss:.4f}, loss_r: {loss_r:.4f}, loss_u: {args.lam * loss_u:.4f}")
-                    save_history(losses, name, classes)
+                if (step+1) % 20 == 0:
+                    logger.info(
+                        f"step: {step}, "
+                        f"alpha_r: {alpha_r.item():.4f}, "
+                        f"alpha_f: {alpha_f.item():.4f}, "
+                        f"||g_r||: {grad_r_norm:.4f}, "
+                        f"||g_f||: {grad_f_norm:.4f}, "
+                        f"cos: {cos_value:.4f}, "
+                        f"||update||: {update_norm:.4f}, "
+                        f"loss: {loss.item():.4f}, "
+                        f"loss_r: {loss_r.item():.4f}, "
+                        f"loss_u: {loss_u.item():.4f}"
+                    )
+                    # save_history(losses, name, classes)
+                if step % 50 == 0:
+                    torch.cuda.empty_cache()
+                    gc.collect()
 
                 time_1.set_description("Epoch %i" % epoch)
                 time_1.set_postfix(loss=loss.item() / batch_size)
                 sleep(0.1)
                 time_1.update(1)
+            del grads_r, grads_f
+
+            torch.cuda.empty_cache()
+            gc.collect()
+            
             epoch_time = time.time() - epoch_start_time
             epoch_times.append(epoch_time)
             logger.info(
@@ -293,7 +543,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+            if epoch%2==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -389,10 +639,10 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="5",
+        default="3",
     )
     parser.add_argument(
-        "--train_method", help="method of training", type=str, required=False,default="xattn"
+        "--train_method", help="method of training", type=str, required=False,default="full"
     )
     parser.add_argument(
         "--batch_size",
@@ -402,7 +652,7 @@ if __name__ == "__main__":
         default=4,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=3
+        "--epochs", help="epochs used to train", type=int, required=False, default=5
     )
     parser.add_argument(
         "--lr",
@@ -444,7 +694,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="5",
+        default="0",
     )
     parser.add_argument(
         "--image_size",
@@ -465,8 +715,9 @@ if __name__ == "__main__":
     ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
     parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--beta", type=float, default=0.9)
+    parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--alpha", type=float, default=1e-4)
+    parser.add_argument("--lam", type=float, default=0.5)
 
     args = parser.parse_args()
     logger, log_file = setup_logger(name=f"MUNBa_class_to_forgot{args.class_to_forget}")

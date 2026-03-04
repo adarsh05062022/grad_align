@@ -219,7 +219,8 @@ def setup_remain_data(
     )
 
     remain_indices = [
-        i for i, (_, y) in enumerate(dataset) if y != class_to_forget
+    i for i in range(len(dataset._samples))
+    if dataset._samples[i][1] != class_to_forget
     ]
 
     remain_dataset = Subset(dataset, remain_indices)
@@ -235,7 +236,7 @@ def setup_remain_data(
         remain_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=8,
+        num_workers=4,
         pin_memory=True,
         persistent_workers=True,
     )
@@ -265,7 +266,8 @@ def setup_forget_data(
     )
 
     forget_indices = [
-        i for i, (_, y) in enumerate(dataset) if y == class_to_forget
+    i for i in range(len(dataset._samples))
+    if dataset._samples[i][1] == class_to_forget
     ]
 
     forget_dataset = Subset(dataset, forget_indices)
@@ -281,7 +283,7 @@ def setup_forget_data(
         forget_dataset,
         batch_size=batch_size,
         shuffle=True,
-        num_workers=8,
+        num_workers=4,
         pin_memory=True,
         persistent_workers=True,
     )

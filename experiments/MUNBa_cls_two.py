@@ -12,7 +12,7 @@ from train_scripts.dataset import (
     setup_model,
     setup_forget_data,
     setup_remain_data,
-)   
+)
 from tqdm import tqdm
 
 from logger.logger import setup_logger
@@ -24,7 +24,7 @@ import random
 import cvxpy as cp
 
 
-TEXT_SOMETHING = "with_ema_slug"
+TEXT_SOMETHING = "layer_importance_masking_5_precent_forget_mask"
 
 
 def l1_regularization(parameters):
@@ -33,10 +33,103 @@ def l1_regularization(parameters):
         params_vec.append(param.view(-1))
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
 
+def compute_topk_forget_mask(
+    model,
+    forget_dl,
+    parameters,
+    descriptions,
+    class_to_forget,
+    beta,
+    device,
+    percent=0.05,
+):
+    print(f"\n[Mask] Computing top {percent*100}% forget-important weights...")
+    model.eval()
+    criteria = torch.nn.MSELoss()
 
+    accum_grads = [torch.zeros_like(p) for p in parameters]
 
+    for forget_images, forget_labels in tqdm(forget_dl):
 
+        forget_images = forget_images.to(device)
 
+        forget_prompts = [
+            descriptions[label] for label in forget_labels
+        ]
+
+        pseudo_prompts = [
+            descriptions[(int(class_to_forget) + 1) % 10]
+            for _ in forget_labels
+        ]
+
+        forget_batch = {
+            "jpg": forget_images.permute(0, 2, 3, 1),
+            "txt": forget_prompts,
+        }
+
+        pseudo_batch = {
+            "jpg": forget_images.permute(0, 2, 3, 1),
+            "txt": pseudo_prompts,
+        }
+
+        forget_input, forget_emb = model.get_input(
+            forget_batch, model.first_stage_key
+        )
+        pseudo_input, pseudo_emb = model.get_input(
+            pseudo_batch, model.first_stage_key
+        )
+
+        t = torch.randint(
+            0, model.num_timesteps,
+            (forget_input.shape[0],),
+            device=device,
+        ).long()
+
+        noise = torch.randn_like(forget_input)
+
+        forget_out = model.apply_model(
+            model.q_sample(forget_input, t, noise),
+            t,
+            forget_emb
+        )
+
+        pseudo_out = model.apply_model(
+            model.q_sample(pseudo_input, t, noise),
+            t,
+            pseudo_emb
+        ).detach()
+
+        loss_u = criteria(forget_out, pseudo_out) * beta
+
+        grads_f = torch.autograd.grad(
+            loss_u, parameters, allow_unused=True
+        )
+
+        for i, g in enumerate(grads_f):
+            if g is not None:
+                accum_grads[i] += g.detach()
+
+    masks = []
+
+    for g in accum_grads:
+        if g is None:
+            masks.append(None)
+            continue
+
+        importance = torch.abs(g)
+        flat = importance.view(-1)
+
+        k = int(percent * flat.numel())
+        if k == 0:
+            masks.append(torch.zeros_like(g, dtype=torch.bool))
+            continue
+
+        threshold = torch.topk(flat, k).values[-1]
+        mask = importance >= threshold
+        masks.append(mask)
+
+    print("[Mask] Done.\n")
+    return masks
 
 def MUNBa(
     class_to_forget,
@@ -66,159 +159,74 @@ def MUNBa(
     logger.info("Training started")
     model = setup_model(config_path, ckpt_path, device)
     criteria = torch.nn.MSELoss()
-    
-    def identify_slug_layer(model, loss_r, loss_u):
-        """
-        Implements SLUG layer identification exactly as in arXiv:2407.11867
-        """
-        model.zero_grad()
-
-        # ---- Forget gradients ----
-        loss_u.backward(retain_graph=True)
-        forget_grads = {
-            n: p.grad.detach().clone()
-            for n, p in model.model.diffusion_model.named_parameters()
-            if p.grad is not None
-        }
-
-        model.zero_grad()
-
-        # ---- Retain gradients ----
-        loss_r.backward(retain_graph=True)
-        retain_grads = {
-            n: p.grad.detach().clone()
-            for n, p in model.model.diffusion_model.named_parameters()
-            if p.grad is not None
-        }
-
-        layer_stats = {}
-
-        for name, param in model.model.diffusion_model.named_parameters():
-            if name not in forget_grads or name not in retain_grads:
-                continue
-
-            # block-level grouping (important!)
-            layer_id = ".".join(name.split(".")[:3])
-
-            g_f = forget_grads[name]
-            g_r = retain_grads[name]
-
-            importance = g_f.norm() / (param.norm() + 1e-8)
-            alignment = torch.cosine_similarity(
-                g_f.flatten(), g_r.flatten(), dim=0
-            )
-
-            if layer_id not in layer_stats:
-                layer_stats[layer_id] = {
-                    "importance": 0.0,
-                    "alignment": []
-                }
-
-            layer_stats[layer_id]["importance"] += importance.item()
-            layer_stats[layer_id]["alignment"].append(alignment.item())
-
-        # average alignment per layer
-        for l in layer_stats:
-            layer_stats[l]["alignment"] = np.mean(layer_stats[l]["alignment"])
-
-        # ---- Pareto selection ----
-        layers = list(layer_stats.keys())
-        scores = [
-            (l,
-            layer_stats[l]["importance"],
-            layer_stats[l]["alignment"])
-            for l in layers
-        ]
-
-        # Pareto front: max importance, min alignment
-        pareto = []
-        for l, imp, align in scores:
-            dominated = False
-            for l2, imp2, align2 in scores:
-                if imp2 >= imp and align2 <= align and (imp2 > imp or align2 < align):
-                    dominated = True
-                    break
-            if not dominated:
-                pareto.append((l, imp, align))
-
-        # pick highest-importance layer on Pareto front
-        pareto.sort(key=lambda x: -x[1])
-        selected_layer = pareto[0][0]
-
-        return selected_layer, pareto
 
     remain_dl, descriptions = setup_remain_data(class_to_forget, batch_size, image_size)
     forget_dl, _ = setup_forget_data(class_to_forget, batch_size, image_size)
     num_forget = len(forget_dl.dataset)
     logger.info(f"Number of unlearning datapoints: {num_forget}")
 
-    #### Convex Optimization Problem (bargaining game) Initialization ####
-    if args.munba:
-        n_tasks = 2 # K
-        prvs_alpha = np.ones(n_tasks, dtype=np.float32) # alpha from iteration    
-        prvs_alpha[0] = 1.0
-        prvs_alpha[1] = 0.5
-    #####################################################
+        
 
     # choose parameters to train based on train_method
     parameters = []
-    forget_params = []
-    remain_params = []
-    # for name, param in model.model.diffusion_model.named_parameters():
-    #     # train all layers except x-attns and time_embed layers
-    #     if train_method == "noxattn":
-    #         if name.startswith("out.") or "attn2" in name or "time_embed" in name:
-    #             pass
-    #         else:
-    #             # print(name)
-    #             parameters.append(param)
-    #     # train only self attention layers
-    #     if train_method == "selfattn":
-    #         if "attn1" in name:
-    #             print(name)
-    #             parameters.append(param)
-    #     # train only x attention layers
-    #     if train_method == "xattn":
-    #         if "attn2" in name:
-    #             # print(name)
-    #             parameters.append(param)
-    #     # train all layers
-    #     if train_method == "full":
-    #         # print(name)
-    #         parameters.append(param)
-    #     # train all layers except time embed layers
-    #     if train_method == "notime":
-    #         if not (name.startswith("out.") or "time_embed" in name):
-    #             print(name)
-    #             parameters.append(param)
-    #     if train_method == "xlayer":
-    #         if "attn2" in name:
-    #             if "output_blocks.6." in name or "output_blocks.8." in name:
-    #                 print(name)
-    #                 parameters.append(param)
-    #     if train_method == "selflayer":
-    #         if "attn1" in name:
-    #             if "input_blocks.4." in name or "input_blocks.7." in name:
-    #                 print(name)
-    #                 parameters.append(param)
+    for param_name, param in model.model.diffusion_model.named_parameters():
+        # train all layers except x-attns and time_embed layers
+        if train_method == "noxattn":
+            if name.startswith("out.") or "attn2" in name or "time_embed" in name:
+                pass
+            else:
+                # print(param_name)
+                parameters.append(param)
+        # train only self attention layers
+        if train_method == "selfattn":
+            if "attn1" in param_name:
+                print(param_name)
+                parameters.append(param)
+        # train only x attention layers
+        if train_method == "xattn":
+            if "attn2" in param_name:
+                # print(param_name)
+                parameters.append(param)
+        # train all layers
+        if train_method == "full":
+            # print(param_name)
+            parameters.append(param)
+        # train all layers except time embed layers
+        if train_method == "notime":
+            if not (param_name.startswith("out.") or "time_embed" in param_name):
+                print(param_name)
+                parameters.append(param)
+        if train_method == "xlayer":
+            if "attn2" in param_name:
+                if "output_blocks.6." in param_name or "output_blocks.8." in param_name:
+                    print(param_name)
+                    parameters.append(param)
+        if train_method == "selflayer":
+            if "attn1" in param_name:
+                if "input_blocks.4." in param_name or "input_blocks.7." in param_name:
+                    print(param_name)
+                    parameters.append(param)
 
-    for name, param in model.model.diffusion_model.named_parameters():
-        if not param.requires_grad:
-            continue
-
-        if name.startswith(slug_layer):
-            forget_params.append(param)
-
-        if param in parameters:
-            remain_params.append(param)
-            
     # set model to train
+
+    forget_masks = compute_topk_forget_mask(
+    model,
+    forget_dl,
+    parameters,
+    descriptions,
+    class_to_forget,
+    beta,
+    device,
+    percent=0.05,  # Top 1%
+    )
+
+    # ----------------------------------------------------
     model.train()
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
     
     if mask_path:
-        mask = torch.load(mask_path)
+        masks = torch.load(mask_path)
         name = f"compvis-cls_{class_to_forget}-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
     else:
         name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
@@ -227,30 +235,24 @@ def MUNBa(
     step = 0
     epoch_times = []
 
-    #############################
-    # moving average initialization
-    angle_ema = torch.tensor(0.0, device=device)
-    angle_step = 0
-    beta_angle = 0.70
-    ema_nr = torch.tensor(0.0, device=device)
-    ema_nf = torch.tensor(0.0, device=device)
-    ###############################
+
     for epoch in range(epochs):
         epoch_start_time = time.time()
         logger.info(f"Epoch {epoch+1}/{epochs} started")
         with tqdm(total=len(forget_dl)) as time_1:
             model.train()
-            forget_iter = iter(forget_dl)
+            # forget_iter = iter(forget_dl)
             remain_iter = iter(remain_dl)
+            
 
-            for i, (images, labels) in enumerate(forget_dl):
+            for i, (forget_images, forget_labels) in enumerate(forget_dl):   
+                alpha_r_vals = []
+                alpha_f_vals = [] 
+                grad_r_vals = []
+                grad_f_vals = [] 
                 model.train()
                 optimizer.zero_grad()
-                try:
-                    forget_images, forget_labels = next(forget_iter)
-                except StopIteration:
-                    forget_iter = iter(forget_dl)
-                    forget_images, forget_labels = next(forget_iter)
+                
 
                 try:
                     remain_images, remain_labels = next(remain_iter)
@@ -299,84 +301,101 @@ def MUNBa(
                 pseudo_out = model.apply_model(pseudo_noisy, t, pseudo_emb).detach()
 
                 loss_u = criteria(forget_out, pseudo_out) * beta
-                
-                slug_layer, pareto_layers = identify_slug_layer(model, loss_r, loss_u)
-                logger.info(f"SLUG layer selected: {slug_layer}")
-                logger.info(f"SLUG Pareto layers: {pareto_layers}")
 
                 #####################################################
                 if args.munba:
-                    # compute gradient for each task
-                    grads = {}
-                    for task, loss in zip([0, 1], [loss_r, loss_u]):
-                        optimizer.zero_grad()
-                        grad = torch.autograd.grad(loss, parameters, retain_graph=True)
-                        grads[task] = torch.cat([torch.flatten(g.detach()) for g in grad])
-
                     
+                    if with_l1:
+                        current_alpha = alpha * (1 - epoch / epochs)
+                        l1_loss = current_alpha * l1_regularization(parameters)
+                        loss_r_total = loss_r + l1_loss
+                    else:
+                        loss_r_total = loss_r
 
-                    
-                   
-                    logger.info(f"BETA_VALUE: - {beta_angle}")
-
-                    gr = grads[0]
-                    gf = grads[1]
+                    grads_r = torch.autograd.grad(loss_r_total, parameters, retain_graph=True,allow_unused=True)
+                    grads_f = torch.autograd.grad(loss_u, parameters, allow_unused=True)
 
                     eps = 1e-8
-                    a_min = 1e-3
-                    a_max = 10.0
+                    xi = 1e-8
 
-                    # step counter
-                    angle_step += 1
+                    layerwise_updates = []
 
-                    # instantaneous gradient norms
-                    norm_gr = torch.norm(gr)
-                    norm_gf = torch.norm(gf)
+                    for layer_index, (gr, gf, p) in enumerate(zip(grads_r, grads_f, parameters)):
 
-                    # EMA accumulation of gradient magnitudes
-                    ema_nr = beta_angle * ema_nr + (1.0 - beta_angle) * norm_gr
-                    ema_nf = beta_angle * ema_nf + (1.0 - beta_angle) * norm_gf
+                        if gr is None or gf is None:
+                            layerwise_updates.append(None)
+                            continue
 
-                    # bias correction
-                    norm_gr_hat = ema_nr / (1.0 - beta_angle ** angle_step)
-                    norm_gf_hat = ema_nf / (1.0 - beta_angle ** angle_step)
+                        gr_flat = gr.view(-1)
+                        gf_flat = gf.view(-1)
 
-                    # magnitude-based step sizes
-                    alpha_0 = 1.0 / (norm_gr_hat + eps)
-                    alpha_1 = 1.0 / (norm_gf_hat + eps)
+                        norm_gr = torch.clamp(torch.norm(gr_flat), min=1e-6)
+                        norm_gf = torch.clamp(torch.norm(gf_flat), min=1e-6)
 
-                    # clamp for stability
-                    prvs_alpha[0] = torch.clamp(alpha_0, min=a_min, max=a_max)
-                    prvs_alpha[1] = torch.clamp(alpha_1, min=a_min, max=a_max)
+                        cos_phi = torch.dot(gr_flat, gf_flat) / (norm_gr * norm_gf)
+                        cos_phi = torch.clamp(cos_phi, -1.0 + 1e-6, 1.0 - 1e-6)
 
+                        sin_sq_phi = 1.0 - cos_phi**2
 
+                        # coeff = torch.sqrt((1.0 - cos_phi) / (sin_sq_phi + xi))
+                        if sin_sq_phi < 1e-6:
+                            alpha_r_l = 0.5 / norm_gr
+                            alpha_f_l = 0.5 / norm_gf
+                        else:
+                            coeff = torch.sqrt((1.0 - cos_phi) / (sin_sq_phi + xi))
+                            alpha_r_l = coeff / norm_gr
+                            alpha_f_l = coeff / norm_gf
 
-                    if prvs_alpha[0] > 0 and prvs_alpha[1] > 0: # Bargaining succeeded
-                        loss = loss_r * prvs_alpha[0] + loss_u * prvs_alpha[1]
-                    else:
-                        # continue
-                        loss = loss_r + loss_u * 0.5
+                        
+                        alpha_r_vals.append(alpha_r_l.item())
+                        alpha_f_vals.append(alpha_f_l.item())
+
+                        grad_r_vals.append(alpha_r_l.item() * norm_gr.item())
+                        grad_f_vals.append(alpha_f_l.item() * norm_gf.item())
+
+                        g_tilde = alpha_r_l * gr + alpha_f_l * gf
+
+                        mask = forget_masks[layer_index]
+
+                        if mask is not None:
+                            g_masked = torch.zeros_like(g_tilde)
+                            g_masked[mask] = g_tilde[mask]
+                            layerwise_updates.append(g_masked)
+                        else:
+                            layerwise_updates.append(None)   
+                  
+                    avg_alpha_r = np.mean(alpha_r_vals)
+                    avg_alpha_f = np.mean(alpha_f_vals)
+
+                    avg_grad_r = np.mean(grad_r_vals)
+                    avg_grad_f = np.mean(grad_f_vals)
+
+                    loss = loss_r + loss_u 
                 #####################################################
                 else:
                     loss = loss_r + args.lam * loss_u
 
-                optimizer.zero_grad()
-                if with_l1:
-                    current_alpha = alpha * (1 - epoch / (epochs))
-                    loss = loss + current_alpha * l1_regularization(parameters)
-                loss.backward()
-                nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+                if args.munba:
+                    optimizer.zero_grad()
+                    for p, g_tilde in zip(parameters, layerwise_updates):
+                        if g_tilde is not None:
+                            p.grad = g_tilde
+                else:
+                    optimizer.zero_grad()
+                    loss.backward()
+
+                nn.utils.clip_grad_norm_(parameters, 1.0)
+                optimizer.step()
+
                 losses.append(loss.item() / batch_size)
 
-                optimizer.step()
                 step += 1
                 torch.cuda.empty_cache()
                 gc.collect()
 
                 if (step+1) % 10 == 0:
                     if args.munba:
-
-                        logger.info(f"step: {step},norm_gr:{norm_gr},norm_gf:{norm_gf},alpha[0]: {prvs_alpha[0]:.4f},alpha[1]: {prvs_alpha[1]:.4f},loss: {loss:.4f}, loss: {loss:.4f}, loss_r: {loss_r * prvs_alpha[0]:.4f}, loss_u: {loss_u * prvs_alpha[1]:.4f}")
+                        logger.info(f"step: {step}, avg_alpha_r: {avg_alpha_r:.4f}, avg_alpha_f: {avg_alpha_f:.4f}, avg_grad_r: {avg_grad_r:.4f}, avg_grad_f: {avg_grad_f:.4f}, loss: {loss.item():.4f}, loss_r: {loss_r.item():.4f}, loss_u: {loss_u.item():.4f}")
                     else:
                         logger.info(f"step: {step}, loss: {loss:.4f}, loss_r: {loss_r:.4f}, loss_u: {args.lam * loss_u:.4f}")
                     save_history(losses, name, classes)
@@ -392,8 +411,8 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch ==0 or (epoch + 1)%5 == 0  :
-                save_model(model, name, epoch, save_compvis=True, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
+            if epoch%2==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+                save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
     logger.info(
@@ -405,7 +424,7 @@ def MUNBa(
         model,
         name,
         None,
-        save_compvis=True,
+        save_compvis=False,
         save_diffusers=True,
         compvis_config_file=config_path,
         diffusers_config_file=diffusers_config_path,
@@ -436,7 +455,7 @@ def save_model(
     compvis_config_file=None,
     diffusers_config_file=None,
     device="cpu",
-    save_compvis=True,
+    save_compvis=False,
     save_diffusers=True,
 ):
     # SAVE MODEL
@@ -446,7 +465,8 @@ def save_model(
         path = f"{folder_path}/{name}-epoch_{num}.pt"
     else:
         path = f"{folder_path}/{name}.pt"
-    if save_compvis:
+    # Always save compvis temporarily if diffusers is needed
+    if save_diffusers:
         torch.save(model.state_dict(), path)
 
     if save_diffusers:
@@ -454,6 +474,10 @@ def save_model(
         savemodelDiffusers(
             name, compvis_config_file, diffusers_config_file, device=device, num=num,
         )
+    # delete compvis checkpoint if user doesn't want it
+    if (not save_compvis) and os.path.exists(path):
+        os.remove(path)
+        print(f"Deleted compvis checkpoint: {path}")
 
 
 def save_history(losses, name, word_print):
@@ -493,10 +517,10 @@ if __name__ == "__main__":
         help="batch_size used to train",
         type=int,
         required=False,
-        default=2,
+        default=4,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=1
+        "--epochs", help="epochs used to train", type=int, required=False, default=5
     )
     parser.add_argument(
         "--lr",
@@ -538,7 +562,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="0",
+        default="2",
     )
     parser.add_argument(
         "--image_size",
