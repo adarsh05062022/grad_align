@@ -1,0 +1,32 @@
+[
+    {
+        "model_name": "diffusers-cls_1-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask-epoch_0.pt",
+        "num_samples": 1,
+        "fid": 0.044266197830438614,
+        "last_execution": "2026-03-07 20:33:22"
+    },
+    {
+        "model_name": "diffusers-cls_1-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 1,
+        "fid": 0.027726206928491592,
+        "last_execution": "2026-03-07 20:43:07"
+    },
+    {
+        "model_name": "diffusers-cls_1-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 1,
+        "fid": 18.261873245239258,
+        "last_execution": "2026-03-07 20:53:09"
+    },
+    {
+        "model_name": "diffusers-cls_1-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask-epoch_0.pt",
+        "num_samples": 1,
+        "fid": 5.6601386070251465,
+        "last_execution": "2026-03-07 21:36:15"
+    },
+    {
+        "model_name": "diffusers-cls_1-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask-epoch_0.pt",
+        "num_samples": 1,
+        "fid": 0.5095200538635254,
+        "last_execution": "2026-03-07 21:41:28"
+    }
+]

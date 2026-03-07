@@ -27,14 +27,21 @@ CIFAR10_CLASSES = [
 ############################################
 # IMAGE TRANSFORM
 ############################################
+def add_texture_noise(x, strength=0.03):
+    noise = torch.randn_like(x)
+    high_freq = noise - torch.nn.functional.avg_pool2d(noise, 3, stride=1, padding=1)
+    return x + strength * high_freq
 
-def get_transform(image_size=256):
+
+def get_transform(image_size=512):
 
     return transforms.Compose([
         transforms.Resize(image_size),
         transforms.CenterCrop(image_size),
+        transforms.RandomAdjustSharpness(2),
         transforms.ToTensor(),
-        transforms.Normalize([0.5], [0.5])
+        transforms.Lambda(lambda x: add_texture_noise(x)),
+        transforms.Normalize([0.5],[0.5])
     ])
 
 
@@ -47,7 +54,7 @@ def setup_model(config, ckpt, device):
     if isinstance(config, (str, Path)):
         config = OmegaConf.load(config)
 
-    pl_sd = torch.load(ckpt, map_location="cpu")
+    pl_sd = torch.load(ckpt, map_location="cpu", weights_only=False)
 
     if "state_dict" in pl_sd:
         sd = pl_sd["state_dict"]
