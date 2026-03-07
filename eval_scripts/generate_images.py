@@ -1,3 +1,4 @@
+#generate-images.py
 import argparse
 import os
 
@@ -11,6 +12,8 @@ from diffusers import (
 )
 from PIL import Image
 from transformers import CLIPTextModel, CLIPTokenizer
+
+import gc
 
 
 def generate_images(
@@ -72,17 +75,22 @@ def generate_images(
     unet = UNet2DConditionModel.from_pretrained(
         "CompVis/stable-diffusion-v1-4", subfolder="unet"
     )
-    if "SD" not in model_name:
-        try:
-            # model_path = (
-            #     f'models/{model_name}/{model_name.replace("compvis","diffusers")}.pt'
-            # )
-            model_path = model_name
-            unet.load_state_dict(torch.load(model_path))
-        except Exception as e:
-            print(
-                f"Model path is not valid, please check the file name and structure: {e}"
-            )
+    if not (model_name.endswith(".pt") or model_name.endswith(".pth")):
+        raise ValueError("Generation is allowed ONLY from checkpoint (.pt/.pth).")
+
+    if not os.path.exists(model_name):
+        raise FileNotFoundError(f"Checkpoint not found: {model_name}")
+
+    print(f"Loading checkpoint: {model_name}")
+
+    state_dict = torch.load(model_name, map_location="cpu")
+
+    missing, unexpected = unet.load_state_dict(state_dict, strict=False)
+
+    print("Missing keys:", len(missing))
+    print("Unexpected keys:", len(unexpected))
+
+    print("Checkpoint successfully loaded. Starting generation...")
     scheduler = LMSDiscreteScheduler(
         beta_start=0.00085,
         beta_end=0.012,
@@ -96,7 +104,8 @@ def generate_images(
     torch_device = device
     df = pd.read_csv(prompts_path)
 
-    folder_path = f"{save_path}/{model_name}"
+    model_folder = os.path.basename(model_name)
+    folder_path = os.path.join(save_path, model_folder)
     os.makedirs(folder_path, exist_ok=True)
 
     for _, row in df.iterrows():
@@ -120,7 +129,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(10):
+        for i in range(100):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -191,18 +200,27 @@ def generate_images(
             for num, im in enumerate(pil_images):
                 im.save(f"{folder_path}/{case_number}_{i * 10 + num}.png")
                 # im.save(f"{folder_path}/{case_number}_{num}.png")
+    
+    del vae
+    del text_encoder
+    del tokenizer
+    del unet
+    del scheduler  
+
+    gc.collect()
+    torch.cuda.empty_cache()
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=True)
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated-epoch_0.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=True
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/prompts.csv" 
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=True
+        "--save_path", help="folder where to save images", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/generated_images"
     )
     parser.add_argument(
         "--device",
@@ -237,7 +255,7 @@ if __name__ == "__main__":
         help="number of samples per prompt",
         type=int,
         required=False,
-        default=10,
+        default=1,
     )
     parser.add_argument(
         "--ddim_steps",

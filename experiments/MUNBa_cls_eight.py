@@ -25,7 +25,7 @@ import random
 
 
 
-TEXT_SOMETHING = "layer_importance_masking_10_percent_per_epoch_mask_fisher_once_nash_softmax_updated"
+TEXT_SOMETHING = "layer_importance_masking_15_percent_per_epoch_mask_fisher_once_nash_softmax_updated"
 
 
 def l1_regularization(parameters):
@@ -72,7 +72,7 @@ def compute_dual_importance_mask(
     class_to_forget,
     beta,
     device,
-    target_density = 0.05,        # exact % parameters to update per layer
+    target_density = 0.15,        # exact % parameters to update per layer
     lambda_tradeoff = 1.0 
 ):
     logger.info("Lambda tradeoff for Nash weighting: %.2f", lambda_tradeoff)
@@ -337,7 +337,7 @@ def MUNBa(
         class_to_forget,
         beta,
         device,
-        target_density=0.10,
+        target_density=0.15,  # target 15% parameters active
         lambda_tradeoff=1.0
     )
     mask_time = time.time() - mask_start_time
@@ -543,7 +543,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch%2==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+            if epoch%1==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -639,7 +639,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="3",
+        default="0",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -694,7 +694,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="0",
+        default="2",
     )
     parser.add_argument(
         "--image_size",

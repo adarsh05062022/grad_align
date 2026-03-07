@@ -1,67 +1,36 @@
-# -------------------
-# Model checkpoints / weights
-# -------------------
+# weights
 *.ckpt
 *.pt
 *.pth
 *.bin
 *.safetensors
-*.onnx
-*.h5
-*.pkl
 
-# -------------------
-# Ignore heavy folders
-# -------------------
-models/
-checkpoints/
-outputs/
-runs/
-wandb/
-cache/
+# images
+*.png
+*.jpg
+*.jpeg
 
-# -------------------
-# Logs
-# -------------------
+# logs
 logs/
 *.log
-*.tmp
 
-# -------------------
-# Python junk
-# -------------------
-**/__pycache__/
+# python
+__pycache__/
 *.pyc
-*.pyo
-.ipynb_checkpoints/
 
-# -------------------
-# Env
-# -------------------
+# env
 .env
 venv/
 .venv/
 
-# -------------------
-# VSCode
-# -------------------
+# vscode
 .vscode/
 
-# -------------------
-# Ignore images globally
-# -------------------
-*.jpeg
-*.jpg
-*.png
-src/taming-transformers/
+eval_scripts/CLASS/generated_images/
 
-# -------------------
-# BUT include code/config folders fully
-# -------------------
-!train_scripts/
-!eval_scripts/
-!configs/
-
-!train_scripts/**
-!eval_scripts/**
+# include code only
+!train_scripts/**/*.py
+!eval_scripts/**/*.py
 !configs/**
+
+src/taming-transformers/

@@ -43,6 +43,7 @@ def compute_fid(real_path, fake_path, image_size):
     fid.update(fake_images, real=False)
 
     score = fid.compute()
+    
     print("FID Score:", score.item())
 
 

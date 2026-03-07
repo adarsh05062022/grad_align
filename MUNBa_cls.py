@@ -347,7 +347,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch%2==0 and epoch != epochs - 1:
+            if epoch%1==0 and epoch != epochs - 1:
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -443,7 +443,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="3",
+        default="9",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -498,7 +498,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="6",
+        default="5",
     )
     parser.add_argument(
         "--image_size",
@@ -519,7 +519,7 @@ if __name__ == "__main__":
     ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
     parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--beta", type=float, default=0.5)
+    parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--alpha", type=float, default=1e-4)
 
     args = parser.parse_args()

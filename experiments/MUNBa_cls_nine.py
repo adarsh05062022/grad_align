@@ -1,3 +1,4 @@
+# Top k% masking with one time nash calculation
 import argparse
 import os
 from time import sleep
@@ -21,10 +22,13 @@ import gc
 import time
 import random
 
-import cvxpy as cp
-from collections import defaultdict
+from .mask import compute_dual_importance_mask
 
-TEXT_SOMETHING = "block_wise"
+
+
+
+# TEXT_SOMETHING = "masked_nash_topk10_frequent_mask_changed_prompts"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "masked_nash_topk10_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -32,6 +36,53 @@ def l1_regularization(parameters):
     for param in parameters:
         params_vec.append(param.view(-1))
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
+
+
+def flatten_grads(parameters, grads):
+    """
+    Flatten ALL grads into ONE contiguous tensor.
+    Zero-fills missing grads so indexing stays aligned with global_mask_flat.
+    """
+    parts = []
+    for p, g in zip(parameters, grads):
+        if g is not None:
+            parts.append(g.detach().reshape(-1))
+        else:
+            parts.append(torch.zeros(p.numel(), device=p.device))
+    return torch.cat(parts)  # single contiguous tensor
+
+
+def unpack_update_to_grads(parameters, flat_update, numel_list):
+    """
+    Write flat_update back into p.grad in one pass.
+    """
+    offset = 0
+    for p, numel in zip(parameters, numel_list):
+        chunk = flat_update[offset:offset + numel].view_as(p)
+        if p.grad is None:
+            p.grad = chunk.clone()
+        else:
+            p.grad.copy_(chunk)
+        offset += numel
+
+def _recompute_interval(epoch, epochs, steps_per_epoch):
+    """
+    Recompute interval in STEPS, scaled by epoch size.
+    Target: recompute every ~25% of epoch-0, ~50% of mid epochs.
+    
+    Example:
+        steps_per_epoch=900  → epoch0: every 225 steps, mid: every 450 steps
+        steps_per_epoch=50   → epoch0: every 12 steps,  mid: every 25 steps
+    """
+    if epoch == 0:
+        fraction = 0.25          # recompute 4x in first epoch (most volatile)
+    elif epoch <= epochs // 2:
+        fraction = 0.50          # recompute 2x in mid epochs
+    else:
+        fraction = 999999        # once per epoch in late phase (model stabilising)
+
+    interval = max(10, int(steps_per_epoch * fraction))
+    return interval
 
 def MUNBa(
     class_to_forget,
@@ -64,6 +115,7 @@ def MUNBa(
 
     remain_dl, descriptions = setup_remain_data(class_to_forget, batch_size, image_size)
     forget_dl, _ = setup_forget_data(class_to_forget, batch_size, image_size)
+    fisher_dl, _ = setup_forget_data(class_to_forget, batch_size, image_size)
     num_forget = len(forget_dl.dataset)
     logger.info(f"Number of unlearning datapoints: {num_forget}")
 
@@ -71,6 +123,7 @@ def MUNBa(
 
     # choose parameters to train based on train_method
     parameters = []
+    param_names = []
     for param_name, param in model.model.diffusion_model.named_parameters():
         # train all layers except x-attns and time_embed layers
         if train_method == "noxattn":
@@ -79,98 +132,136 @@ def MUNBa(
             else:
                 # print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         # train only self attention layers
         if train_method == "selfattn":
             if "attn1" in param_name:
                 print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         # train only x attention layers
         if train_method == "xattn":
             if "attn2" in param_name:
                 # print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         # train all layers
         if train_method == "full":
             # print(param_name)
             parameters.append(param)
+            param_names.append(param_name)
         # train all layers except time embed layers
         if train_method == "notime":
             if not (param_name.startswith("out.") or "time_embed" in param_name):
                 print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         if train_method == "xlayer":
             if "attn2" in param_name:
                 if "output_blocks.6." in param_name or "output_blocks.8." in param_name:
                     print(param_name)
                     parameters.append(param)
+                    param_names.append(param_name)
         if train_method == "selflayer":
             if "attn1" in param_name:
                 if "input_blocks.4." in param_name or "input_blocks.7." in param_name:
                     print(param_name)
                     parameters.append(param)
+                    param_names.append(param_name)
 
     # set model to train
+
+    # ----------------------------------------------------
     model.train()
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
     
-    if mask_path:
-        mask = torch.load(mask_path)
-        name = f"compvis-cls_{class_to_forget}-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
-    else:
-        name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
+    
+    name = f"compvis-cls_{class_to_forget}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
 
     # TRAINING CODE
     step = 0
     epoch_times = []
-    layer_groups = defaultdict(list)
-    layer_group_names = defaultdict(list)
-    param_set = set(parameters)   # faster lookup
+    # Pre-compute numel_list once — reused every step
+    numel_list = [p.numel() for p in parameters]
 
-    for param_name, param in model.model.diffusion_model.named_parameters():
-        if param not in param_set:
-            continue
+    # Compute mask ONCE before training, not inside epoch loop
+    logger.info("Computing importance mask (once, before training)...")
+    # model.eval()
+    # mask, mask_flat = compute_dual_importance_mask(
+    #     model,
+    #     forget_dl,
+    #     remain_dl,
+    #     parameters,
+    #     descriptions,
+    #     class_to_forget,
+    #     beta,
+    #     device,
+    #     target_density=0.10,  # target 15% parameters active
+    #     lambda_tradeoff=1.0
+    # )
+    
+    
 
-        parts = param_name.split('.')
+    # total = mask_flat.numel()
+    # active = mask_flat.sum().item()
+    # logger.info(f"Mask density: {active/total:.6f} ({active}/{total} params active)")
+    # model.train()
 
-        if "input_blocks" in param_name:
-            block_id = parts[3]   # input_blocks.X
-            block_name = f"input_blocks.{block_id}"
 
-        elif "output_blocks" in param_name:
-            block_id = parts[3]   # output_blocks.X
-            block_name = f"output_blocks.{block_id}"
 
-        elif "middle_block" in param_name:
-            block_name = "middle_block"
+    # logger.info(f"Dual importance masks computed for all layers. Starting training with MUNBa...")
+    steps_per_epoch = len(forget_dl)   # already accounts for batch size
+    logger.info(f"Steps per epoch: {steps_per_epoch} | Batch size: {batch_size}")
+    max_fisher_batches = min(80, steps_per_epoch // 3)
+    logger.info(f"Fisher cap: {max_fisher_batches} batches (steps_per_epoch={steps_per_epoch})")
 
-        else:
-            block_name = "others"
-
-        layer_groups[block_name].append(param)
-        layer_group_names[block_name].append(param_name)
-
-    layer_groups = list(layer_groups.values())
-    for block_name, names in layer_group_names.items():
-        logger.info(f"\nBlock: {block_name}")
-        for n in names:
-            logger.info(f"   {n}")
 
     for epoch in range(epochs):
+        recompute_every = _recompute_interval(epoch, epochs, steps_per_epoch)
+        logger.info(f"Epoch {epoch+1}: mask recompute every {recompute_every} steps")
         epoch_start_time = time.time()
         logger.info(f"Epoch {epoch+1}/{epochs} started")
+
+        # ── EMA mask recomputation every epoch after the first ────────────────
+        # The model weights have shifted so the importance landscape has changed.
+        # We recompute and blend with the previous mask to avoid sudden thrashing.
+        
+            
+
         with tqdm(total=len(forget_dl)) as time_1:
-            model.train()
+            # model.train()
+            # forget_iter = iter(forget_dl)
             remain_iter = iter(remain_dl)
             
 
-            for i, (forget_images, forget_labels ) in enumerate(forget_dl):   
-                alpha_r_vals = []
-                alpha_f_vals = [] 
-                grad_r_vals = []
-                grad_f_vals = [] 
-                model.train()
-                optimizer.zero_grad()
+            for i, (forget_images, forget_labels) in enumerate(forget_dl):   
+                if step>=0 and step % recompute_every == 0:
+                    logger.info(f"Recomputing mask with EMA (Step {step})...")
+                    mask_start_time = time.time()
+
+                    model.eval()
+                    mask, mask_flat = compute_dual_importance_mask(
+                        model=model,
+                        forget_dl=fisher_dl,  # use separate dataloader for fisher computation to avoid exhausting forget_dl iterator
+                        remain_dl=remain_dl,
+                        parameters=parameters,
+                        param_names=param_names,
+                        descriptions=descriptions,
+                        class_to_forget=class_to_forget,
+                        beta=beta,
+                        device=device,
+                        target_density=0.10,
+                        lambda_tradeoff=1.0,
+                        previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
+                        ema_alpha=0.3,
+                        logger=logger,
+                        max_fisher_batches=max_fisher_batches
+                    )
+                    mask_time = time.time() - mask_start_time
+                    logger.info(f"Mask computed in {mask_time:.2f}s ({mask_time/60:.2f} min)")
+                    model.train()
+                
                 
 
                 try:
@@ -183,10 +274,13 @@ def MUNBa(
 
                 remain_prompts = [descriptions[label] for label in remain_labels]
                 forget_prompts = [descriptions[label] for label in forget_labels]
+                #   chnage this 
                 pseudo_prompts = [
                     descriptions[(int(class_to_forget) + 1) % 10]
                     for label in forget_labels
                 ]
+                # PSEUDO_TARGET = "a blurry unrecognizable texture with no specific features"
+                # pseudo_prompts = [PSEUDO_TARGET for _ in forget_labels]
 
                 # remain stage
                 remain_batch = {
@@ -219,10 +313,17 @@ def MUNBa(
                 pseudo_noisy = model.q_sample(x_start=pseudo_input, t=t, noise=noise)
                 pseudo_out = model.apply_model(pseudo_noisy, t, pseudo_emb).detach()
 
-                loss_u = criteria(forget_out, pseudo_out) 
+                loss_u = criteria(forget_out, pseudo_out) * beta
 
                 #####################################################
                 if args.munba:
+                    alpha_r = torch.tensor(0.0, device=device)
+                    alpha_f = torch.tensor(0.0, device=device)
+                    grad_r_norm = 0.0
+                    grad_f_norm = 0.0
+                    cos_value = 0.0
+                    update_norm = 0.0
+                    optimizer.zero_grad()
                     
                     if with_l1:
                         current_alpha = alpha * (1 - epoch / epochs)
@@ -231,110 +332,109 @@ def MUNBa(
                     else:
                         loss_r_total = loss_r
 
-                    grads_r = torch.autograd.grad(loss_r_total, parameters, retain_graph=True,allow_unused=True)
+                    grads_r = torch.autograd.grad(loss_r_total, parameters,allow_unused=True)
                     grads_f = torch.autograd.grad(loss_u, parameters, allow_unused=True)
 
-                    grad_r_dict = dict(zip(parameters, grads_r))
-                    grad_f_dict = dict(zip(parameters, grads_f))
+                    grads_r = [g.detach() if g is not None else None for g in grads_r]
+                    grads_f = [g.detach() if g is not None else None for g in grads_f]
 
-                    eps = 1e-8
-                    xi = 1e-8
 
-                    layerwise_updates = {}
-                    alpha_r_vals = []
-                    alpha_f_vals = []
 
-                    for block in layer_groups:
-                        gr_list = []
-                        gf_list = []
-                        valid_params = []
+                    # FIX: ONE flatten → ONE gather → compute Nash → ONE scatter
+                    # Replaces 2*N gather + N cat + 2*N scatter across layers
 
-                        for p in block:
-                            if grad_r_dict[p] is not None and grad_f_dict[p] is not None:
-                                gr_list.append(grad_r_dict[p].reshape(-1))
-                                gf_list.append(grad_f_dict[p].reshape(-1))
-                                valid_params.append(p)
+                    # Step A: flatten all grads into two contiguous vectors
+                    gr_flat = flatten_grads(parameters, grads_r)
+                    gf_flat = flatten_grads(parameters, grads_f)
 
-                        if len(gr_list) == 0:
-                            continue
+                    # Step B: ONE boolean index on contiguous memory
+                    gr_masked = gr_flat[mask_flat]
+                    gf_masked = gf_flat[mask_flat]
 
-                        # ---- concatenate block grads ----
-                        gr_block = torch.cat(gr_list)
-                        gf_block = torch.cat(gf_list)
+                    if gr_masked.numel() == 0:
+                        del gr_flat, gf_flat, gr_masked, gf_masked
+                        continue
 
-                        norm_gr = torch.norm(gr_block)
-                        norm_gf = torch.norm(gf_block)
+                    # Step C: Nash weight computation (identical logic)
+                    norm_gr = torch.clamp(torch.norm(gr_masked), min=1e-6)
+                    norm_gf = torch.clamp(torch.norm(gf_masked), min=1e-6)
+                    cos_phi = torch.clamp(
+                        torch.dot(gr_masked, gf_masked) / (norm_gr * norm_gf),
+                        -1.0 + 1e-6, 1.0 - 1e-6
+                    )
+                    sin_sq_phi = torch.clamp(1.0 - cos_phi ** 2, min=0.0)
 
-                        norm_gr = torch.clamp(norm_gr, min=1e-8)
-                        norm_gf = torch.clamp(norm_gf, min=1e-8)
+                    grad_r_norm = norm_gr.item()
+                    grad_f_norm = norm_gf.item()
+                    cos_value = cos_phi.item()
 
-                        dot = torch.dot(gr_block, gf_block)
-                        cos_phi = dot / (norm_gr * norm_gf)
-                        cos_phi = torch.clamp(cos_phi, -0.999, 0.999)
+                    if sin_sq_phi < 1e-6:
+                        alpha_r = 0.5 / norm_gr
+                        alpha_f = 0.5 / norm_gf
+                    else:
+                        alpha_r = (1.0 / norm_gr) * torch.sqrt(
+                            (1.0 - cos_phi) / (sin_sq_phi + 1e-8)
+                        )
+                        alpha_f = (1.0 / norm_gf) * torch.sqrt(
+                            sin_sq_phi * (1.0 - cos_phi)
+                        )
 
-                        # ---- STABLE SIN TERM ----
-                        sin_sq = torch.clamp(1.0 - cos_phi ** 2, min=1e-4)
+                    update_norm = torch.norm(alpha_r * gr_masked + alpha_f * gf_masked).item()
 
-                        coeff = torch.sqrt((1.0 - cos_phi) / sin_sq)
+                    # Step D: build full update vector, zeros outside mask
+                    update_full = torch.zeros_like(gr_flat)
+                    update_full[mask_flat] = alpha_r * gr_masked + alpha_f * gf_masked
 
-                        # ---- Nash coefficients ----
-                        alpha_r_block = coeff / norm_gr
-                        alpha_f_block = beta * coeff / norm_gf   # β damping
+                    del gr_flat, gf_flat, gr_masked, gf_masked
 
-                        alpha_r_vals.append(alpha_r_block.item())
-                        alpha_f_vals.append(alpha_f_block.item())
+                    # Step E: ONE unpack into p.grad — replaces N per-layer scatter ops
+                    unpack_update_to_grads(parameters, update_full, numel_list)
+                    del update_full
 
-                        grad_r_vals.append( norm_gr.item())
-                        grad_f_vals.append(norm_gf.item())
 
-                        # ---- apply same α to block ----
-                        for p in valid_params:
-                            g_tilde = (
-                                alpha_r_block * grad_r_dict[p]
-                                + alpha_f_block * grad_f_dict[p]
-                            )
-                            layerwise_updates[p] = g_tilde
+                    
 
-                    avg_alpha_r = np.mean(alpha_r_vals) if alpha_r_vals else 0
-                    avg_alpha_f = np.mean(alpha_f_vals) if alpha_f_vals else 0
-
-                    avg_grad_r = np.mean(grad_r_vals)
-                    avg_grad_f = np.mean(grad_f_vals)
-
-                    loss = loss_r + loss_u
+                    loss = loss_r + loss_u 
                 #####################################################
                 else:
                     loss = loss_r + args.lam * loss_u
 
-                if args.munba:
-                    optimizer.zero_grad()
-                    for p in parameters:
-                        if p in layerwise_updates:
-                            p.grad = layerwise_updates[p]
-                else:
-                    optimizer.zero_grad()
-                    loss.backward()
-
+                
                 nn.utils.clip_grad_norm_(parameters, 1.0)
                 optimizer.step()
 
                 losses.append(loss.item() / batch_size)
 
                 step += 1
-                torch.cuda.empty_cache()
-                gc.collect()
+                
 
-                if (step+1) % 10 == 0:
-                    if args.munba:
-                        logger.info(f"step: {step}, avg_alpha_r: {avg_alpha_r:.4f}, avg_alpha_f: {avg_alpha_f:.4f}, avg_grad_r: {avg_grad_r:.4f}, avg_grad_f: {avg_grad_f:.4f}, loss: {loss.item():.4f}, loss_r: {loss_r.item():.4f}, loss_u: {loss_u.item():.4f}")
-                    else:
-                        logger.info(f"step: {step}, loss: {loss:.4f}, loss_r: {loss_r:.4f}, loss_u: {args.lam * loss_u:.4f}")
-                    save_history(losses, name, classes)
+                if (step+1) % 20 == 0:
+                    logger.info(
+                        f"step: {step}, "
+                        f"alpha_r: {alpha_r.item():.4f}, "
+                        f"alpha_f: {alpha_f.item():.4f}, "
+                        f"||g_r||: {grad_r_norm:.4f}, "
+                        f"||g_f||: {grad_f_norm:.4f}, "
+                        f"cos: {cos_value:.4f}, "
+                        f"||update||: {update_norm:.4f}, "
+                        f"loss: {loss.item():.4f}, "
+                        f"loss_r: {loss_r.item():.4f}, "
+                        f"loss_u: {loss_u.item():.4f}"
+                    )
+                    # save_history(losses, name, classes)
+                if step % 50 == 0:
+                    torch.cuda.empty_cache()
+                    gc.collect()
 
                 time_1.set_description("Epoch %i" % epoch)
                 time_1.set_postfix(loss=loss.item() / batch_size)
                 sleep(0.1)
                 time_1.update(1)
+            del grads_r, grads_f
+
+            torch.cuda.empty_cache()
+            gc.collect()
+            
             epoch_time = time.time() - epoch_start_time
             epoch_times.append(epoch_time)
             logger.info(
@@ -342,7 +442,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+            if epoch%1==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -411,7 +511,6 @@ def save_model(
         print(f"Deleted compvis checkpoint: {path}")
 
 
-
 def save_history(losses, name, word_print):
     folder_path = f"models/{name}"
     os.makedirs(folder_path, exist_ok=True)
@@ -439,17 +538,17 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="5",
+        default="0",
     )
     parser.add_argument(
-        "--train_method", help="method of training", type=str, required=False,default="xattn"
+        "--train_method", help="method of training", type=str, required=False,default="full"
     )
     parser.add_argument(
         "--batch_size",
         help="batch_size used to train",
         type=int,
         required=False,
-        default=4,
+        default=8,
     )
     parser.add_argument(
         "--epochs", help="epochs used to train", type=int, required=False, default=5
@@ -459,7 +558,7 @@ if __name__ == "__main__":
         help="learning rate used to train",
         type=float,
         required=False,
-        default=5e-6,
+        default=1e-5,
     )
     parser.add_argument(
         "--ckpt_path",
@@ -494,7 +593,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="4",
+        default="6",
     )
     parser.add_argument(
         "--image_size",
@@ -515,8 +614,9 @@ if __name__ == "__main__":
     ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
     parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--beta", type=float, default=0.3)
+    parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--alpha", type=float, default=1e-4)
+    parser.add_argument("--lam", type=float, default=0.5)
 
     args = parser.parse_args()
     logger, log_file = setup_logger(name=f"MUNBa_class_to_forgot{args.class_to_forget}")
