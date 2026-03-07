@@ -12,16 +12,16 @@ if __name__ == "__main__":
         prog="ImageClassification",
         description="Takes the path of images and generates classification scores",
     )
-    parser.add_argument("--folder_path", help="path to images", type=str, required=True)
+    parser.add_argument("--folder_path", help="path to images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_9-MUNBa-method_full-lr_1e-05_E5_U960_masked_nash_topk10_frequent_mask.pt")
     parser.add_argument(
-        "--prompts_path", help="path to prompts", type=str, required=True
+        "--prompts_path", help="path to prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/prompts.csv"
     )
     parser.add_argument(
         "--save_path",
         help="path to save results",
         type=str,
         required=False,
-        default=None,
+        default="CLASS/UA/cls9.csv",
     )
     parser.add_argument("--device", type=str, required=False, default="cuda:0")
     parser.add_argument("--topk", type=int, required=False, default=5)
