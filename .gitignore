@@ -34,3 +34,10 @@ eval_scripts/CLASS/generated_images/
 !configs/**
 
 src/taming-transformers/
+
+datasets/
+data/
+*.tar.gz
+*.pth
+*.ckpt
+*.pt
