@@ -66,9 +66,9 @@ def _get_food10_remapped_labels(dataset):
 class Food101Dataset(Dataset):
     def __init__(self, split="train", class_to_forget=None, transform=None):
         self.base = Food101(
-            root="./data",
+            root="/storage/s25017/MUNBa/SD/datasets",
             split=split,
-            download=True
+            download=False
         )
         self.remapped_labels = _get_food10_remapped_labels(self.base)
 

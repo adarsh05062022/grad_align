@@ -1,1 +1,1 @@
-/storage/s25017/MUNBa/SD/models/compvis-cls_3-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask-epoch_0.pt
+/storage/s25017/MUNBa/SD/models/compvis-cls_3-MUNBa-method_full-lr_1e-05_E5_U750_FOOD101_masked_nash_topk10_frequent_mask/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U750_FOOD101_masked_nash_topk10_frequent_mask.pt

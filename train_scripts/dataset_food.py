@@ -1,3 +1,4 @@
+#datset_food.py
 import torch
 from torch.utils.data import DataLoader, Subset
 from torchvision.datasets import Food101
@@ -39,7 +40,21 @@ def get_transform(image_size=512):
         transforms.Normalize([0.5], [0.5])
     ])
 
+class RemappedSubset(torch.utils.data.Dataset):
+    def __init__(self, dataset, indices, remapped_labels):
+        self.dataset = dataset
+        self.indices = indices
+        self.remapped_labels = remapped_labels
 
+    def __len__(self):
+        return len(self.indices)
+
+    def __getitem__(self, idx):
+        real_idx = self.indices[idx]
+        img, _ = self.dataset[real_idx]
+        label = self.remapped_labels[real_idx]
+        return img, label
+    
 ############################################
 # INTERNAL: build filtered dataset + label map
 ############################################
@@ -54,7 +69,7 @@ def _build_food10_dataset(root, image_size):
     dataset = Food101(
         root=root,
         split="train",
-        download=True,
+        download=False,
         transform=transform
     )
 
@@ -105,7 +120,7 @@ def setup_remain_data(
         if label != -1 and label != class_to_forget      # only our 10 classes, excluding forget class
     ]
 
-    remain_dataset = Subset(dataset, remain_indices)
+    remain_dataset = RemappedSubset(dataset, remain_indices, remapped_labels)
 
     descriptions = [f"an image of {cls}" for cls in FOOD10_CLASSES]
 
@@ -137,7 +152,7 @@ def setup_forget_data(
         if label == class_to_forget
     ]
 
-    forget_dataset = Subset(dataset, forget_indices)
+    forget_dataset = RemappedSubset(dataset, forget_indices, remapped_labels)
 
     descriptions = [f"an image of {cls}" for cls in FOOD10_CLASSES]
 

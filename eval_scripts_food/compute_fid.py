@@ -3,7 +3,7 @@
 import argparse
 
 import torch
-from eval_scripts_food.dataset_food import setup_fid_data
+from dataset_food import setup_fid_data
 from torchmetrics.image.fid import FrechetInceptionDistance
 
 

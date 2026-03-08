@@ -120,14 +120,14 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--checkpoints_txt", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_cifar/CLASS/checkpoints_to_evaluate.txt")
-    parser.add_argument("--prompts_path", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_cifar/CLASS/prompts.csv")
-    parser.add_argument("--save_path", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_cifar/CLASS/generated_images")
+    parser.add_argument("--checkpoints_txt", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_food/CLASS/checkpoints_to_evaluate.txt")
+    parser.add_argument("--prompts_path", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_food/CLASS/prompts.csv")
+    parser.add_argument("--save_path", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_food/CLASS/generated_images")
     parser.add_argument("--output_json", type=str, default="CLASS/results.json")
 
     parser.add_argument("--class_to_forget", type=int, default=3)
     parser.add_argument("--image_size", type=int, default=512)
-    parser.add_argument("--num_samples", type=int, default=1)
+    parser.add_argument("--num_samples", type=int, default=5)
     parser.add_argument("--device", type=str, default="cuda:0")
     parser.add_argument("--guidance_scale", type=float, default=7.5)
     parser.add_argument("--ddim_steps", type=int, default=50)

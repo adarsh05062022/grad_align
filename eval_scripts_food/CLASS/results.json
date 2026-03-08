@@ -1,0 +1,14 @@
+[
+    {
+        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U750_FOOD101_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 1,
+        "fid": 2.3274552822113037,
+        "last_execution": "2026-03-08 00:59:08"
+    },
+    {
+        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U750_FOOD101_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 5,
+        "fid": 4.2349653244018555,
+        "last_execution": "2026-03-08 06:50:19"
+    }
+]

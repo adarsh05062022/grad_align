@@ -1,11 +1,11 @@
 case_number,prompt,evaluation_seed
-0,a photo of an airplane,42
-1,a photo of an automobile,43
-2,a photo of a bird,44
-3,a photo of a cat,45
-4,a photo of a deer,46
-5,a photo of a dog,47
-6,a photo of a frog,48
-7,a photo of a horse,49
-8,a photo of a ship,50
-9,a photo of a truck,51
+0,a photo of a pizza,42
+1,a photo of sushi,43
+2,a photo of a hamburger,44
+3,a photo of hot and sour soup,45
+4,a photo of ice cream,46
+5,a photo of chocolate cake,47
+6,a photo of ramen,48
+7,a photo of steak,49
+8,a photo of tacos,50
+9,a photo of waffles,51

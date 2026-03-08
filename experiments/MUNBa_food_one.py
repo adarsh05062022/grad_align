@@ -21,7 +21,7 @@ import gc
 import time
 import random
 
-from .mask import compute_dual_importance_mask
+from .mask_food101 import compute_dual_importance_mask
 from train_scripts.dataset_food import FOOD10_CLASSES
 
 
@@ -574,7 +574,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="5",
+        default="6",
     )
     parser.add_argument(
         "--image_size",

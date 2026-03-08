@@ -27,8 +27,7 @@ from .mask import compute_dual_importance_mask
 
 
 
-# TEXT_SOMETHING = "masked_nash_topk10_frequent_mask_changed_prompts"  # used in logging and naming outputs, change to reflect your experiment setting
-TEXT_SOMETHING = "masked_nash_topk10_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "masked_nash_topk05_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -251,7 +250,7 @@ def MUNBa(
                         class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=0.10,
+                        target_density=0.05,
                         lambda_tradeoff=1.0,
                         previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
                         ema_alpha=0.3,
@@ -442,8 +441,8 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch%1==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
-                save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
+            # if epoch%5==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+            #     save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
     logger.info(
@@ -538,7 +537,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="0",
+        default="7",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"

@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--class_to_forget", type=int, default=0)
     parser.add_argument("--image_size", type=int, default=512)
-    parser.add_argument("--num_samples", type=int, default=5)
+    parser.add_argument("--num_samples", type=int, default=10)
     parser.add_argument("--device", type=str, default="cuda:0")
     parser.add_argument("--guidance_scale", type=float, default=7.5)
     parser.add_argument("--ddim_steps", type=int, default=50)
