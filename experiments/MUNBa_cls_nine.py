@@ -27,7 +27,7 @@ from .mask import compute_dual_importance_mask
 
 
 
-TEXT_SOMETHING = "masked_nash_topk30_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "masked_nash_topk10_frequent_mask_ratio"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -250,8 +250,9 @@ def MUNBa(
                         class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=0.30,
+                        target_density=0.10,
                         lambda_tradeoff=1.0,
+                        importance_variant=args.importance_variant,
                         previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
                         ema_alpha=0.3,
                         logger=logger,
@@ -592,7 +593,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="1",
+        default="3",
     )
     parser.add_argument(
         "--image_size",
@@ -607,6 +608,13 @@ if __name__ == "__main__":
         type=int,
         required=False,
         default=50,
+    )
+
+    parser.add_argument(
+    "--importance_variant",
+    type=str,
+    default="ratio",
+    choices=["ratio", "difference", "both"],
     )
 
     

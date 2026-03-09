@@ -538,5 +538,11 @@
         "num_samples": 10,
         "fid": 0.8961608409881592,
         "last_execution": "2026-03-09 02:28:13"
+    },
+    {
+        "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 10,
+        "fid": 1.7834960222244263,
+        "last_execution": "2026-03-09 12:02:35"
     }
 ]

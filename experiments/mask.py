@@ -105,6 +105,7 @@ def _build_mask_from_fisher(
     accum_fisher_r,
     target_density,
     lambda_tradeoff,
+    importance_variant,
     logger=None,
     param_names=None,   
 ):
@@ -166,7 +167,17 @@ def _build_mask_from_fisher(
     def global_z(x):
         return (x - x.mean()) / (x.std().clamp(min=1e-10))
 
-    score = 0.5 * global_z(ratio) + 0.5 * global_z(diff)
+    ratio_z = global_z(ratio)
+    diff_z = global_z(diff)
+
+    if importance_variant == "ratio":
+        score = ratio_z
+
+    elif importance_variant == "difference":
+        score = diff_z
+
+    elif importance_variant == "both":
+        score = 0.5 * ratio_z + 0.5 * diff_z
 
     # ── Step 5: deterministic top-k (NO Gumbel noise) ────────────────────────
     # The mask is computed once.  Adding Gumbel noise gives a single random
@@ -295,6 +306,7 @@ def compute_dual_importance_mask(
     device,
     target_density=0.10,       # 10% is a safer default than 15% — sweep this
     lambda_tradeoff=1.0,
+    importance_variant="both",
     previous_mask_flat=None,   # pass the previous mask for EMA smoothing
     ema_alpha=0.3,             # weight of new mask in EMA:  new = α·new + (1-α)·old
     logger=None,
@@ -341,7 +353,7 @@ def compute_dual_importance_mask(
 
     masks, mask_flat = _build_mask_from_fisher(
         parameters, accum_fisher_f, accum_fisher_r,
-        target_density, lambda_tradeoff, logger,param_names=param_names
+        target_density, lambda_tradeoff, importance_variant, logger, param_names=param_names
     )
 
     # ── EMA smoothing over mask recomputations ────────────────────────────────

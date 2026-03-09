@@ -1,1 +1,5 @@
-/storage/s25017/MUNBa/SD/models/compvis-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk30_frequent_mask/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk30_frequent_mask.pt
+/storage/s25017/MUNBa/SD/models/compvis-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt
+
+/storage/s25017/MUNBa/SD/models/compvis-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_difference/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_difference.pt
+
+/storage/s25017/MUNBa/SD/models/compvis-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_ratio/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_ratio.pt
