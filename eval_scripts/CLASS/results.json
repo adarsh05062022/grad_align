@@ -544,5 +544,17 @@
         "num_samples": 10,
         "fid": 1.7834960222244263,
         "last_execution": "2026-03-09 12:02:35"
+    },
+    {
+        "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 10,
+        "fid": 0.7047258019447327,
+        "last_execution": "2026-03-09 12:15:31"
+    },
+    {
+        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask.pt",
+        "num_samples": 10,
+        "fid": 0.7850363254547119,
+        "last_execution": "2026-03-09 12:16:59"
     }
 ]
