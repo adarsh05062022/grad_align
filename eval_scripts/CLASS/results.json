@@ -556,5 +556,41 @@
         "num_samples": 10,
         "fid": 0.7850363254547119,
         "last_execution": "2026-03-09 12:16:59"
+    },
+    {
+        "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_difference.pt",
+        "num_samples": 10,
+        "fid": 2.436371326446533,
+        "last_execution": "2026-03-09 12:32:50"
+    },
+    {
+        "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_difference.pt",
+        "num_samples": 10,
+        "fid": 4.161552429199219,
+        "last_execution": "2026-03-09 12:56:05"
+    },
+    {
+        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_difference.pt",
+        "num_samples": 10,
+        "fid": 1.3833489418029785,
+        "last_execution": "2026-03-09 13:00:14"
+    },
+    {
+        "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_ratio.pt",
+        "num_samples": 10,
+        "fid": 1.8029791116714478,
+        "last_execution": "2026-03-09 13:03:00"
+    },
+    {
+        "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_ratio.pt",
+        "num_samples": 10,
+        "fid": 1.7822818756103516,
+        "last_execution": "2026-03-09 13:36:35"
+    },
+    {
+        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_ratio.pt",
+        "num_samples": 10,
+        "fid": 0.8262035846710205,
+        "last_execution": "2026-03-09 13:47:21"
     }
 ]
