@@ -1,0 +1,99 @@
+{
+  "Abalation 1": {
+    "Title": "Top K percentage parameter selection report",
+    "Description": "The ablation is done on the 3 classes of the ImageNet dataset.",
+    "FIDs": {
+      "class_0": {
+        "topk05": {
+          "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk05_frequent_mask.pt",
+          "fid": 3.3737316131591797
+        },
+        "topk10": {
+          "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt",
+          "fid": 1.7834960222244263
+        },
+        "topk15": {
+          "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk15_frequent_mask.pt",
+          "fid": 1.4771372079849243
+        },
+        "topk20": {
+          "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk20_frequent_mask.pt",
+          "fid": 1.0131510496139526
+        },
+        "topk30": {
+          "model_name": "diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk30_frequent_mask.pt",
+          "fid": 0.5430604219436646
+        }
+      },
+
+      "class_2": {
+        "topk05": {
+          "model_name": "diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk05_frequent_mask.pt",
+          "fid": 0.902600884437561
+        },
+        "topk10": {
+          "model_name": "diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk10_frequent_mask.pt",
+          "fid": 0.6558343172073364
+        },
+        "topk15": {
+          "model_name": "diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk15_frequent_mask.pt",
+          "fid": 0.44946184754371643
+        },
+        "topk20": {
+          "model_name": "diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk20_frequent_mask.pt",
+          "fid": 0.46391579508781433
+        },
+        "topk30": {
+          "model_name": "diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk30_frequent_mask.pt",
+          "fid": 0.8961608409881592
+        }
+      },
+
+      "class_4": {
+        "topk05": {
+          "model_name": "diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk05_frequent_mask.pt",
+          "fid": 0.9828464984893799
+        },
+        "topk10": {
+          "model_name": "diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk10_frequent_mask.pt",
+          "fid": 0.9237666726112366
+        },
+        "topk15": {
+          "model_name": "diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk15_frequent_mask.pt",
+          "fid": 1.139115571975708
+        },
+        "topk20": {
+          "model_name": "diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk20_frequent_mask.pt",
+          "fid": 1.120065689086914
+        },
+        "topk30": {
+          "model_name": "diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk30_frequent_mask.pt",
+          "fid": 1.6789621114730835
+        }
+      },
+
+      "class_7": {
+        "topk05": {
+          "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk05_frequent_mask.pt",
+          "fid": 2.152376890182495
+        },
+        "topk10": {
+          "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt",
+          "fid": 0.7047258019447327
+        },
+        "topk15": {
+          "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk15_frequent_mask.pt",
+          "fid": 1.046686053276062
+        },
+        "topk20": {
+          "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk20_frequent_mask.pt",
+          "fid": 1.0914702415466309
+        },
+        "topk30": {
+          "model_name": "diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk30_frequent_mask.pt",
+          "fid": 0.7000386714935303
+        }
+      }
+    }
+  }
+}

@@ -125,7 +125,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_path", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images")
     parser.add_argument("--output_json", type=str, default="CLASS/results.json")
 
-    parser.add_argument("--class_to_forget", type=int, default=0)
+    parser.add_argument("--class_to_forget", type=int, default=7)
     parser.add_argument("--image_size", type=int, default=512)
     parser.add_argument("--num_samples", type=int, default=10)
     parser.add_argument("--device", type=str, default="cuda:0")

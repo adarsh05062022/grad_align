@@ -27,7 +27,7 @@ from .mask import compute_dual_importance_mask
 
 
 
-TEXT_SOMETHING = "masked_nash_topk05_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "masked_nash_topk30_frequent_mask"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -250,7 +250,7 @@ def MUNBa(
                         class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=0.05,
+                        target_density=0.30,
                         lambda_tradeoff=1.0,
                         previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
                         ema_alpha=0.3,
@@ -592,7 +592,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="6",
+        default="1",
     )
     parser.add_argument(
         "--image_size",

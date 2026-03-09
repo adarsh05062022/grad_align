@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import argparse
 import os
 
 
@@ -21,20 +20,28 @@ def compute_ua(csv_path):
         "parachute",
     ]
 
+    topk_cols = [
+        "category_top1",
+        "category_top2",
+        "category_top3",
+        "category_top4",
+        "category_top5",
+    ]
+
     results = {}
     ua_list = []
 
     for i, cls in enumerate(classes):
 
         subset = df[df["case_number"] == i]
-
         total = len(subset)
 
         if total == 0:
             ua = 0
         else:
-            failures = (
-                subset["category_top1"].str.lower() == cls.lower()
+            failures = subset[topk_cols].fillna("").apply(
+                lambda row: any(cls.lower() in str(x).lower() for x in row),
+                axis=1
             ).sum()
 
             ua = (1 - failures / total) * 100
@@ -51,40 +58,56 @@ def compute_ua(csv_path):
 
 if __name__ == "__main__":
 
-    parser = argparse.ArgumentParser()
+    # List of CSV files
+    csv_files = [
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk05_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk15_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk20_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk30_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk05_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk10_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk15_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk20_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk30_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk05_frequent_mask.pt_classification.csv", 
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk10_frequent_mask.pt_classification.csv", 
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk15_frequent_mask.pt_classification.csv", 
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk20_frequent_mask.pt_classification.csv", 
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk30_frequent_mask.pt_classification.csv", 
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk05_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk15_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk20_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk30_frequent_mask.pt_classification.csv",
+    ]
 
-    parser.add_argument("--csv_path", required=False, default="cls9.csv", help="Path to the CSV file containing classification results")
-    parser.add_argument("--output_json", default="ua_results.json")
-
-    args = parser.parse_args()
-
-    # Compute UA
-    ua_results = compute_ua(args.csv_path)
-
-    # Get experiment name from CSV
-    csv_name = os.path.basename(args.csv_path).replace(".csv", "")
-
-    new_entry = {csv_name: ua_results}
+    output_json = "abalation_1_ua_results.json"
 
     # Load existing JSON if present
-    if os.path.exists(args.output_json):
-
+    if os.path.exists(output_json):
         try:
-            with open(args.output_json, "r") as f:
+            with open(output_json, "r") as f:
                 existing = json.load(f)
         except json.JSONDecodeError:
             existing = {}
-
     else:
         existing = {}
 
-    # Append new results
-    existing.update(new_entry)
+    # Process each CSV
+    for csv_file in csv_files:
+
+        ua_results = compute_ua(csv_file)
+
+        csv_name = os.path.basename(csv_file).replace(".csv", "")
+
+        existing[csv_name] = ua_results
+
+        print(f"\nProcessed {csv_file}")
 
     # Save updated JSON
-    with open(args.output_json, "w") as f:
+    with open(output_json, "w") as f:
         json.dump(existing, f, indent=4)
 
-    # Print results
     print("\nUpdated UA Results:\n")
     print(json.dumps(existing, indent=4))
