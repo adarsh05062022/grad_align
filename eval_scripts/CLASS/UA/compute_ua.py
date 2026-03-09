@@ -60,26 +60,15 @@ if __name__ == "__main__":
 
     # List of CSV files
     csv_files = [
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk05_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk15_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk20_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk30_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk05_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk10_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk15_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk20_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_2-MUNBa-method_full-lr_1e-05_E5_U993_masked_nash_topk30_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk05_frequent_mask.pt_classification.csv", 
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk10_frequent_mask.pt_classification.csv", 
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk15_frequent_mask.pt_classification.csv", 
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk20_frequent_mask.pt_classification.csv", 
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_4-MUNBa-method_full-lr_1e-05_E5_U941_masked_nash_topk30_frequent_mask.pt_classification.csv", 
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk05_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk15_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk20_frequent_mask.pt_classification.csv",
-        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk30_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_difference.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_ratio.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_difference.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_ratio.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_difference.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_ratio.pt_classification.csv",
+        "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/UA/abalation2/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt_classification.csv"
     ]
 
     output_json = "abalation_1_ua_results.json"

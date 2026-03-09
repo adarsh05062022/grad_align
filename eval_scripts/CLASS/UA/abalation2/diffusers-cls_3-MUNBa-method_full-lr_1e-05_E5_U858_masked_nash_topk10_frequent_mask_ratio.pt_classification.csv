@@ -1,0 +1,1001 @@
+case_number,prompt,evaluation_seed,category_top1,index_top1,scores_top1,category_top2,index_top2,scores_top2,category_top3,index_top3,scores_top3,category_top4,index_top4,scores_top4,category_top5,index_top5,scores_top5
+0,a photo of a tench fish,42,tench,0,0.43284863,barracouta,389,0.0038372953,spaghetti squash,940,0.002425679,coral reef,973,0.0021430075,rock beauty,392,0.001976613
+0,a photo of a tench fish,42,tench,0,0.4407727,slug,114,0.005894086,coral reef,973,0.005442095,barracouta,389,0.0034587672,coho,391,0.0027946164
+0,a photo of a tench fish,42,tench,0,0.4619024,barracouta,389,0.011686479,goldfish,1,0.006719762,anemone fish,393,0.0064217844,puffer,397,0.005657517
+0,a photo of a tench fish,42,tench,0,0.45281246,barracouta,389,0.0048605865,zucchini,939,0.0023606136,sea cucumber,329,0.0023141066,coho,391,0.0016363737
+0,a photo of a tench fish,42,tench,0,0.3626541,goldfish,1,0.0031933924,barracouta,389,0.0025089977,rock beauty,392,0.0017076444,anemone fish,393,0.0016397593
+0,a photo of a tench fish,42,tench,0,0.4319361,barracouta,389,0.0047681644,coho,391,0.0021980177,gar,395,0.0017774305,reel,758,0.0015533883
+0,a photo of a tench fish,42,tench,0,0.45618808,barracouta,389,0.0064635146,goldfish,1,0.0025569363,gar,395,0.0021237102,coho,391,0.002008027
+0,a photo of a tench fish,42,tench,0,0.40924755,coho,391,0.0703187,barracouta,389,0.025729178,sturgeon,394,0.008713732,reel,758,0.008308523
+0,a photo of a tench fish,42,tench,0,0.25680768,coho,391,0.005836983,lakeside,975,0.0038951742,barracouta,389,0.003621344,reel,758,0.0029202844
+0,a photo of a tench fish,42,tench,0,0.39567643,rock beauty,392,0.0031821432,barracouta,389,0.0027400074,goldfish,1,0.002682227,coral reef,973,0.0023549623
+0,a photo of a tench fish,42,tench,0,0.51360047,coral reef,973,0.014386307,barracouta,389,0.010242524,anemone fish,393,0.0088340435,goldfish,1,0.004051693
+0,a photo of a tench fish,42,tench,0,0.5587884,barracouta,389,0.0047461353,coho,391,0.004191928,reel,758,0.002044882,rock beauty,392,0.0020085268
+0,a photo of a tench fish,42,tench,0,0.439451,platypus,103,0.0052131005,barracouta,389,0.004129463,eel,390,0.0038588173,lemon,951,0.0024036688
+0,a photo of a tench fish,42,tench,0,0.5677627,coral reef,973,0.003820527,anemone fish,393,0.0032298814,rock beauty,392,0.002850412,puffer,397,0.0025955832
+0,a photo of a tench fish,42,tench,0,0.37756056,anemone fish,393,0.018772611,goldfish,1,0.008054701,coral reef,973,0.0077708918,reel,758,0.006838251
+0,a photo of a tench fish,42,tench,0,0.4305469,coral reef,973,0.003810178,eel,390,0.0030112807,goldfish,1,0.002244566,anemone fish,393,0.0020362542
+0,a photo of a tench fish,42,tench,0,0.18954441,rock beauty,392,0.07029214,coral reef,973,0.029092504,anemone fish,393,0.02034646,puffer,397,0.019933498
+0,a photo of a tench fish,42,tench,0,0.3331606,coral reef,973,0.023143394,goldfish,1,0.021587847,eel,390,0.020229882,anemone fish,393,0.013280733
+0,a photo of a tench fish,42,tench,0,0.40319216,barracouta,389,0.0039051862,goldfish,1,0.0017372594,coho,391,0.0016156881,platypus,103,0.001580269
+0,a photo of a tench fish,42,tench,0,0.43445903,poncho,735,0.004664413,eel,390,0.0042275456,barracouta,389,0.0038893397,stingray,6,0.0033788397
+0,a photo of a tench fish,42,tench,0,0.3161617,spaghetti squash,940,0.01415036,coral reef,973,0.009687795,puffer,397,0.007046987,rock beauty,392,0.006798361
+0,a photo of a tench fish,42,tench,0,0.60757375,barracouta,389,0.0029815424,gar,395,0.0015967976,coral reef,973,0.0014552095,consomme,925,0.001420799
+0,a photo of a tench fish,42,tench,0,0.22420831,coho,391,0.0057465853,barracouta,389,0.005533275,spaghetti squash,940,0.0048365695,reel,758,0.0033109686
+0,a photo of a tench fish,42,tench,0,0.5126276,barracouta,389,0.0022876938,goldfish,1,0.0020701627,eel,390,0.0019982802,platypus,103,0.0014783031
+0,a photo of a tench fish,42,tench,0,0.45455208,coho,391,0.0037699295,barracouta,389,0.0024935752,lemon,951,0.0021132042,spaghetti squash,940,0.001690494
+0,a photo of a tench fish,42,tench,0,0.4180105,barracouta,389,0.008760796,coho,391,0.0027820298,reel,758,0.0021968686,Granny Smith,948,0.0016503972
+0,a photo of a tench fish,42,tench,0,0.38246843,barracouta,389,0.003439935,lakeside,975,0.0019862086,spaghetti squash,940,0.0018291306,coho,391,0.0018114067
+0,a photo of a tench fish,42,tench,0,0.47917572,coho,391,0.0037697365,barracouta,389,0.0028128573,goldfish,1,0.0025181456,maillot,638,0.0018911188
+0,a photo of a tench fish,42,tench,0,0.48327044,coho,391,0.01713823,barracouta,389,0.008804488,gar,395,0.0030019204,sturgeon,394,0.0029074464
+0,a photo of a tench fish,42,tench,0,0.57091784,sea cucumber,329,0.011536355,coral reef,973,0.006055346,anemone fish,393,0.0053204815,barracouta,389,0.005241325
+0,a photo of a tench fish,42,tench,0,0.5966268,anemone fish,393,0.021472666,barracouta,389,0.019661602,coral reef,973,0.017775815,rock beauty,392,0.01365852
+0,a photo of a tench fish,42,tench,0,0.42241937,sea cucumber,329,0.0068483804,coral reef,973,0.006260362,eel,390,0.005607369,spaghetti squash,940,0.003936949
+0,a photo of a tench fish,42,tench,0,0.52480483,coral reef,973,0.0077095414,barracouta,389,0.0074468544,rock beauty,392,0.0067967526,anemone fish,393,0.0041937763
+0,a photo of a tench fish,42,tench,0,0.49788213,barracouta,389,0.023146091,coho,391,0.006223503,goldfish,1,0.005516195,gar,395,0.004338877
+0,a photo of a tench fish,42,tench,0,0.489341,barracouta,389,0.0049771816,coral reef,973,0.0027015598,rock beauty,392,0.0024693657,eel,390,0.0022840097
+0,a photo of a tench fish,42,tench,0,0.33973697,puffer,397,0.035659805,rock beauty,392,0.025208615,anemone fish,393,0.018244635,coral reef,973,0.010109799
+0,a photo of a tench fish,42,tench,0,0.20159201,coho,391,0.09121197,dugong,149,0.03556933,scuba diver,983,0.027509548,barracouta,389,0.017908748
+0,a photo of a tench fish,42,tench,0,0.56729907,coho,391,0.00845211,anemone fish,393,0.0076321983,coral reef,973,0.005757449,rock beauty,392,0.0056758155
+0,a photo of a tench fish,42,tench,0,0.72511876,barracouta,389,0.014351369,gar,395,0.003621169,coho,391,0.0030478106,sturgeon,394,0.0030134034
+0,a photo of a tench fish,42,tench,0,0.46205577,barracouta,389,0.0064610513,coho,391,0.0037271895,eel,390,0.0032476634,sturgeon,394,0.002989716
+0,a photo of a tench fish,42,tench,0,0.48919088,barracouta,389,0.02290056,coho,391,0.016232435,rock beauty,392,0.008227976,anemone fish,393,0.007724973
+0,a photo of a tench fish,42,tench,0,0.41087747,barracouta,389,0.0064831357,coho,391,0.0027397731,gar,395,0.0018303063,reel,758,0.0018078177
+0,a photo of a tench fish,42,tench,0,0.47733766,barracouta,389,0.027035616,coho,391,0.006524414,reel,758,0.0052773766,sturgeon,394,0.0028605617
+0,a photo of a tench fish,42,tench,0,0.5278154,barracouta,389,0.0030102837,goldfish,1,0.0020333352,jackfruit,955,0.0020085233,lakeside,975,0.001315874
+0,a photo of a tench fish,42,tench,0,0.52055085,barracouta,389,0.0034868545,coho,391,0.0024088705,zucchini,939,0.002080023,goldfish,1,0.0016040112
+0,a photo of a tench fish,42,tench,0,0.5048132,sea cucumber,329,0.016387412,barracouta,389,0.014541192,gar,395,0.0049334853,coho,391,0.004724518
+0,a photo of a tench fish,42,tench,0,0.2643139,coral reef,973,0.026058117,anemone fish,393,0.017597256,puffer,397,0.006558961,rock beauty,392,0.0051224465
+0,a photo of a tench fish,42,tench,0,0.43089125,barracouta,389,0.0054125534,goldfish,1,0.0028944837,rock beauty,392,0.0024651233,coral reef,973,0.0021317322
+0,a photo of a tench fish,42,tench,0,0.52436525,coho,391,0.004540964,barracouta,389,0.0025718769,crayfish,124,0.0023996993,rock crab,119,0.002240975
+0,a photo of a tench fish,42,tench,0,0.47255963,coho,391,0.01213111,barracouta,389,0.006607132,eel,390,0.0036430797,sturgeon,394,0.0036265757
+0,a photo of a tench fish,42,tench,0,0.5199659,barracouta,389,0.011606255,coho,391,0.008403055,coral reef,973,0.0077612237,rock beauty,392,0.004040462
+0,a photo of a tench fish,42,tench,0,0.48080605,rock beauty,392,0.008532531,goldfish,1,0.0046147346,reel,758,0.004252582,barracouta,389,0.003993164
+0,a photo of a tench fish,42,tench,0,0.37898466,barracouta,389,0.004861076,rock beauty,392,0.004668745,anemone fish,393,0.002878299,goldfish,1,0.0028296313
+0,a photo of a tench fish,42,tench,0,0.52176034,coral reef,973,0.03922594,rock beauty,392,0.013564971,anemone fish,393,0.006105962,scuba diver,983,0.0060065617
+0,a photo of a tench fish,42,tench,0,0.42545515,lakeside,975,0.0023482714,barracouta,389,0.0016857159,slug,114,0.0015514599,coho,391,0.0014196993
+0,a photo of a tench fish,42,tench,0,0.38600132,coho,391,0.024312295,barracouta,389,0.018760521,sea cucumber,329,0.0118383365,sturgeon,394,0.0052715517
+0,a photo of a tench fish,42,tench,0,0.4427275,barracouta,389,0.0050040903,coho,391,0.0028584062,sturgeon,394,0.0015843632,goldfish,1,0.0014922608
+0,a photo of a tench fish,42,tench,0,0.5335944,barracouta,389,0.011156455,coral reef,973,0.008351307,rock beauty,392,0.007629626,anemone fish,393,0.0052256538
+0,a photo of a tench fish,42,tench,0,0.2807397,barracouta,389,0.06465482,coral reef,973,0.030565439,coho,391,0.02512847,gar,395,0.019679928
+0,a photo of a tench fish,42,tench,0,0.3807273,coral reef,973,0.028715488,rock beauty,392,0.010940485,anemone fish,393,0.004341855,barracouta,389,0.0041735154
+0,a photo of a tench fish,42,tench,0,0.45875648,coral reef,973,0.007150598,anemone fish,393,0.0048323236,goldfish,1,0.0047304234,barracouta,389,0.0037038522
+0,a photo of a tench fish,42,tench,0,0.4524809,barracouta,389,0.0024974288,lemon,951,0.0014387837,reel,758,0.0014369929,spaghetti squash,940,0.0014098629
+0,a photo of a tench fish,42,tench,0,0.57009953,barracouta,389,0.00866778,coho,391,0.0064688465,sturgeon,394,0.0023136805,slug,114,0.0017287617
+0,a photo of a tench fish,42,tench,0,0.4500304,coho,391,0.0065350463,spaghetti squash,940,0.0036436385,barracouta,389,0.0032202408,lemon,951,0.0023572464
+0,a photo of a tench fish,42,tench,0,0.59855276,barracouta,389,0.021178564,gar,395,0.015893592,coho,391,0.008212095,sturgeon,394,0.0050856723
+0,a photo of a tench fish,42,tench,0,0.68244576,coral reef,973,0.012961084,barracouta,389,0.005834688,anemone fish,393,0.0054054135,eel,390,0.004725018
+0,a photo of a tench fish,42,tench,0,0.3939052,barracouta,389,0.0037505375,coral reef,973,0.0031510156,lemon,951,0.0016214373,coho,391,0.001561055
+0,a photo of a tench fish,42,tench,0,0.41570932,coho,391,0.0077524283,barracouta,389,0.0072765592,reel,758,0.004040361,cloak,501,0.002485886
+0,a photo of a tench fish,42,tench,0,0.48219952,barracouta,389,0.0039193067,coho,391,0.0032496501,gar,395,0.0019469135,American black bear,295,0.0017132317
+0,a photo of a tench fish,42,tench,0,0.31288472,coho,391,0.050950777,coral reef,973,0.013564185,sturgeon,394,0.011117477,sea cucumber,329,0.008319395
+0,a photo of a tench fish,42,tench,0,0.30381134,barracouta,389,0.04782904,coho,391,0.013672486,gar,395,0.010210322,reel,758,0.009470247
+0,a photo of a tench fish,42,tench,0,0.35996506,barracouta,389,0.005218694,spaghetti squash,940,0.0015446842,sea cucumber,329,0.0013667885,coho,391,0.001330303
+0,a photo of a tench fish,42,tench,0,0.45696878,barracouta,389,0.0026682727,coho,391,0.0021653334,coral reef,973,0.0019270385,platypus,103,0.0012251916
+0,a photo of a tench fish,42,tench,0,0.35617596,barracouta,389,0.0041453475,reel,758,0.001968197,coho,391,0.0016998986,goldfish,1,0.0014099659
+0,a photo of a tench fish,42,tench,0,0.40094665,barracouta,389,0.0024227113,spaghetti squash,940,0.0019932785,coho,391,0.0016908244,sunglasses,837,0.0016869097
+0,a photo of a tench fish,42,tench,0,0.36871433,barracouta,389,0.008702812,reel,758,0.002535119,coho,391,0.0017936416,spaghetti squash,940,0.0016899697
+0,a photo of a tench fish,42,tench,0,0.51074564,eel,390,0.04670192,coral reef,973,0.006259756,puffer,397,0.0057305167,coho,391,0.0055213924
+0,a photo of a tench fish,42,tench,0,0.513009,coral reef,973,0.01841488,anemone fish,393,0.01640927,barracouta,389,0.014600488,rock beauty,392,0.012590784
+0,a photo of a tench fish,42,tench,0,0.59824747,barracouta,389,0.015315619,reel,758,0.011098587,coho,391,0.005480994,gar,395,0.0029590356
+0,a photo of a tench fish,42,tench,0,0.45465556,coral reef,973,0.004634562,rock beauty,392,0.0046140943,anemone fish,393,0.0039936514,puffer,397,0.0030933577
+0,a photo of a tench fish,42,tench,0,0.44596994,barracouta,389,0.0035626236,rock beauty,392,0.0018228675,reel,758,0.0017796428,anemone fish,393,0.0015476746
+0,a photo of a tench fish,42,coho,391,0.23025402,tench,0,0.2243513,sturgeon,394,0.023641368,barracouta,389,0.02287288,gar,395,0.009369382
+0,a photo of a tench fish,42,tench,0,0.5244046,coral reef,973,0.019509621,rock beauty,392,0.014268752,barracouta,389,0.010029211,anemone fish,393,0.007593094
+0,a photo of a tench fish,42,tench,0,0.44102436,rock beauty,392,0.013038449,anemone fish,393,0.011325624,coral reef,973,0.010500307,barracouta,389,0.0063668755
+0,a photo of a tench fish,42,tench,0,0.48027617,barracouta,389,0.016815301,reel,758,0.0136935515,coral reef,973,0.0075128083,coho,391,0.0066787167
+0,a photo of a tench fish,42,tench,0,0.44796175,coral reef,973,0.006745655,coho,391,0.0054722717,barracouta,389,0.0049731913,anemone fish,393,0.0033489598
+0,a photo of a tench fish,42,tench,0,0.47974488,gar,395,0.018811135,coho,391,0.016749486,barracouta,389,0.015502767,sturgeon,394,0.0056917975
+0,a photo of a tench fish,42,tench,0,0.4127639,barracouta,389,0.004863765,sea cucumber,329,0.0032968544,goldfish,1,0.001675624,platypus,103,0.0015335524
+0,a photo of a tench fish,42,tench,0,0.53964555,barracouta,389,0.011754234,jackfruit,955,0.008313969,sea cucumber,329,0.008291106,gar,395,0.0027877109
+0,a photo of a tench fish,42,tench,0,0.5751873,eel,390,0.004810377,coral reef,973,0.0039054905,rock beauty,392,0.0029335378,barracouta,389,0.0028971953
+0,a photo of a tench fish,42,puffer,397,0.09925393,tench,0,0.081087075,coral reef,973,0.076527834,anemone fish,393,0.07377403,rock beauty,392,0.057649735
+0,a photo of a tench fish,42,tench,0,0.5163438,barracouta,389,0.008056008,reel,758,0.0039738673,puffer,397,0.0035351557,coho,391,0.0033133852
+0,a photo of a tench fish,42,tench,0,0.297323,coral reef,973,0.05175502,rock beauty,392,0.017369382,anemone fish,393,0.014408,puffer,397,0.0064616418
+0,a photo of a tench fish,42,tench,0,0.40814057,coral reef,973,0.013966678,rock beauty,392,0.008573959,barracouta,389,0.008053519,anemone fish,393,0.0039719245
+0,a photo of a tench fish,42,tench,0,0.51321,barracouta,389,0.003965384,coral reef,973,0.0033689437,rock beauty,392,0.0024228513,coho,391,0.002211258
+0,a photo of a tench fish,42,tench,0,0.5109054,barracouta,389,0.009955281,coho,391,0.006412215,reel,758,0.0037387402,gar,395,0.0029767854
+0,a photo of a tench fish,42,tench,0,0.41760442,spaghetti squash,940,0.013465813,barracouta,389,0.009453933,zucchini,939,0.008623722,gar,395,0.0077654393
+0,a photo of a tench fish,42,tench,0,0.3411213,jackfruit,955,0.012370467,barracouta,389,0.010376459,lemon,951,0.0074396124,coral reef,973,0.0058307066
+0,a photo of a tench fish,42,tench,0,0.33953586,coral reef,973,0.008977955,barracouta,389,0.005773921,rock beauty,392,0.0050653117,goldfish,1,0.0034139017
+0,a photo of a tench fish,42,rock beauty,392,0.22463383,tench,0,0.1369767,coral reef,973,0.050663378,anemone fish,393,0.017742474,goldfish,1,0.0073924433
+1,a photo of an English springer dog,43,English springer,217,0.38157418,cocker spaniel,219,0.056238603,English setter,212,0.025573704,Saint Bernard,247,0.01841396,clumber,216,0.012731554
+1,a photo of an English springer dog,43,English springer,217,0.17769134,cocker spaniel,219,0.11822236,English setter,212,0.10967723,clumber,216,0.015698072,Sussex spaniel,220,0.006849174
+1,a photo of an English springer dog,43,English springer,217,0.29093906,cocker spaniel,219,0.06353388,Sussex spaniel,220,0.008601239,clumber,216,0.007656487,Blenheim spaniel,156,0.007213984
+1,a photo of an English springer dog,43,English springer,217,0.32014307,cocker spaniel,219,0.10693589,clumber,216,0.020946566,Sussex spaniel,220,0.017717775,Welsh springer spaniel,218,0.009837988
+1,a photo of an English springer dog,43,English springer,217,0.25460827,English setter,212,0.07842864,cocker spaniel,219,0.05131893,clumber,216,0.009396434,Brittany spaniel,215,0.009183867
+1,a photo of an English springer dog,43,English springer,217,0.2786823,cocker spaniel,219,0.08585652,Tibetan terrier,200,0.015477659,English setter,212,0.014450907,Sussex spaniel,220,0.010518601
+1,a photo of an English springer dog,43,English springer,217,0.25854146,Border collie,232,0.049738996,cocker spaniel,219,0.023282455,Japanese spaniel,152,0.018946275,Sussex spaniel,220,0.017575797
+1,a photo of an English springer dog,43,English setter,212,0.23488036,English springer,217,0.13340251,clumber,216,0.051415484,cocker spaniel,219,0.026636487,Brittany spaniel,215,0.012485564
+1,a photo of an English springer dog,43,English springer,217,0.33145165,cocker spaniel,219,0.04476572,English setter,212,0.010909077,Welsh springer spaniel,218,0.009126743,clumber,216,0.007839872
+1,a photo of an English springer dog,43,English springer,217,0.49990252,cocker spaniel,219,0.027434802,Welsh springer spaniel,218,0.016076678,Border collie,232,0.011932433,Brittany spaniel,215,0.009970184
+1,a photo of an English springer dog,43,English springer,217,0.4905271,cocker spaniel,219,0.02765903,Welsh springer spaniel,218,0.0077007245,Sussex spaniel,220,0.0071987933,clumber,216,0.0057758377
+1,a photo of an English springer dog,43,English springer,217,0.5481771,cocker spaniel,219,0.03717994,Sussex spaniel,220,0.012668751,Welsh springer spaniel,218,0.008907259,clumber,216,0.005569825
+1,a photo of an English springer dog,43,English springer,217,0.33358434,cocker spaniel,219,0.10018855,Sussex spaniel,220,0.02370007,clumber,216,0.014570509,standard poodle,267,0.008271884
+1,a photo of an English springer dog,43,English springer,217,0.18760626,cocker spaniel,219,0.13579322,English setter,212,0.013693461,clumber,216,0.008878202,Sussex spaniel,220,0.00811932
+1,a photo of an English springer dog,43,English springer,217,0.2790026,cocker spaniel,219,0.02339021,Border collie,232,0.021709532,English setter,212,0.021006245,Brittany spaniel,215,0.019080915
+1,a photo of an English springer dog,43,English springer,217,0.20795666,cocker spaniel,219,0.168717,English setter,212,0.032273404,clumber,216,0.010231922,Sussex spaniel,220,0.010215895
+1,a photo of an English springer dog,43,English springer,217,0.27104297,cocker spaniel,219,0.09600766,English setter,212,0.020688534,clumber,216,0.012842526,Sussex spaniel,220,0.009305619
+1,a photo of an English springer dog,43,English springer,217,0.3806127,Border collie,232,0.010947019,Great Dane,246,0.008378178,English setter,212,0.007621468,clumber,216,0.006719939
+1,a photo of an English springer dog,43,cocker spaniel,219,0.16067496,English springer,217,0.08958611,Tibetan terrier,200,0.024562957,Sussex spaniel,220,0.011656637,Shih-Tzu,155,0.010678452
+1,a photo of an English springer dog,43,English springer,217,0.28554755,cocker spaniel,219,0.03919721,English setter,212,0.015714874,Brittany spaniel,215,0.012497223,clumber,216,0.011400064
+1,a photo of an English springer dog,43,English springer,217,0.45643723,cocker spaniel,219,0.029525008,Sussex spaniel,220,0.00940469,Border collie,232,0.0069971588,Saluki,176,0.006153191
+1,a photo of an English springer dog,43,English springer,217,0.23961405,Blenheim spaniel,156,0.044794343,Japanese spaniel,152,0.038066093,cocker spaniel,219,0.03354225,Sussex spaniel,220,0.015674695
+1,a photo of an English springer dog,43,English springer,217,0.34231582,cocker spaniel,219,0.04106164,Welsh springer spaniel,218,0.014814668,clumber,216,0.014148208,Sussex spaniel,220,0.011935448
+1,a photo of an English springer dog,43,English springer,217,0.27726766,cocker spaniel,219,0.084410265,Japanese spaniel,152,0.014219942,Blenheim spaniel,156,0.013139317,Sussex spaniel,220,0.011385561
+1,a photo of an English springer dog,43,English setter,212,0.17902009,English springer,217,0.10486469,cocker spaniel,219,0.03595245,clumber,216,0.015751736,Shih-Tzu,155,0.01122514
+1,a photo of an English springer dog,43,English springer,217,0.46240968,cocker spaniel,219,0.04135602,Sussex spaniel,220,0.020063993,Welsh springer spaniel,218,0.014047941,Japanese spaniel,152,0.0077773905
+1,a photo of an English springer dog,43,English springer,217,0.39181352,English setter,212,0.048849087,cocker spaniel,219,0.017510654,Brittany spaniel,215,0.015687807,clumber,216,0.011024674
+1,a photo of an English springer dog,43,English springer,217,0.33681387,cocker spaniel,219,0.025807327,clumber,216,0.010545176,Border collie,232,0.008684709,Sussex spaniel,220,0.0080981795
+1,a photo of an English springer dog,43,English springer,217,0.42677176,cocker spaniel,219,0.030438224,clumber,216,0.012789985,Welsh springer spaniel,218,0.007901296,English setter,212,0.0072780857
+1,a photo of an English springer dog,43,English springer,217,0.521542,cocker spaniel,219,0.017165476,Border collie,232,0.013020511,English setter,212,0.0091551365,Brittany spaniel,215,0.008184559
+1,a photo of an English springer dog,43,English springer,217,0.3971653,cocker spaniel,219,0.017589401,Welsh springer spaniel,218,0.013861686,Border collie,232,0.010761384,clumber,216,0.009144196
+1,a photo of an English springer dog,43,English springer,217,0.2846242,Japanese spaniel,152,0.045416605,Sussex spaniel,220,0.036725778,cocker spaniel,219,0.02422745,Blenheim spaniel,156,0.023724766
+1,a photo of an English springer dog,43,English springer,217,0.48757437,cocker spaniel,219,0.02989418,Sussex spaniel,220,0.010459299,clumber,216,0.008627639,Welsh springer spaniel,218,0.0076112403
+1,a photo of an English springer dog,43,English springer,217,0.2814649,Japanese spaniel,152,0.035694283,Sussex spaniel,220,0.025954667,cocker spaniel,219,0.019394804,Blenheim spaniel,156,0.019365406
+1,a photo of an English springer dog,43,English springer,217,0.33694196,cocker spaniel,219,0.038578305,English setter,212,0.009143898,Welsh springer spaniel,218,0.008229031,clumber,216,0.007957364
+1,a photo of an English springer dog,43,English springer,217,0.35346767,Sussex spaniel,220,0.029969612,cocker spaniel,219,0.02492303,clumber,216,0.023505861,Border collie,232,0.019502219
+1,a photo of an English springer dog,43,English springer,217,0.23314519,English setter,212,0.094423585,cocker spaniel,219,0.024784967,Brittany spaniel,215,0.022262214,Welsh springer spaniel,218,0.01791128
+1,a photo of an English springer dog,43,English springer,217,0.33765203,Sussex spaniel,220,0.03794235,cocker spaniel,219,0.024953932,Blenheim spaniel,156,0.016728,Border collie,232,0.016029825
+1,a photo of an English springer dog,43,cocker spaniel,219,0.103213005,English springer,217,0.07491582,English setter,212,0.042890366,clumber,216,0.021517588,Sussex spaniel,220,0.015829096
+1,a photo of an English springer dog,43,English springer,217,0.32227072,Welsh springer spaniel,218,0.04182045,cocker spaniel,219,0.027595457,Japanese spaniel,152,0.013921756,Blenheim spaniel,156,0.013234169
+1,a photo of an English springer dog,43,English springer,217,0.31833473,Brittany spaniel,215,0.027254181,cocker spaniel,219,0.025783507,Border collie,232,0.008431474,Sussex spaniel,220,0.007053747
+1,a photo of an English springer dog,43,English springer,217,0.29261425,cocker spaniel,219,0.04685444,clumber,216,0.017948825,Sussex spaniel,220,0.00889415,Welsh springer spaniel,218,0.007348645
+1,a photo of an English springer dog,43,English springer,217,0.39818966,cocker spaniel,219,0.032006834,Brittany spaniel,215,0.00794314,standard poodle,267,0.0061458573,clumber,216,0.005068111
+1,a photo of an English springer dog,43,English springer,217,0.28362727,cocker spaniel,219,0.1488248,Sussex spaniel,220,0.011349915,Blenheim spaniel,156,0.0085745575,Welsh springer spaniel,218,0.008197638
+1,a photo of an English springer dog,43,English springer,217,0.34719566,Welsh springer spaniel,218,0.031075409,clumber,216,0.029493492,English setter,212,0.018925233,cocker spaniel,219,0.017128907
+1,a photo of an English springer dog,43,English springer,217,0.29686883,cocker spaniel,219,0.13593169,Sussex spaniel,220,0.013480052,clumber,216,0.009034255,Welsh springer spaniel,218,0.004971899
+1,a photo of an English springer dog,43,English springer,217,0.3549869,cocker spaniel,219,0.0804828,English setter,212,0.022650976,Sussex spaniel,220,0.009202238,clumber,216,0.0065220385
+1,a photo of an English springer dog,43,English springer,217,0.34047168,cocker spaniel,219,0.022144547,English setter,212,0.015797043,Welsh springer spaniel,218,0.012551251,clumber,216,0.0123111475
+1,a photo of an English springer dog,43,English springer,217,0.38289708,cocker spaniel,219,0.029714324,clumber,216,0.016507693,Welsh springer spaniel,218,0.0076610167,Brittany spaniel,215,0.006340745
+1,a photo of an English springer dog,43,English springer,217,0.49368033,cocker spaniel,219,0.015813531,Welsh springer spaniel,218,0.008684014,Brittany spaniel,215,0.007558853,clumber,216,0.006514918
+1,a photo of an English springer dog,43,cocker spaniel,219,0.18043572,English springer,217,0.10985079,Sussex spaniel,220,0.026063444,Japanese spaniel,152,0.022754801,Blenheim spaniel,156,0.016353412
+1,a photo of an English springer dog,43,English springer,217,0.5282008,Welsh springer spaniel,218,0.015717248,cocker spaniel,219,0.015515363,clumber,216,0.008875869,Sussex spaniel,220,0.00547367
+1,a photo of an English springer dog,43,English springer,217,0.4182272,cocker spaniel,219,0.049677525,Welsh springer spaniel,218,0.023731101,clumber,216,0.022896867,Brittany spaniel,215,0.0094802985
+1,a photo of an English springer dog,43,English springer,217,0.3546055,cocker spaniel,219,0.07891771,clumber,216,0.010533564,Sussex spaniel,220,0.009408498,Welsh springer spaniel,218,0.007312755
+1,a photo of an English springer dog,43,English springer,217,0.53540176,Brittany spaniel,215,0.014042583,clumber,216,0.009033479,cocker spaniel,219,0.008063604,English setter,212,0.007371817
+1,a photo of an English springer dog,43,cocker spaniel,219,0.14616743,English springer,217,0.0767283,English setter,212,0.043736663,clumber,216,0.0173593,standard poodle,267,0.016740175
+1,a photo of an English springer dog,43,English springer,217,0.23218544,cocker spaniel,219,0.052887965,English setter,212,0.040753465,Brittany spaniel,215,0.009283285,clumber,216,0.009164083
+1,a photo of an English springer dog,43,English springer,217,0.42931345,Border collie,232,0.027209328,collie,231,0.013381653,Brittany spaniel,215,0.010772069,Sussex spaniel,220,0.010440986
+1,a photo of an English springer dog,43,English springer,217,0.30112857,cocker spaniel,219,0.026196392,Brittany spaniel,215,0.016192248,Great Dane,246,0.014811381,English setter,212,0.01178638
+1,a photo of an English springer dog,43,English springer,217,0.50106996,cocker spaniel,219,0.015730051,Welsh springer spaniel,218,0.014144297,clumber,216,0.01319972,Sussex spaniel,220,0.0071747005
+1,a photo of an English springer dog,43,English springer,217,0.3808344,cocker spaniel,219,0.053714115,Sussex spaniel,220,0.0134283,clumber,216,0.01102894,Blenheim spaniel,156,0.007227889
+1,a photo of an English springer dog,43,English springer,217,0.22570857,cocker spaniel,219,0.050194044,English setter,212,0.047952093,Japanese spaniel,152,0.028198803,Blenheim spaniel,156,0.0190855
+1,a photo of an English springer dog,43,English springer,217,0.23277992,English setter,212,0.05468542,cocker spaniel,219,0.019257378,Saluki,176,0.017772755,Gordon setter,214,0.014666264
+1,a photo of an English springer dog,43,English springer,217,0.21226278,cocker spaniel,219,0.039470952,Blenheim spaniel,156,0.029029202,Sussex spaniel,220,0.025149435,Japanese spaniel,152,0.02084176
+1,a photo of an English springer dog,43,English springer,217,0.29886612,cocker spaniel,219,0.13524675,clumber,216,0.013781371,Sussex spaniel,220,0.012800012,English setter,212,0.011167846
+1,a photo of an English springer dog,43,English springer,217,0.29639944,cocker spaniel,219,0.051871993,clumber,216,0.01427347,Sussex spaniel,220,0.010449266,Welsh springer spaniel,218,0.009458956
+1,a photo of an English springer dog,43,English springer,217,0.36453745,cocker spaniel,219,0.030945148,Sussex spaniel,220,0.019477893,Japanese spaniel,152,0.012663693,Border collie,232,0.011289031
+1,a photo of an English springer dog,43,English springer,217,0.3323236,cocker spaniel,219,0.02987758,Welsh springer spaniel,218,0.025650818,Border collie,232,0.016774762,clumber,216,0.014252473
+1,a photo of an English springer dog,43,English springer,217,0.21621916,English setter,212,0.050541684,cocker spaniel,219,0.024264298,Welsh springer spaniel,218,0.017133297,clumber,216,0.014919755
+1,a photo of an English springer dog,43,English springer,217,0.3607239,cocker spaniel,219,0.09250477,clumber,216,0.014628683,Sussex spaniel,220,0.0125780385,Welsh springer spaniel,218,0.010535417
+1,a photo of an English springer dog,43,English springer,217,0.32362625,cocker spaniel,219,0.06417551,Sussex spaniel,220,0.019694798,English setter,212,0.013458209,Japanese spaniel,152,0.013025121
+1,a photo of an English springer dog,43,English springer,217,0.45803446,cocker spaniel,219,0.058032542,Sussex spaniel,220,0.018090537,clumber,216,0.011293176,Japanese spaniel,152,0.010910761
+1,a photo of an English springer dog,43,English springer,217,0.40024814,Border collie,232,0.029303996,cocker spaniel,219,0.02091658,Blenheim spaniel,156,0.009742178,collie,231,0.007600829
+1,a photo of an English springer dog,43,English springer,217,0.35012865,cocker spaniel,219,0.024630867,Sussex spaniel,220,0.016114999,Brittany spaniel,215,0.0116225835,clumber,216,0.011532611
+1,a photo of an English springer dog,43,English springer,217,0.29423505,cocker spaniel,219,0.076072566,Welsh springer spaniel,218,0.008157672,Old English sheepdog,229,0.008064308,standard poodle,267,0.005570748
+1,a photo of an English springer dog,43,English springer,217,0.4198705,Border collie,232,0.0207064,Welsh springer spaniel,218,0.013523386,cocker spaniel,219,0.013438291,Brittany spaniel,215,0.01067218
+1,a photo of an English springer dog,43,English springer,217,0.5294264,cocker spaniel,219,0.01650073,Brittany spaniel,215,0.011190781,clumber,216,0.005774514,Sussex spaniel,220,0.0053056558
+1,a photo of an English springer dog,43,English springer,217,0.5218829,Brittany spaniel,215,0.032083243,English setter,212,0.021925569,clumber,216,0.0040201377,cocker spaniel,219,0.0038240433
+1,a photo of an English springer dog,43,English springer,217,0.09995436,Welsh springer spaniel,218,0.097550586,English setter,212,0.04525941,Brittany spaniel,215,0.037161924,Blenheim spaniel,156,0.033498786
+1,a photo of an English springer dog,43,English springer,217,0.46255517,cocker spaniel,219,0.016679255,Welsh springer spaniel,218,0.008332502,Border collie,232,0.006344425,Brittany spaniel,215,0.0058195842
+1,a photo of an English springer dog,43,English springer,217,0.35916755,cocker spaniel,219,0.15893278,Sussex spaniel,220,0.014547166,standard poodle,267,0.009203723,clumber,216,0.00816833
+1,a photo of an English springer dog,43,English springer,217,0.26023108,English setter,212,0.04549676,Blenheim spaniel,156,0.028726194,cocker spaniel,219,0.024067473,Brittany spaniel,215,0.015270549
+1,a photo of an English springer dog,43,English springer,217,0.4656762,clumber,216,0.016274666,cocker spaniel,219,0.012149305,Brittany spaniel,215,0.009902444,Welsh springer spaniel,218,0.0063019777
+1,a photo of an English springer dog,43,cocker spaniel,219,0.21314046,English springer,217,0.04702117,Blenheim spaniel,156,0.01865388,Sussex spaniel,220,0.01841345,Japanese spaniel,152,0.017958524
+1,a photo of an English springer dog,43,English springer,217,0.42182654,cocker spaniel,219,0.029584633,English setter,212,0.012321894,Blenheim spaniel,156,0.008923358,Brittany spaniel,215,0.0059719444
+1,a photo of an English springer dog,43,English springer,217,0.2183025,English setter,212,0.06727304,Brittany spaniel,215,0.034758545,clumber,216,0.030786548,Welsh springer spaniel,218,0.01615313
+1,a photo of an English springer dog,43,English springer,217,0.4889089,Brittany spaniel,215,0.014516249,cocker spaniel,219,0.010618506,Welsh springer spaniel,218,0.007677681,clumber,216,0.006217537
+1,a photo of an English springer dog,43,English springer,217,0.2559857,cocker spaniel,219,0.048245303,clumber,216,0.009668161,English setter,212,0.007837874,Sussex spaniel,220,0.0077424534
+1,a photo of an English springer dog,43,English setter,212,0.12523744,English springer,217,0.08756604,Blenheim spaniel,156,0.069133274,Japanese spaniel,152,0.038853917,Border collie,232,0.034707356
+1,a photo of an English springer dog,43,English springer,217,0.3682543,cocker spaniel,219,0.015250187,Border collie,232,0.013993662,Brittany spaniel,215,0.013360255,collie,231,0.009507011
+1,a photo of an English springer dog,43,cocker spaniel,219,0.1856134,English springer,217,0.15356511,Blenheim spaniel,156,0.026642043,English setter,212,0.019253349,Sussex spaniel,220,0.011979818
+1,a photo of an English springer dog,43,English springer,217,0.3574421,Border collie,232,0.030947506,Brittany spaniel,215,0.014101077,collie,231,0.012830239,Welsh springer spaniel,218,0.010693744
+1,a photo of an English springer dog,43,English springer,217,0.2932713,cocker spaniel,219,0.11136404,Sussex spaniel,220,0.033786237,clumber,216,0.013173749,Blenheim spaniel,156,0.0121217985
+1,a photo of an English springer dog,43,English springer,217,0.48884413,cocker spaniel,219,0.033368874,Welsh springer spaniel,218,0.01554327,clumber,216,0.006777301,Brittany spaniel,215,0.005207225
+1,a photo of an English springer dog,43,English springer,217,0.3502321,cocker spaniel,219,0.063592054,Sussex spaniel,220,0.035408672,clumber,216,0.014292933,Japanese spaniel,152,0.014286086
+1,a photo of an English springer dog,43,English springer,217,0.35459897,cocker spaniel,219,0.13624713,Sussex spaniel,220,0.0170672,Welsh springer spaniel,218,0.015226264,clumber,216,0.015113205
+1,a photo of an English springer dog,43,English springer,217,0.35355234,cocker spaniel,219,0.07774882,clumber,216,0.015662318,English setter,212,0.013184334,Welsh springer spaniel,218,0.012293776
+1,a photo of an English springer dog,43,English springer,217,0.38225845,cocker spaniel,219,0.051936828,Sussex spaniel,220,0.012443647,Welsh springer spaniel,218,0.011863443,clumber,216,0.011089428
+1,a photo of an English springer dog,43,English springer,217,0.40864527,Brittany spaniel,215,0.0126396585,cocker spaniel,219,0.007238869,English setter,212,0.0054805204,Welsh springer spaniel,218,0.005009544
+1,a photo of an English springer dog,43,English springer,217,0.12078632,cocker spaniel,219,0.058791485,English setter,212,0.026952056,Japanese spaniel,152,0.024036009,Sussex spaniel,220,0.022488791
+2,a photo of a cassette player,44,tape player,848,0.16628064,cassette player,482,0.12362238,CD player,485,0.1137456,radio,754,0.045316424,cassette,481,0.028399533
+2,a photo of a cassette player,44,tape player,848,0.17254102,cassette player,482,0.12535097,cassette,481,0.07698959,radio,754,0.050905526,CD player,485,0.040648255
+2,a photo of a cassette player,44,tape player,848,0.1358491,cassette player,482,0.13563189,CD player,485,0.080984786,radio,754,0.07696802,cassette,481,0.04857994
+2,a photo of a cassette player,44,tape player,848,0.097571954,CD player,485,0.08731783,cassette player,482,0.0626014,radio,754,0.054110646,Polaroid camera,732,0.049321495
+2,a photo of a cassette player,44,tape player,848,0.3561488,cassette player,482,0.1564338,cassette,481,0.10681235,CD player,485,0.01346496,radio,754,0.010297083
+2,a photo of a cassette player,44,tape player,848,0.2097885,cassette player,482,0.19199772,CD player,485,0.10554046,radio,754,0.04244706,cassette,481,0.0402672
+2,a photo of a cassette player,44,tape player,848,0.23422539,cassette player,482,0.11846878,CD player,485,0.08629594,cassette,481,0.027251167,radio,754,0.022403255
+2,a photo of a cassette player,44,tape player,848,0.06850964,CD player,485,0.062211502,cassette player,482,0.05660568,radio,754,0.04171651,printer,742,0.03946539
+2,a photo of a cassette player,44,cassette player,482,0.15415749,tape player,848,0.09703528,CD player,485,0.09654126,radio,754,0.08479434,cassette,481,0.02995924
+2,a photo of a cassette player,44,tape player,848,0.24216399,CD player,485,0.11802333,cassette player,482,0.069345355,radio,754,0.042771745,cassette,481,0.014763193
+2,a photo of a cassette player,44,tape player,848,0.16159762,cassette player,482,0.12325853,radio,754,0.09206392,CD player,485,0.087515905,cassette,481,0.055317476
+2,a photo of a cassette player,44,tape player,848,0.24287657,cassette,481,0.13141891,cassette player,482,0.124002315,CD player,485,0.046799168,printer,742,0.010514785
+2,a photo of a cassette player,44,tape player,848,0.28202456,cassette player,482,0.26363263,cassette,481,0.055853967,radio,754,0.020603606,CD player,485,0.009457529
+2,a photo of a cassette player,44,tape player,848,0.28127325,cassette player,482,0.19142409,radio,754,0.10860935,CD player,485,0.08001187,cassette,481,0.027269699
+2,a photo of a cassette player,44,tape player,848,0.2046817,CD player,485,0.11585909,cassette player,482,0.10872475,radio,754,0.08900948,cassette,481,0.040254373
+2,a photo of a cassette player,44,tape player,848,0.22898555,cassette player,482,0.123402216,CD player,485,0.069851704,cassette,481,0.023293212,radio,754,0.017022502
+2,a photo of a cassette player,44,CD player,485,0.1391884,tape player,848,0.13246971,radio,754,0.12829319,cassette,481,0.09216977,cassette player,482,0.0747223
+2,a photo of a cassette player,44,CD player,485,0.118840784,tape player,848,0.11224944,cassette player,482,0.089181736,Polaroid camera,732,0.045804776,radio,754,0.035590507
+2,a photo of a cassette player,44,tape player,848,0.18474047,radio,754,0.16145793,CD player,485,0.14964035,cassette player,482,0.1181328,cassette,481,0.015457375
+2,a photo of a cassette player,44,CD player,485,0.36691734,cassette player,482,0.045781177,tape player,848,0.045073513,radio,754,0.03949039,cassette,481,0.018037243
+2,a photo of a cassette player,44,tape player,848,0.20796414,cassette player,482,0.14053747,CD player,485,0.06680866,cassette,481,0.029320022,radio,754,0.016172504
+2,a photo of a cassette player,44,tape player,848,0.15985005,cassette player,482,0.11056123,CD player,485,0.05377903,radio,754,0.037753332,cassette,481,0.036067605
+2,a photo of a cassette player,44,tape player,848,0.2608677,cassette player,482,0.12188675,CD player,485,0.07886667,radio,754,0.054352384,cassette,481,0.026384521
+2,a photo of a cassette player,44,tape player,848,0.58472615,cassette player,482,0.15020253,CD player,485,0.024617879,cassette,481,0.0123490635,radio,754,0.007316316
+2,a photo of a cassette player,44,tape player,848,0.18748453,cassette player,482,0.16670579,cassette,481,0.10457914,radio,754,0.02886759,CD player,485,0.02739041
+2,a photo of a cassette player,44,tape player,848,0.18737052,cassette player,482,0.11160047,CD player,485,0.067478485,radio,754,0.06325664,cassette,481,0.039708294
+2,a photo of a cassette player,44,CD player,485,0.18311268,tape player,848,0.18101051,cassette player,482,0.09022638,radio,754,0.06426839,cassette,481,0.035291534
+2,a photo of a cassette player,44,cassette,481,0.13758086,cassette player,482,0.063510746,tape player,848,0.05151116,radio,754,0.050165806,CD player,485,0.04992519
+2,a photo of a cassette player,44,tape player,848,0.18731697,cassette player,482,0.12904154,CD player,485,0.06550649,radio,754,0.023178248,cassette,481,0.012994049
+2,a photo of a cassette player,44,radio,754,0.26392108,tape player,848,0.09581264,CD player,485,0.09204914,cassette player,482,0.04490986,cassette,481,0.023073733
+2,a photo of a cassette player,44,tape player,848,0.2143465,cassette player,482,0.17606173,CD player,485,0.12403353,radio,754,0.10852917,cassette,481,0.017174255
+2,a photo of a cassette player,44,tape player,848,0.2995352,cassette player,482,0.19395617,cassette,481,0.04614931,CD player,485,0.03625584,radio,754,0.011447173
+2,a photo of a cassette player,44,tape player,848,0.19241309,cassette player,482,0.18732361,cassette,481,0.102480024,radio,754,0.042197205,CD player,485,0.041704915
+2,a photo of a cassette player,44,tape player,848,0.299576,cassette player,482,0.19263569,CD player,485,0.04229373,cassette,481,0.038739078,radio,754,0.017836757
+2,a photo of a cassette player,44,tape player,848,0.12779386,cassette player,482,0.121401735,radio,754,0.08058817,cassette,481,0.07877338,CD player,485,0.038097735
+2,a photo of a cassette player,44,tape player,848,0.15309449,cassette player,482,0.14856799,cassette,481,0.11180579,CD player,485,0.037948694,radio,754,0.02522743
+2,a photo of a cassette player,44,tape player,848,0.2976326,cassette player,482,0.19292414,cassette,481,0.044478513,CD player,485,0.03964024,radio,754,0.03186293
+2,a photo of a cassette player,44,cassette player,482,0.22907852,tape player,848,0.2238685,CD player,485,0.06501191,radio,754,0.045763537,cassette,481,0.045580972
+2,a photo of a cassette player,44,tape player,848,0.106619075,radio,754,0.10470295,cassette player,482,0.10306627,CD player,485,0.04940387,cassette,481,0.035245806
+2,a photo of a cassette player,44,CD player,485,0.14888482,tape player,848,0.14091139,cassette player,482,0.0857752,radio,754,0.024268964,mailbox,637,0.0145480605
+2,a photo of a cassette player,44,tape player,848,0.30908236,cassette player,482,0.21977115,CD player,485,0.059082888,cassette,481,0.04505168,radio,754,0.01338148
+2,a photo of a cassette player,44,tape player,848,0.20348282,cassette player,482,0.1804546,CD player,485,0.050308768,radio,754,0.04853888,cassette,481,0.02904048
+2,a photo of a cassette player,44,cassette,481,0.18065801,cassette player,482,0.1366732,tape player,848,0.12572357,radio,754,0.0075278967,CD player,485,0.0047279717
+2,a photo of a cassette player,44,tape player,848,0.18254197,CD player,485,0.09175553,cassette player,482,0.09135144,ballpoint,418,0.04198427,toaster,859,0.038128696
+2,a photo of a cassette player,44,tape player,848,0.23191181,cassette player,482,0.15567075,CD player,485,0.088448115,radio,754,0.046303537,cassette,481,0.01964902
+2,a photo of a cassette player,44,tape player,848,0.17621343,cassette player,482,0.09653245,radio,754,0.041224845,CD player,485,0.03678188,cassette,481,0.025673758
+2,a photo of a cassette player,44,tape player,848,0.23249063,CD player,485,0.15686737,cassette player,482,0.07114196,radio,754,0.05930832,cassette,481,0.016268805
+2,a photo of a cassette player,44,tape player,848,0.22146858,cassette player,482,0.14507984,cassette,481,0.106367536,CD player,485,0.028497506,radio,754,0.016704455
+2,a photo of a cassette player,44,tape player,848,0.23341146,cassette player,482,0.13267934,CD player,485,0.09999783,radio,754,0.038309623,cassette,481,0.022132108
+2,a photo of a cassette player,44,CD player,485,0.31184068,tape player,848,0.08483822,cassette player,482,0.055558726,Polaroid camera,732,0.04878074,cassette,481,0.048180003
+2,a photo of a cassette player,44,radio,754,0.11848083,tape player,848,0.11408511,CD player,485,0.10330761,cassette player,482,0.08467742,cassette,481,0.032654103
+2,a photo of a cassette player,44,CD player,485,0.28374842,radio,754,0.13225631,tape player,848,0.048582442,cassette player,482,0.044220436,cassette,481,0.008923314
+2,a photo of a cassette player,44,tape player,848,0.21209398,cassette player,482,0.09756332,CD player,485,0.09139115,radio,754,0.043336276,cassette,481,0.018788066
+2,a photo of a cassette player,44,tape player,848,0.17137031,cassette player,482,0.12786217,CD player,485,0.105265714,radio,754,0.05182202,cassette,481,0.019857584
+2,a photo of a cassette player,44,cassette player,482,0.21209885,tape player,848,0.1571666,radio,754,0.06961122,CD player,485,0.067082636,cassette,481,0.027024541
+2,a photo of a cassette player,44,tape player,848,0.10780354,CD player,485,0.103101775,Polaroid camera,732,0.100716114,cassette player,482,0.06861166,radio,754,0.048878647
+2,a photo of a cassette player,44,CD player,485,0.12817252,tape player,848,0.11692403,cassette player,482,0.08967865,radio,754,0.06529546,cassette,481,0.022015665
+2,a photo of a cassette player,44,tape player,848,0.16722383,cassette player,482,0.08870559,CD player,485,0.0817347,cassette,481,0.07226571,radio,754,0.06333435
+2,a photo of a cassette player,44,tape player,848,0.25401965,cassette player,482,0.12282652,cassette,481,0.071529746,CD player,485,0.027023003,radio,754,0.025034118
+2,a photo of a cassette player,44,tape player,848,0.24559435,cassette player,482,0.110968955,cassette,481,0.06131684,CD player,485,0.0553532,radio,754,0.04377662
+2,a photo of a cassette player,44,cassette player,482,0.16841502,tape player,848,0.15234028,cassette,481,0.12477603,radio,754,0.089188546,CD player,485,0.010337088
+2,a photo of a cassette player,44,tape player,848,0.17591535,cassette player,482,0.16209234,radio,754,0.10343803,CD player,485,0.07993808,cassette,481,0.023876991
+2,a photo of a cassette player,44,radio,754,0.12015521,tape player,848,0.09507983,cassette,481,0.07547931,CD player,485,0.0722515,cassette player,482,0.06843698
+2,a photo of a cassette player,44,cassette,481,0.13601734,tape player,848,0.09540205,cassette player,482,0.07399865,CD player,485,0.060669545,radio,754,0.04359226
+2,a photo of a cassette player,44,tape player,848,0.35321334,cassette player,482,0.24704565,CD player,485,0.026002962,cassette,481,0.015126857,radio,754,0.011528437
+2,a photo of a cassette player,44,tape player,848,0.31666005,cassette player,482,0.26143107,cassette,481,0.05398283,CD player,485,0.02425378,radio,754,0.006599494
+2,a photo of a cassette player,44,tape player,848,0.32111037,cassette player,482,0.21472368,CD player,485,0.092303425,radio,754,0.03862983,cassette,481,0.008435671
+2,a photo of a cassette player,44,radio,754,0.16282323,CD player,485,0.14175181,tape player,848,0.08900123,cassette player,482,0.08006503,cassette,481,0.034233868
+2,a photo of a cassette player,44,tape player,848,0.16232018,CD player,485,0.13073166,cassette player,482,0.12160112,radio,754,0.09419639,cassette,481,0.015852317
+2,a photo of a cassette player,44,tape player,848,0.21956535,cassette player,482,0.19143215,CD player,485,0.11297428,radio,754,0.040648244,cassette,481,0.01629399
+2,a photo of a cassette player,44,CD player,485,0.2220337,radio,754,0.10779292,tape player,848,0.10509099,cassette player,482,0.09275955,cassette,481,0.029551474
+2,a photo of a cassette player,44,tape player,848,0.24249297,cassette player,482,0.10884423,CD player,485,0.08556597,radio,754,0.047063436,cassette,481,0.04210393
+2,a photo of a cassette player,44,CD player,485,0.19909267,tape player,848,0.19883406,cassette player,482,0.1189445,radio,754,0.045410037,desktop computer,527,0.024053069
+2,a photo of a cassette player,44,CD player,485,0.26936182,tape player,848,0.17596789,cassette player,482,0.15305714,radio,754,0.114087135,cassette,481,0.013043962
+2,a photo of a cassette player,44,tape player,848,0.10105308,radio,754,0.093410484,cassette player,482,0.072586104,cassette,481,0.05250583,CD player,485,0.051867746
+2,a photo of a cassette player,44,CD player,485,0.17981125,tape player,848,0.13498281,radio,754,0.09757544,cassette player,482,0.0616256,cassette,481,0.02821684
+2,a photo of a cassette player,44,tape player,848,0.20907204,cassette player,482,0.16238111,CD player,485,0.072458506,cassette,481,0.040950086,radio,754,0.037577253
+2,a photo of a cassette player,44,tape player,848,0.18501855,CD player,485,0.13049763,cassette player,482,0.121648766,radio,754,0.0657813,cassette,481,0.052136216
+2,a photo of a cassette player,44,tape player,848,0.14058949,radio,754,0.13733543,cassette player,482,0.12525134,CD player,485,0.107176475,cassette,481,0.033637702
+2,a photo of a cassette player,44,tape player,848,0.24963029,cassette player,482,0.15309489,CD player,485,0.057029255,radio,754,0.03668175,cassette,481,0.01433664
+2,a photo of a cassette player,44,tape player,848,0.27598906,cassette player,482,0.188682,CD player,485,0.07145246,cassette,481,0.03570862,radio,754,0.03202662
+2,a photo of a cassette player,44,tape player,848,0.14059341,radio,754,0.07432853,cassette player,482,0.06824413,cassette,481,0.059172448,CD player,485,0.019396747
+2,a photo of a cassette player,44,cassette player,482,0.23522101,tape player,848,0.21746816,cassette,481,0.05763042,radio,754,0.045152675,CD player,485,0.03342411
+2,a photo of a cassette player,44,CD player,485,0.1347948,radio,754,0.1298616,cassette player,482,0.11864074,tape player,848,0.11605751,cassette,481,0.034791496
+2,a photo of a cassette player,44,tape player,848,0.15346855,radio,754,0.14152086,CD player,485,0.090654835,cassette player,482,0.085049115,cassette,481,0.04128829
+2,a photo of a cassette player,44,CD player,485,0.20305192,radio,754,0.148408,tape player,848,0.13266972,cassette player,482,0.07696982,cassette,481,0.009866694
+2,a photo of a cassette player,44,tape player,848,0.22011225,cassette player,482,0.10523856,CD player,485,0.09271535,radio,754,0.060135525,cassette,481,0.04295643
+2,a photo of a cassette player,44,CD player,485,0.19016112,tape player,848,0.10707826,radio,754,0.09234197,cassette player,482,0.06322418,cassette,481,0.024354832
+2,a photo of a cassette player,44,tape player,848,0.20168115,cassette player,482,0.12860705,radio,754,0.12390941,CD player,485,0.0570071,cassette,481,0.017889015
+2,a photo of a cassette player,44,tape player,848,0.17289545,cassette player,482,0.12866715,cassette,481,0.110674396,CD player,485,0.02180292,radio,754,0.010086508
+2,a photo of a cassette player,44,tape player,848,0.122911535,CD player,485,0.11752194,cassette player,482,0.111574575,cassette,481,0.088232204,radio,754,0.026032384
+2,a photo of a cassette player,44,CD player,485,0.21548606,tape player,848,0.13028443,cassette player,482,0.11388047,radio,754,0.10256332,cassette,481,0.011697469
+2,a photo of a cassette player,44,cassette player,482,0.18598728,tape player,848,0.1500515,radio,754,0.10659028,CD player,485,0.07719118,cassette,481,0.023150288
+2,a photo of a cassette player,44,tape player,848,0.13505384,cassette player,482,0.11785404,radio,754,0.10149901,CD player,485,0.07407814,cassette,481,0.028077709
+2,a photo of a cassette player,44,tape player,848,0.19544429,cassette player,482,0.12356855,radio,754,0.062387075,cassette,481,0.029225439,CD player,485,0.029122612
+2,a photo of a cassette player,44,CD player,485,0.23296145,tape player,848,0.15880084,radio,754,0.08529409,cassette player,482,0.08111201,cassette,481,0.013174022
+2,a photo of a cassette player,44,tape player,848,0.14572302,cassette player,482,0.096197926,cassette,481,0.083325356,radio,754,0.02097649,CD player,485,0.016353723
+2,a photo of a cassette player,44,tape player,848,0.10580011,CD player,485,0.10210132,radio,754,0.07388233,cassette player,482,0.06555129,cassette,481,0.034882654
+2,a photo of a cassette player,44,tape player,848,0.27604848,cassette player,482,0.19115916,CD player,485,0.083139434,cassette,481,0.024079246,radio,754,0.01916574
+2,a photo of a cassette player,44,tape player,848,0.25296456,CD player,485,0.22372936,cassette player,482,0.14883675,radio,754,0.036015265,cassette,481,0.014576629
+3,a photo of a chain saw,45,church,497,0.43427992,bell cote,442,0.047940698,monastery,663,0.043940492,castle,483,0.014654565,vault,884,0.001978084
+3,a photo of a chain saw,45,church,497,0.40454966,monastery,663,0.05950293,castle,483,0.024548661,bell cote,442,0.019897643,vault,884,0.002085096
+3,a photo of a chain saw,45,church,497,0.47910175,bell cote,442,0.019353343,monastery,663,0.014093462,dome,538,0.0029207824,vault,884,0.00238576
+3,a photo of a chain saw,45,bell cote,442,0.32419127,church,497,0.08731975,monastery,663,0.040750913,analog clock,409,0.011706813,dome,538,0.00609429
+3,a photo of a chain saw,45,bell cote,442,0.2282426,church,497,0.14255916,monastery,663,0.06982255,analog clock,409,0.007120051,dome,538,0.0044237752
+3,a photo of a chain saw,45,church,497,0.33969182,bell cote,442,0.14172216,monastery,663,0.03534463,castle,483,0.0073118676,beacon,437,0.0032783565
+3,a photo of a chain saw,45,church,497,0.20987749,bell cote,442,0.11434045,monastery,663,0.06575977,analog clock,409,0.0067919516,dome,538,0.004602816
+3,a photo of a chain saw,45,church,497,0.6268465,monastery,663,0.06531911,castle,483,0.008397717,bell cote,442,0.007083956,triumphal arch,873,0.005674844
+3,a photo of a chain saw,45,church,497,0.6221639,monastery,663,0.020367833,castle,483,0.006834202,bell cote,442,0.004872478,analog clock,409,0.003536013
+3,a photo of a chain saw,45,bell cote,442,0.13902372,castle,483,0.05851161,church,497,0.05372544,monastery,663,0.04706064,analog clock,409,0.008842013
+3,a photo of a chain saw,45,church,497,0.35090086,monastery,663,0.04659147,bell cote,442,0.045430843,castle,483,0.020606278,analog clock,409,0.0078039235
+3,a photo of a chain saw,45,church,497,0.29573712,bell cote,442,0.079270974,monastery,663,0.02186572,vault,884,0.004204226,altar,406,0.0030997004
+3,a photo of a chain saw,45,church,497,0.25023708,bell cote,442,0.11112238,monastery,663,0.015967527,beacon,437,0.010960522,analog clock,409,0.008451223
+3,a photo of a chain saw,45,church,497,0.42335752,monastery,663,0.04324519,bell cote,442,0.037486993,castle,483,0.01685762,dome,538,0.010084392
+3,a photo of a chain saw,45,bell cote,442,0.1662984,church,497,0.12155941,monastery,663,0.02831435,castle,483,0.022100415,analog clock,409,0.005715133
+3,a photo of a chain saw,45,church,497,0.23984756,bell cote,442,0.026311401,picket fence,716,0.012115477,castle,483,0.009760856,monastery,663,0.009495792
+3,a photo of a chain saw,45,church,497,0.536299,monastery,663,0.071709864,bell cote,442,0.035461705,castle,483,0.006107785,vault,884,0.002649025
+3,a photo of a chain saw,45,bell cote,442,0.22267504,church,497,0.16617586,monastery,663,0.09935934,tile roof,858,0.011752665,dome,538,0.0092776595
+3,a photo of a chain saw,45,church,497,0.3139796,bell cote,442,0.04285374,monastery,663,0.037960745,vault,884,0.0066508665,dome,538,0.0066021276
+3,a photo of a chain saw,45,church,497,0.4687351,monastery,663,0.05860767,bell cote,442,0.009658186,altar,406,0.0034101203,dome,538,0.002604789
+3,a photo of a chain saw,45,church,497,0.45499924,monastery,663,0.09090586,bell cote,442,0.021353427,dome,538,0.013029974,castle,483,0.008300281
+3,a photo of a chain saw,45,church,497,0.3933177,castle,483,0.024152791,bell cote,442,0.021895764,monastery,663,0.018697668,flagpole,557,0.004537123
+3,a photo of a chain saw,45,church,497,0.4297691,birdhouse,448,0.15886171,monastery,663,0.021382554,bell cote,442,0.017026884,chime,494,0.0039865435
+3,a photo of a chain saw,45,church,497,0.18477435,monastery,663,0.06380399,bell cote,442,0.05643054,analog clock,409,0.00891058,dome,538,0.0077949734
+3,a photo of a chain saw,45,church,497,0.2368723,bell cote,442,0.17644934,monastery,663,0.03174486,chime,494,0.005944053,castle,483,0.0048162052
+3,a photo of a chain saw,45,church,497,0.5006622,castle,483,0.06723401,monastery,663,0.03190603,bell cote,442,0.008643946,beacon,437,0.0058529875
+3,a photo of a chain saw,45,church,497,0.40415725,bell cote,442,0.05397149,monastery,663,0.042839486,dome,538,0.004000491,chime,494,0.0038340928
+3,a photo of a chain saw,45,church,497,0.4530311,monastery,663,0.03426322,bell cote,442,0.030950317,castle,483,0.015348183,dome,538,0.0039552846
+3,a photo of a chain saw,45,church,497,0.39577052,picket fence,716,0.044436123,bell cote,442,0.04161693,flagpole,557,0.010238026,monastery,663,0.009941662
+3,a photo of a chain saw,45,church,497,0.18713471,bell cote,442,0.18620534,monastery,663,0.034391582,castle,483,0.016391266,analog clock,409,0.0056849867
+3,a photo of a chain saw,45,church,497,0.3622202,castle,483,0.021743063,monastery,663,0.02031008,bell cote,442,0.011223975,barn,425,0.010138108
+3,a photo of a chain saw,45,church,497,0.32216692,monastery,663,0.13194583,bell cote,442,0.074641064,castle,483,0.005716912,crane,517,0.004382132
+3,a photo of a chain saw,45,monastery,663,0.26722416,church,497,0.2500068,castle,483,0.07522686,bell cote,442,0.01494137,palace,698,0.005714917
+3,a photo of a chain saw,45,church,497,0.45845035,castle,483,0.018383842,monastery,663,0.012198387,beacon,437,0.009246293,bell cote,442,0.009162453
+3,a photo of a chain saw,45,church,497,0.32935727,monastery,663,0.29786593,castle,483,0.056757916,bell cote,442,0.026422484,palace,698,0.0075655626
+3,a photo of a chain saw,45,church,497,0.61456347,monastery,663,0.04065359,bell cote,442,0.011423247,dome,538,0.0026240782,castle,483,0.0022545203
+3,a photo of a chain saw,45,church,497,0.355165,castle,483,0.09751635,monastery,663,0.032025278,bell cote,442,0.012149257,analog clock,409,0.0037117924
+3,a photo of a chain saw,45,church,497,0.28704387,monastery,663,0.0523234,castle,483,0.048962194,bell cote,442,0.01438146,birdhouse,448,0.014310736
+3,a photo of a chain saw,45,church,497,0.3887614,bell cote,442,0.033782907,monastery,663,0.013189869,castle,483,0.0040667406,analog clock,409,0.0031605714
+3,a photo of a chain saw,45,church,497,0.58330697,monastery,663,0.01956089,castle,483,0.0070702992,bell cote,442,0.0024208608,matchstick,644,0.0020812654
+3,a photo of a chain saw,45,church,497,0.7222208,monastery,663,0.08565397,castle,483,0.02481713,bell cote,442,0.002607123,dome,538,0.0013471908
+3,a photo of a chain saw,45,church,497,0.18163048,monastery,663,0.06412166,picket fence,716,0.034738038,birdhouse,448,0.022967694,castle,483,0.020761741
+3,a photo of a chain saw,45,church,497,0.5024445,castle,483,0.060195234,monastery,663,0.03449567,bell cote,442,0.018753137,barn,425,0.00241637
+3,a photo of a chain saw,45,church,497,0.34746268,bell cote,442,0.04868558,castle,483,0.017076777,analog clock,409,0.014936396,monastery,663,0.013352957
+3,a photo of a chain saw,45,bell cote,442,0.20735496,church,497,0.16595936,monastery,663,0.0391193,castle,483,0.0032292882,dome,538,0.0030011274
+3,a photo of a chain saw,45,bell cote,442,0.20492198,church,497,0.116437875,monastery,663,0.069958605,castle,483,0.049710583,palace,698,0.009748123
+3,a photo of a chain saw,45,church,497,0.24327673,castle,483,0.050963823,bell cote,442,0.04210635,monastery,663,0.037895855,beacon,437,0.006842669
+3,a photo of a chain saw,45,church,497,0.16846982,castle,483,0.15033469,monastery,663,0.08294657,bell cote,442,0.055256404,beacon,437,0.011941087
+3,a photo of a chain saw,45,church,497,0.43819642,castle,483,0.049817227,monastery,663,0.011965777,analog clock,409,0.009517875,bell cote,442,0.008229378
+3,a photo of a chain saw,45,church,497,0.5441042,monastery,663,0.018640436,bell cote,442,0.008525776,castle,483,0.0072644395,barn,425,0.005504418
+3,a photo of a chain saw,45,church,497,0.3042478,bell cote,442,0.10455602,monastery,663,0.025242882,vault,884,0.005505009,dome,538,0.003968041
+3,a photo of a chain saw,45,church,497,0.61392176,monastery,663,0.04250205,castle,483,0.007651821,bell cote,442,0.0050393837,altar,406,0.0042822347
+3,a photo of a chain saw,45,bell cote,442,0.16068946,church,497,0.11684644,monastery,663,0.030336048,castle,483,0.0073785745,analog clock,409,0.006361646
+3,a photo of a chain saw,45,church,497,0.43066853,bell cote,442,0.039757363,monastery,663,0.03047569,beacon,437,0.025249291,dome,538,0.006225141
+3,a photo of a chain saw,45,church,497,0.2588906,monastery,663,0.06678051,bell cote,442,0.043416984,birdhouse,448,0.023741672,castle,483,0.006102377
+3,a photo of a chain saw,45,church,497,0.45402035,monastery,663,0.057893034,bell cote,442,0.03529181,dome,538,0.0024137709,analog clock,409,0.0019700718
+3,a photo of a chain saw,45,church,497,0.18306711,bell cote,442,0.1498767,monastery,663,0.048920773,obelisk,682,0.04710935,castle,483,0.014504481
+3,a photo of a chain saw,45,church,497,0.27928266,bell cote,442,0.104712725,monastery,663,0.027255656,analog clock,409,0.004730177,beacon,437,0.004192633
+3,a photo of a chain saw,45,church,497,0.59146553,bell cote,442,0.0488047,monastery,663,0.02139595,analog clock,409,0.0024247838,beacon,437,0.002192796
+3,a photo of a chain saw,45,church,497,0.4082725,beacon,437,0.053609777,bell cote,442,0.020777488,monastery,663,0.019010723,analog clock,409,0.008521089
+3,a photo of a chain saw,45,church,497,0.4225408,monastery,663,0.048056085,bell cote,442,0.016582534,castle,483,0.0031862904,altar,406,0.0031810587
+3,a photo of a chain saw,45,church,497,0.47846958,monastery,663,0.047514446,castle,483,0.031089049,bell cote,442,0.01978035,palace,698,0.004266833
+3,a photo of a chain saw,45,church,497,0.36853063,castle,483,0.054016452,birdhouse,448,0.025806217,monastery,663,0.02157176,pole,733,0.016842104
+3,a photo of a chain saw,45,church,497,0.35972282,monastery,663,0.030507099,bell cote,442,0.02639046,birdhouse,448,0.012915112,chime,494,0.010349628
+3,a photo of a chain saw,45,church,497,0.23235916,monastery,663,0.14017375,bell cote,442,0.068185985,castle,483,0.007901473,vault,884,0.006114113
+3,a photo of a chain saw,45,church,497,0.16789538,bell cote,442,0.14871755,monastery,663,0.064857714,analog clock,409,0.025235288,castle,483,0.014498429
+3,a photo of a chain saw,45,church,497,0.4819604,bell cote,442,0.047764137,monastery,663,0.027684163,castle,483,0.013673057,palace,698,0.006199791
+3,a photo of a chain saw,45,bell cote,442,0.3897334,church,497,0.17368,monastery,663,0.03986284,dome,538,0.006200681,analog clock,409,0.005518075
+3,a photo of a chain saw,45,church,497,0.520894,monastery,663,0.027506877,bell cote,442,0.021388892,castle,483,0.0036167812,analog clock,409,0.0035260208
+3,a photo of a chain saw,45,church,497,0.5278941,monastery,663,0.05229225,bell cote,442,0.031544384,dome,538,0.010649145,analog clock,409,0.009804105
+3,a photo of a chain saw,45,church,497,0.28042105,bell cote,442,0.14747009,monastery,663,0.020113181,castle,483,0.006503405,tile roof,858,0.004888039
+3,a photo of a chain saw,45,church,497,0.3995711,monastery,663,0.15080245,analog clock,409,0.045261897,altar,406,0.03336859,bell cote,442,0.02446169
+3,a photo of a chain saw,45,church,497,0.33314124,monastery,663,0.066500746,bell cote,442,0.059357792,analog clock,409,0.033061996,cinema,498,0.02552471
+3,a photo of a chain saw,45,church,497,0.3755114,monastery,663,0.036943838,bell cote,442,0.0075137387,castle,483,0.0047132485,dome,538,0.003704025
+3,a photo of a chain saw,45,church,497,0.5493766,monastery,663,0.02713699,castle,483,0.019185241,bell cote,442,0.012780924,altar,406,0.00517024
+3,a photo of a chain saw,45,church,497,0.40824348,monastery,663,0.0650211,castle,483,0.01382349,cinema,498,0.011374685,bell cote,442,0.0057598106
+3,a photo of a chain saw,45,church,497,0.20911112,missile,657,0.052324165,bell cote,442,0.03523234,projectile,744,0.027402584,flagpole,557,0.01512563
+3,a photo of a chain saw,45,church,497,0.20603378,flagpole,557,0.06310772,maypole,645,0.048541576,cinema,498,0.03352903,castle,483,0.0281489
+3,a photo of a chain saw,45,church,497,0.63738585,bell cote,442,0.05595006,monastery,663,0.025529373,castle,483,0.0056304536,dome,538,0.004276354
+3,a photo of a chain saw,45,castle,483,0.32345766,church,497,0.20268169,monastery,663,0.032492515,birdhouse,448,0.009302696,bell cote,442,0.0055259736
+3,a photo of a chain saw,45,church,497,0.6884489,monastery,663,0.01709997,castle,483,0.008363051,picket fence,716,0.006258548,chime,494,0.004503098
+3,a photo of a chain saw,45,church,497,0.43152893,bell cote,442,0.08766122,monastery,663,0.051263142,castle,483,0.009310607,analog clock,409,0.0056837443
+3,a photo of a chain saw,45,church,497,0.38370058,castle,483,0.043635596,bell cote,442,0.032166343,monastery,663,0.012125718,obelisk,682,0.00801942
+3,a photo of a chain saw,45,bell cote,442,0.1762476,church,497,0.09680532,obelisk,682,0.026164558,monastery,663,0.018075125,beacon,437,0.011001296
+3,a photo of a chain saw,45,church,497,0.22996926,bell cote,442,0.098269805,monastery,663,0.06131531,castle,483,0.019231966,analog clock,409,0.015053745
+3,a photo of a chain saw,45,church,497,0.51184005,bell cote,442,0.06888983,monastery,663,0.051359124,analog clock,409,0.0039768596,castle,483,0.003640626
+3,a photo of a chain saw,45,monastery,663,0.19983727,church,497,0.13284981,bell cote,442,0.109628536,dome,538,0.008351211,analog clock,409,0.007405505
+3,a photo of a chain saw,45,church,497,0.30140603,castle,483,0.07566518,bell cote,442,0.050309535,monastery,663,0.04944798,palace,698,0.013997172
+3,a photo of a chain saw,45,church,497,0.28746417,monastery,663,0.23801444,bell cote,442,0.054392878,palace,698,0.006783653,dome,538,0.0063950107
+3,a photo of a chain saw,45,church,497,0.62100345,monastery,663,0.049176745,castle,483,0.025028694,bell cote,442,0.007054929,dome,538,0.0017931128
+3,a photo of a chain saw,45,church,497,0.29670787,monastery,663,0.19556724,castle,483,0.04305063,bell cote,442,0.042835392,palace,698,0.0057408735
+3,a photo of a chain saw,45,church,497,0.37428895,monastery,663,0.12522775,bell cote,442,0.031124735,castle,483,0.016159609,dome,538,0.0036442748
+3,a photo of a chain saw,45,bell cote,442,0.18057773,church,497,0.11635254,monastery,663,0.062490083,castle,483,0.012423936,analog clock,409,0.0074708927
+3,a photo of a chain saw,45,church,497,0.54889834,monastery,663,0.03913833,bell cote,442,0.011943863,castle,483,0.008045347,analog clock,409,0.0034297493
+3,a photo of a chain saw,45,church,497,0.40863156,bell cote,442,0.085333936,monastery,663,0.014203303,castle,483,0.010091123,analog clock,409,0.006134655
+3,a photo of a chain saw,45,church,497,0.15892915,monastery,663,0.114839055,bell cote,442,0.0764058,triumphal arch,873,0.02186263,castle,483,0.019879652
+3,a photo of a chain saw,45,church,497,0.20026363,bell cote,442,0.07942857,analog clock,409,0.043090254,monastery,663,0.02564479,wall clock,892,0.008905027
+3,a photo of a chain saw,45,church,497,0.5358295,monastery,663,0.041995093,bell cote,442,0.008094557,dome,538,0.005011934,chime,494,0.002520846
+3,a photo of a chain saw,45,church,497,0.3124566,bell cote,442,0.053836115,castle,483,0.032608286,monastery,663,0.031238047,beacon,437,0.0074415673
+3,a photo of a chain saw,45,church,497,0.3835418,monastery,663,0.039617397,bell cote,442,0.032710563,beacon,437,0.011863432,dome,538,0.0037315616
+4,a photo of a church building,46,church,497,0.39475214,bell cote,442,0.07136945,monastery,663,0.016027799,vault,884,0.012709382,dome,538,0.0037193964
+4,a photo of a church building,46,church,497,0.5290602,bell cote,442,0.018433515,monastery,663,0.011798038,dome,538,0.003551996,tile roof,858,0.0026664168
+4,a photo of a church building,46,church,497,0.68904483,bell cote,442,0.03440786,monastery,663,0.013985862,castle,483,0.0046856315,vault,884,0.002045506
+4,a photo of a church building,46,church,497,0.51108605,bell cote,442,0.020319965,monastery,663,0.0045711654,vault,884,0.0017552347,tile roof,858,0.0016360733
+4,a photo of a church building,46,church,497,0.48346093,bell cote,442,0.011405269,monastery,663,0.009424227,tile roof,858,0.0042566517,castle,483,0.0028623452
+4,a photo of a church building,46,church,497,0.34873,bell cote,442,0.12096596,monastery,663,0.013543714,vault,884,0.0066274,tile roof,858,0.0062425323
+4,a photo of a church building,46,church,497,0.4223129,bell cote,442,0.012672398,monastery,663,0.008933162,dome,538,0.0032428538,vault,884,0.0027940809
+4,a photo of a church building,46,church,497,0.46880898,bell cote,442,0.098416954,monastery,663,0.009918033,beacon,437,0.007487332,castle,483,0.005369465
+4,a photo of a church building,46,church,497,0.32681265,bell cote,442,0.057013445,monastery,663,0.019394647,vault,884,0.0036429237,dome,538,0.003488133
+4,a photo of a church building,46,church,497,0.55415034,bell cote,442,0.0398115,monastery,663,0.006934268,vault,884,0.0027237097,tile roof,858,0.002620449
+4,a photo of a church building,46,church,497,0.5234794,bell cote,442,0.043661345,monastery,663,0.012396954,vault,884,0.010061759,tile roof,858,0.0046197376
+4,a photo of a church building,46,church,497,0.5369382,monastery,663,0.014512569,bell cote,442,0.008010731,dome,538,0.003341225,vault,884,0.0016215697
+4,a photo of a church building,46,church,497,0.53245205,monastery,663,0.0099222325,bell cote,442,0.007589608,castle,483,0.003200529,barn,425,0.0024963522
+4,a photo of a church building,46,church,497,0.74424165,bell cote,442,0.014584201,monastery,663,0.0069373124,missile,657,0.0054263882,projectile,744,0.005340039
+4,a photo of a church building,46,church,497,0.43998638,bell cote,442,0.023176897,tile roof,858,0.0074679432,monastery,663,0.0030063037,dome,538,0.002588476
+4,a photo of a church building,46,church,497,0.34034196,bell cote,442,0.10021917,beacon,437,0.031215124,monastery,663,0.013494942,barn,425,0.003449862
+4,a photo of a church building,46,church,497,0.6175347,bell cote,442,0.013746281,monastery,663,0.0085890135,dome,538,0.006747158,tile roof,858,0.0048622615
+4,a photo of a church building,46,church,497,0.48811582,monastery,663,0.0092361905,bell cote,442,0.007816316,dome,538,0.0016610044,vault,884,0.0014879069
+4,a photo of a church building,46,church,497,0.60612833,bell cote,442,0.0057886504,monastery,663,0.0050169313,beacon,437,0.003933852,picket fence,716,0.003838935
+4,a photo of a church building,46,church,497,0.6006222,monastery,663,0.013445517,bell cote,442,0.00870684,castle,483,0.0030513064,chime,494,0.0014527164
+4,a photo of a church building,46,church,497,0.7210748,monastery,663,0.012555598,bell cote,442,0.004545901,dome,538,0.0013134453,altar,406,0.0012672781
+4,a photo of a church building,46,church,497,0.44503665,birdhouse,448,0.019596001,picket fence,716,0.010648622,mobile home,660,0.008910623,garbage truck,569,0.005320385
+4,a photo of a church building,46,church,497,0.4139564,bell cote,442,0.02686892,beacon,437,0.004047861,monastery,663,0.0034084946,dome,538,0.0033157943
+4,a photo of a church building,46,church,497,0.40482828,bell cote,442,0.07060886,tile roof,858,0.01898977,monastery,663,0.006546573,castle,483,0.005679531
+4,a photo of a church building,46,church,497,0.53666556,bell cote,442,0.01037322,monastery,663,0.0050391993,beacon,437,0.0037310119,suspension bridge,839,0.0033517377
+4,a photo of a church building,46,church,497,0.63654304,bell cote,442,0.029677939,monastery,663,0.009313888,carton,478,0.0063456404,dome,538,0.0040302547
+4,a photo of a church building,46,church,497,0.6398116,bell cote,442,0.038169384,monastery,663,0.019345481,barn,425,0.0044479924,vault,884,0.0029412908
+4,a photo of a church building,46,church,497,0.6561827,bell cote,442,0.016215814,monastery,663,0.0069956873,castle,483,0.0032152906,flagpole,557,0.0023062257
+4,a photo of a church building,46,church,497,0.6290464,bell cote,442,0.008835801,monastery,663,0.0071454938,dome,538,0.0038022972,chime,494,0.0013448024
+4,a photo of a church building,46,church,497,0.5735057,monastery,663,0.030690491,bell cote,442,0.014831179,analog clock,409,0.0020754277,tile roof,858,0.0018539287
+4,a photo of a church building,46,church,497,0.36695984,bell cote,442,0.07428485,monastery,663,0.019618474,beacon,437,0.003467705,vault,884,0.0022324317
+4,a photo of a church building,46,church,497,0.53863055,bell cote,442,0.028659958,monastery,663,0.007656436,dome,538,0.0034858466,tile roof,858,0.0013703513
+4,a photo of a church building,46,church,497,0.608129,monastery,663,0.00891951,bell cote,442,0.00851302,castle,483,0.0026377288,vault,884,0.0021136743
+4,a photo of a church building,46,church,497,0.19317287,bell cote,442,0.09259759,monastery,663,0.013465068,beacon,437,0.012016643,dome,538,0.011972716
+4,a photo of a church building,46,church,497,0.6399457,bell cote,442,0.020909121,monastery,663,0.012572598,vault,884,0.006660318,viaduct,888,0.0023625796
+4,a photo of a church building,46,church,497,0.5776465,bell cote,442,0.020077715,monastery,663,0.011395435,barn,425,0.003966654,castle,483,0.0015992152
+4,a photo of a church building,46,church,497,0.5034229,bell cote,442,0.04014903,monastery,663,0.010926706,beacon,437,0.0017258076,vault,884,0.001569742
+4,a photo of a church building,46,church,497,0.6362064,bell cote,442,0.022104165,monastery,663,0.009856116,tile roof,858,0.002149442,vault,884,0.0020561311
+4,a photo of a church building,46,church,497,0.5331097,bell cote,442,0.009267508,monastery,663,0.004821792,altar,406,0.0019992434,boathouse,449,0.0018655722
+4,a photo of a church building,46,church,497,0.4767551,bell cote,442,0.020513404,monastery,663,0.0061746784,vault,884,0.0022629553,tile roof,858,0.0021243165
+4,a photo of a church building,46,church,497,0.5600161,bell cote,442,0.009308738,monastery,663,0.0039340607,dome,538,0.0028591098,analog clock,409,0.0012176097
+4,a photo of a church building,46,church,497,0.65148485,bell cote,442,0.0129716005,beacon,437,0.005204369,monastery,663,0.004277593,dome,538,0.0026542316
+4,a photo of a church building,46,church,497,0.67030853,bell cote,442,0.00472328,monastery,663,0.0036861782,dome,538,0.0020003614,boathouse,449,0.0015564618
+4,a photo of a church building,46,church,497,0.59889114,bell cote,442,0.017308017,monastery,663,0.0061650844,geyser,974,0.0019437427,analog clock,409,0.0017684886
+4,a photo of a church building,46,church,497,0.4087882,bell cote,442,0.084500484,monastery,663,0.011349982,dome,538,0.0035139634,tile roof,858,0.0028862657
+4,a photo of a church building,46,church,497,0.37903452,monastery,663,0.013426399,bell cote,442,0.007150105,chime,494,0.006259103,birdhouse,448,0.0036238474
+4,a photo of a church building,46,church,497,0.29592097,bell cote,442,0.094244376,monastery,663,0.028668161,vault,884,0.021269687,castle,483,0.020507652
+4,a photo of a church building,46,church,497,0.5387419,monastery,663,0.013242414,bell cote,442,0.007287749,dome,538,0.003135785,chime,494,0.0013610693
+4,a photo of a church building,46,church,497,0.623015,monastery,663,0.024367852,bell cote,442,0.010943997,barn,425,0.007179227,beacon,437,0.004745129
+4,a photo of a church building,46,church,497,0.5087131,monastery,663,0.031782657,bell cote,442,0.01601457,vault,884,0.008004142,altar,406,0.0028177386
+4,a photo of a church building,46,church,497,0.38400277,bell cote,442,0.10999125,monastery,663,0.015596726,castle,483,0.009362718,vault,884,0.0047408403
+4,a photo of a church building,46,church,497,0.5787608,bell cote,442,0.020794308,monastery,663,0.008835149,vault,884,0.0016078,tile roof,858,0.0014232784
+4,a photo of a church building,46,church,497,0.6046935,bell cote,442,0.017514706,monastery,663,0.00673113,dome,538,0.0020115469,tile roof,858,0.0013881136
+4,a photo of a church building,46,church,497,0.47595394,bell cote,442,0.027332867,monastery,663,0.0050875237,tile roof,858,0.0041028424,dome,538,0.0038260715
+4,a photo of a church building,46,church,497,0.5916465,bell cote,442,0.00693514,monastery,663,0.006890265,vault,884,0.0027620199,dome,538,0.0020348597
+4,a photo of a church building,46,church,497,0.52411896,monastery,663,0.017192028,bell cote,442,0.015839236,vault,884,0.0026762942,castle,483,0.002486192
+4,a photo of a church building,46,church,497,0.42580816,bell cote,442,0.016457528,monastery,663,0.0045631337,matchstick,644,0.0035874802,obelisk,682,0.0032234048
+4,a photo of a church building,46,church,497,0.45608708,bell cote,442,0.013947419,monastery,663,0.010066239,dome,538,0.0053339167,carton,478,0.0036288917
+4,a photo of a church building,46,church,497,0.40419298,bell cote,442,0.03261434,monastery,663,0.007737741,birdhouse,448,0.0063554645,chime,494,0.0030499757
+4,a photo of a church building,46,church,497,0.3974719,bell cote,442,0.031440813,monastery,663,0.014749896,vault,884,0.0030994518,gibbon,368,0.0021696344
+4,a photo of a church building,46,church,497,0.5501095,bell cote,442,0.008752103,monastery,663,0.0059949993,castle,483,0.0027260236,analog clock,409,0.0020952008
+4,a photo of a church building,46,church,497,0.4091928,bell cote,442,0.022248855,monastery,663,0.020412993,dome,538,0.0027172542,vault,884,0.002344582
+4,a photo of a church building,46,church,497,0.35315007,bell cote,442,0.09857125,beacon,437,0.023197142,monastery,663,0.0077017136,dome,538,0.0062151123
+4,a photo of a church building,46,church,497,0.3777443,tile roof,858,0.061966624,bell cote,442,0.037582543,monastery,663,0.008717399,castle,483,0.004352513
+4,a photo of a church building,46,church,497,0.46142152,bell cote,442,0.13356258,monastery,663,0.013745082,dome,538,0.0032569251,vault,884,0.0020948425
+4,a photo of a church building,46,church,497,0.27709433,bell cote,442,0.14013888,monastery,663,0.018995322,vault,884,0.005310012,barn,425,0.0023586452
+4,a photo of a church building,46,church,497,0.5177109,bell cote,442,0.03448281,monastery,663,0.006313587,dome,538,0.0023077948,analog clock,409,0.001767929
+4,a photo of a church building,46,church,497,0.44165832,bell cote,442,0.0138361305,monastery,663,0.012463897,castle,483,0.0076783737,barn,425,0.0047920523
+4,a photo of a church building,46,church,497,0.79336166,monastery,663,0.0047272556,bell cote,442,0.004101467,dome,538,0.0011140499,projectile,744,0.0010026823
+4,a photo of a church building,46,church,497,0.50273377,bell cote,442,0.07217895,monastery,663,0.02079172,vault,884,0.011776439,carton,478,0.0040764157
+4,a photo of a church building,46,church,497,0.37958437,bell cote,442,0.092946135,monastery,663,0.016724847,vault,884,0.0038043614,tile roof,858,0.0036113304
+4,a photo of a church building,46,church,497,0.59030133,bell cote,442,0.022516128,monastery,663,0.0049952758,vault,884,0.0022307606,tile roof,858,0.002147675
+4,a photo of a church building,46,church,497,0.51976305,bell cote,442,0.024338521,monastery,663,0.00818163,vault,884,0.00234685,altar,406,0.0019219425
+4,a photo of a church building,46,church,497,0.74981457,monastery,663,0.01502679,bell cote,442,0.003986774,dome,538,0.00300898,altar,406,0.002278989
+4,a photo of a church building,46,church,497,0.5240623,bell cote,442,0.012162076,monastery,663,0.009179413,black-footed ferret,359,0.0022433132,dome,538,0.0019705503
+4,a photo of a church building,46,church,497,0.39738628,bell cote,442,0.021230958,crane,517,0.004554136,monastery,663,0.0041944464,tile roof,858,0.0038175758
+4,a photo of a church building,46,church,497,0.589407,bell cote,442,0.007312875,monastery,663,0.0045379396,beacon,437,0.0034447708,dome,538,0.0019013276
+4,a photo of a church building,46,church,497,0.5709865,bell cote,442,0.035606734,monastery,663,0.012033528,vault,884,0.0046524317,altar,406,0.002091773
+4,a photo of a church building,46,church,497,0.49030668,monastery,663,0.012484649,bell cote,442,0.008633739,dome,538,0.003538474,chime,494,0.002025619
+4,a photo of a church building,46,church,497,0.5991825,bell cote,442,0.016498938,monastery,663,0.007886342,barn,425,0.0015213792,schooner,780,0.0013704713
+4,a photo of a church building,46,church,497,0.51915807,bell cote,442,0.021086087,monastery,663,0.008270669,analog clock,409,0.0019594715,tile roof,858,0.0014416272
+4,a photo of a church building,46,church,497,0.64937764,obelisk,682,0.019216904,beacon,437,0.0047493237,flagpole,557,0.003153012,missile,657,0.003151309
+4,a photo of a church building,46,church,497,0.17161718,bell cote,442,0.14213799,monastery,663,0.055393185,dome,538,0.006407666,vault,884,0.0041908985
+4,a photo of a church building,46,church,497,0.5489422,bell cote,442,0.016442243,monastery,663,0.007731332,dome,538,0.0013137123,chime,494,0.0012768529
+4,a photo of a church building,46,church,497,0.52672714,bell cote,442,0.030415831,monastery,663,0.0034453343,beacon,437,0.0028340765,vault,884,0.0027854086
+4,a photo of a church building,46,church,497,0.44007608,monastery,663,0.0093307765,flagpole,557,0.006651795,bell cote,442,0.0064820014,dome,538,0.0045873006
+4,a photo of a church building,46,church,497,0.53913593,bell cote,442,0.016124485,monastery,663,0.0055811345,analog clock,409,0.0016607711,castle,483,0.0014704582
+4,a photo of a church building,46,church,497,0.31875154,bell cote,442,0.09792205,monastery,663,0.024052745,vault,884,0.01177915,tile roof,858,0.006393968
+4,a photo of a church building,46,church,497,0.5387359,monastery,663,0.054202072,castle,483,0.009578505,bell cote,442,0.00611098,vault,884,0.003888265
+4,a photo of a church building,46,church,497,0.73647213,bell cote,442,0.0057974416,monastery,663,0.0034578738,vault,884,0.0015679079,flagpole,557,0.0015180323
+4,a photo of a church building,46,church,497,0.394048,bell cote,442,0.012987555,monastery,663,0.0047650808,beacon,437,0.0037412494,analog clock,409,0.0026060757
+4,a photo of a church building,46,church,497,0.5573985,vault,884,0.037185885,bell cote,442,0.03654409,monastery,663,0.019835375,dome,538,0.0053027296
+4,a photo of a church building,46,church,497,0.74661636,monastery,663,0.009185372,bell cote,442,0.0029116955,chime,494,0.0011422466,matchstick,644,0.0010719557
+4,a photo of a church building,46,church,497,0.59533846,bell cote,442,0.01852137,monastery,663,0.0108294925,carton,478,0.0015149622,chime,494,0.0014512165
+4,a photo of a church building,46,church,497,0.43764746,monastery,663,0.037430383,bell cote,442,0.03022569,vault,884,0.0056797653,castle,483,0.0039854012
+4,a photo of a church building,46,church,497,0.5362917,bell cote,442,0.017793413,monastery,663,0.011023632,dome,538,0.0033749624,carton,478,0.0019003031
+4,a photo of a church building,46,church,497,0.37322012,bell cote,442,0.06804204,monastery,663,0.0072450135,dome,538,0.0025730545,analog clock,409,0.0020387934
+4,a photo of a church building,46,church,497,0.47126737,bell cote,442,0.016601926,monastery,663,0.015760507,castle,483,0.002975191,dome,538,0.0019396242
+4,a photo of a church building,46,church,497,0.40524748,bell cote,442,0.056281336,monastery,663,0.015338499,chime,494,0.0025297888,dome,538,0.0024706607
+4,a photo of a church building,46,church,497,0.26504913,bell cote,442,0.13848935,monastery,663,0.010479595,tile roof,858,0.0075924634,beacon,437,0.0043897913
+5,a photo of a French horn,47,French horn,566,0.43813416,bassoon,432,0.0019028992,oboe,683,0.0015873654,cornet,513,0.0015166396,trombone,875,0.0014906402
+5,a photo of a French horn,47,French horn,566,0.6165599,cornet,513,0.023850296,trombone,875,0.002084798,bassoon,432,0.0010007264,oboe,683,0.000945399
+5,a photo of a French horn,47,French horn,566,0.55448323,electric guitar,546,0.001540801,bassoon,432,0.0011884408,oboe,683,0.0010544608,nematode,111,0.001036881
+5,a photo of a French horn,47,French horn,566,0.53883076,paper towel,700,0.0019508783,cornet,513,0.0014906594,lab coat,617,0.0014118516,bassoon,432,0.0014046779
+5,a photo of a French horn,47,French horn,566,0.3561423,cornet,513,0.0035626695,electric guitar,546,0.0019032279,bassoon,432,0.0016250537,oboe,683,0.0015525976
+5,a photo of a French horn,47,French horn,566,0.5245611,cornet,513,0.02781747,bassoon,432,0.0016348851,trombone,875,0.0016106403,oboe,683,0.0014964297
+5,a photo of a French horn,47,French horn,566,0.4658764,cornet,513,0.002735572,trombone,875,0.0018407062,bassoon,432,0.0017450949,oboe,683,0.0013749915
+5,a photo of a French horn,47,French horn,566,0.64544487,trombone,875,0.0053571956,cornet,513,0.004097426,bassoon,432,0.0021151528,sax,776,0.0015740508
+5,a photo of a French horn,47,French horn,566,0.4332041,cornet,513,0.002290154,trombone,875,0.0018207533,bassoon,432,0.0017400937,oboe,683,0.0016048421
+5,a photo of a French horn,47,French horn,566,0.5177816,cornet,513,0.004593853,bassoon,432,0.0013085329,carpenter's kit,477,0.001265623,vault,884,0.0012608716
+5,a photo of a French horn,47,French horn,566,0.5176844,bassoon,432,0.003830059,cornet,513,0.0021838208,oboe,683,0.001906655,trombone,875,0.001879791
+5,a photo of a French horn,47,French horn,566,0.4511529,electric guitar,546,0.0013930674,bassoon,432,0.0013679385,cornet,513,0.0012962682,bookshop,454,0.0012788735
+5,a photo of a French horn,47,French horn,566,0.55536467,electric guitar,546,0.001596952,bassoon,432,0.001218831,carpenter's kit,477,0.00093028153,oboe,683,0.0008723303
+5,a photo of a French horn,47,French horn,566,0.3489384,cornet,513,0.0130967265,trombone,875,0.0058314265,sax,776,0.0026935802,bearskin,439,0.002577697
+5,a photo of a French horn,47,French horn,566,0.49044427,cornet,513,0.0063767247,electric guitar,546,0.001514298,carpenter's kit,477,0.0011305143,bassoon,432,0.0010471718
+5,a photo of a French horn,47,French horn,566,0.42508024,cornet,513,0.0020372516,nematode,111,0.0016165397,bassoon,432,0.0014786802,coil,506,0.0014124142
+5,a photo of a French horn,47,French horn,566,0.53254545,trombone,875,0.0051590437,cornet,513,0.0041480176,bassoon,432,0.0018296388,oboe,683,0.0015079185
+5,a photo of a French horn,47,French horn,566,0.41881105,cornet,513,0.033050872,trombone,875,0.010159896,bassoon,432,0.0056236465,oboe,683,0.00519666
+5,a photo of a French horn,47,French horn,566,0.46756974,cornet,513,0.008467547,bassoon,432,0.0030843935,trombone,875,0.0022216393,oboe,683,0.0020570036
+5,a photo of a French horn,47,French horn,566,0.49227777,cornet,513,0.0089339465,trombone,875,0.0020740486,bassoon,432,0.0014791229,oboe,683,0.0014598948
+5,a photo of a French horn,47,French horn,566,0.5458872,cornet,513,0.0021512534,bassoon,432,0.0019798733,trombone,875,0.0017640512,oboe,683,0.0014340773
+5,a photo of a French horn,47,French horn,566,0.57180935,trombone,875,0.0047326917,cornet,513,0.0036570518,bassoon,432,0.0027305237,oboe,683,0.0024776494
+5,a photo of a French horn,47,French horn,566,0.6726274,cornet,513,0.0013443043,vault,884,0.0013409413,bassoon,432,0.001045321,coil,506,0.0010021918
+5,a photo of a French horn,47,French horn,566,0.56933403,cornet,513,0.0032538949,trombone,875,0.0030341654,bassoon,432,0.0013938744,nematode,111,0.0011671468
+5,a photo of a French horn,47,French horn,566,0.4353704,cornet,513,0.011684873,trombone,875,0.010011819,bassoon,432,0.0018529639,bearskin,439,0.0016078645
+5,a photo of a French horn,47,French horn,566,0.5232792,cornet,513,0.009206319,trombone,875,0.0021847864,oboe,683,0.0016996012,bassoon,432,0.0012914302
+5,a photo of a French horn,47,French horn,566,0.4312055,trombone,875,0.004078693,bassoon,432,0.0028152687,cornet,513,0.0027431091,oboe,683,0.0026136928
+5,a photo of a French horn,47,French horn,566,0.502726,coil,506,0.0018737572,mixing bowl,659,0.0017917692,vault,884,0.0015631346,vine snake,59,0.0013077148
+5,a photo of a French horn,47,French horn,566,0.4602751,cornet,513,0.0021794378,trombone,875,0.0015984633,bassoon,432,0.0015611565,electric guitar,546,0.0015434062
+5,a photo of a French horn,47,French horn,566,0.33630303,cornet,513,0.026378412,trombone,875,0.0041739387,carpenter's kit,477,0.0022823077,bassoon,432,0.002048698
+5,a photo of a French horn,47,French horn,566,0.31890088,trombone,875,0.00445088,cornet,513,0.0032355974,bassoon,432,0.0025605217,bookshop,454,0.0017782138
+5,a photo of a French horn,47,French horn,566,0.34738272,cornet,513,0.0256755,hook,600,0.003396657,trombone,875,0.0023107245,umbrella,879,0.0020439113
+5,a photo of a French horn,47,French horn,566,0.41576463,bassoon,432,0.001483832,nematode,111,0.0014525776,stage,819,0.001431712,mixing bowl,659,0.0014250623
+5,a photo of a French horn,47,French horn,566,0.4639325,trombone,875,0.0027911242,cornet,513,0.0027594406,bassoon,432,0.002036846,stage,819,0.0015324497
+5,a photo of a French horn,47,French horn,566,0.23066686,cornet,513,0.08032983,trombone,875,0.014426481,oboe,683,0.0020325645,sax,776,0.0019923202
+5,a photo of a French horn,47,French horn,566,0.35871807,cornet,513,0.0089413775,trombone,875,0.0018437739,electric guitar,546,0.0018407517,bassoon,432,0.0016418046
+5,a photo of a French horn,47,French horn,566,0.51805264,bassoon,432,0.0013961212,vault,884,0.0012957288,electric guitar,546,0.0012944832,oboe,683,0.0012183773
+5,a photo of a French horn,47,French horn,566,0.4857281,cornet,513,0.0026101428,trombone,875,0.0025242101,bassoon,432,0.0020345657,bookshop,454,0.0013540703
+5,a photo of a French horn,47,French horn,566,0.33036315,cornet,513,0.017786115,bassoon,432,0.007541557,turnstile,877,0.005904347,trombone,875,0.0048288857
+5,a photo of a French horn,47,French horn,566,0.5421867,bassoon,432,0.0014370303,electric guitar,546,0.0014286535,cornet,513,0.001310321,trombone,875,0.0012412206
+5,a photo of a French horn,47,French horn,566,0.3528348,cornet,513,0.003219157,trombone,875,0.003022028,bassoon,432,0.0025767356,bookshop,454,0.002053308
+5,a photo of a French horn,47,French horn,566,0.5276151,electric guitar,546,0.0017377539,bassoon,432,0.0012384997,carpenter's kit,477,0.0010776796,shopping cart,791,0.0009886203
+5,a photo of a French horn,47,French horn,566,0.43291062,trombone,875,0.007527735,cornet,513,0.0074941553,bassoon,432,0.003877238,sax,776,0.002504707
+5,a photo of a French horn,47,French horn,566,0.47763327,trombone,875,0.0095369425,cornet,513,0.0039490876,bassoon,432,0.0024433641,bearskin,439,0.0018075396
+5,a photo of a French horn,47,French horn,566,0.3918533,stage,819,0.0025694175,bassoon,432,0.0016753522,pick,714,0.0016203081,paper towel,700,0.0015359471
+5,a photo of a French horn,47,French horn,566,0.40391818,cornet,513,0.020023957,trombone,875,0.0054931086,bassoon,432,0.002283213,oboe,683,0.0020422272
+5,a photo of a French horn,47,French horn,566,0.5568777,electric guitar,546,0.0016344506,bassoon,432,0.0012236059,bookshop,454,0.0011143907,stage,819,0.0011090176
+5,a photo of a French horn,47,French horn,566,0.48011315,cornet,513,0.02221027,trombone,875,0.006695339,bassoon,432,0.0023138176,oboe,683,0.0019073336
+5,a photo of a French horn,47,French horn,566,0.55385286,bassoon,432,0.0021439702,cornet,513,0.0017416172,oboe,683,0.0014887424,vault,884,0.0013066309
+5,a photo of a French horn,47,French horn,566,0.47673902,bassoon,432,0.0016539589,electric guitar,546,0.0013484255,shoji,789,0.0012452584,nematode,111,0.0012436829
+5,a photo of a French horn,47,French horn,566,0.40399042,cornet,513,0.015203137,coil,506,0.0029890328,bassoon,432,0.0019340296,chain mail,490,0.0016252858
+5,a photo of a French horn,47,French horn,566,0.5044105,cornet,513,0.0035369375,trombone,875,0.002588388,bassoon,432,0.0014578906,paper towel,700,0.0012318215
+5,a photo of a French horn,47,French horn,566,0.43640953,trombone,875,0.002417431,cornet,513,0.0021710296,stethoscope,823,0.0018928212,eel,390,0.0017245414
+5,a photo of a French horn,47,French horn,566,0.6412716,bassoon,432,0.0010894673,electric guitar,546,0.00097417505,bookshop,454,0.00091400236,cornet,513,0.0008652387
+5,a photo of a French horn,47,French horn,566,0.51803887,cornet,513,0.001763596,electric guitar,546,0.0012613988,nematode,111,0.0012108037,bassoon,432,0.0011307893
+5,a photo of a French horn,47,French horn,566,0.51317394,cornet,513,0.0018992849,bassoon,432,0.0013835921,electric guitar,546,0.0013499337,bookshop,454,0.0012359078
+5,a photo of a French horn,47,French horn,566,0.5356075,cornet,513,0.002327203,electric guitar,546,0.0015763651,bassoon,432,0.001278572,carpenter's kit,477,0.0010751064
+5,a photo of a French horn,47,French horn,566,0.44043446,cornet,513,0.015271289,trombone,875,0.0020293116,bassoon,432,0.0013513033,carpenter's kit,477,0.0012920635
+5,a photo of a French horn,47,French horn,566,0.336745,cornet,513,0.010533603,trombone,875,0.0055601303,bassoon,432,0.0023097529,sax,776,0.0023063829
+5,a photo of a French horn,47,French horn,566,0.27776057,stage,819,0.008679682,cornet,513,0.007492856,trombone,875,0.005834182,sax,776,0.003226899
+5,a photo of a French horn,47,French horn,566,0.4012827,cornet,513,0.003232439,nematode,111,0.0026480476,bassoon,432,0.002155326,turnstile,877,0.0021426065
+5,a photo of a French horn,47,French horn,566,0.42451096,cornet,513,0.0053211236,trombone,875,0.0025480362,oboe,683,0.0024604143,bassoon,432,0.0023651016
+5,a photo of a French horn,47,French horn,566,0.4378369,cornet,513,0.002315299,bassoon,432,0.0023062704,trombone,875,0.0017435026,oboe,683,0.0013591081
+5,a photo of a French horn,47,French horn,566,0.4989439,cornet,513,0.0023571968,trombone,875,0.0021556306,bassoon,432,0.0020589377,sax,776,0.0013767029
+5,a photo of a French horn,47,French horn,566,0.32867497,cornet,513,0.0063489233,sax,776,0.0030834647,trombone,875,0.0030687104,bassoon,432,0.0023922238
+5,a photo of a French horn,47,French horn,566,0.39604175,nematode,111,0.003012128,carbonara,959,0.0019521344,mixing bowl,659,0.0017056764,caldron,469,0.0016951769
+5,a photo of a French horn,47,French horn,566,0.52124125,cornet,513,0.002595027,electric guitar,546,0.001704641,bassoon,432,0.0013008929,oboe,683,0.0012691178
+5,a photo of a French horn,47,French horn,566,0.5921218,cornet,513,0.006599651,trombone,875,0.003266865,oboe,683,0.0015180847,bassoon,432,0.0013506027
+5,a photo of a French horn,47,French horn,566,0.35786211,cornet,513,0.005509118,bassoon,432,0.002587571,trombone,875,0.0023613088,sax,776,0.0017082335
+5,a photo of a French horn,47,French horn,566,0.5090879,cornet,513,0.0015997376,bassoon,432,0.0011393211,electric guitar,546,0.0011301805,caldron,469,0.0011075258
+5,a photo of a French horn,47,French horn,566,0.48006633,cornet,513,0.0062608807,trombone,875,0.0023369056,bassoon,432,0.0019169945,oboe,683,0.0016683767
+5,a photo of a French horn,47,French horn,566,0.53701645,coil,506,0.0019181347,bassoon,432,0.0015467261,electric guitar,546,0.001309238,mixing bowl,659,0.0012318299
+5,a photo of a French horn,47,French horn,566,0.48644456,cornet,513,0.0016447395,electric guitar,546,0.0015500576,bassoon,432,0.0014688777,oboe,683,0.0013271527
+5,a photo of a French horn,47,French horn,566,0.5070504,cornet,513,0.0048700813,trombone,875,0.0047850516,bassoon,432,0.0019466183,oboe,683,0.0014127478
+5,a photo of a French horn,47,French horn,566,0.438935,cornet,513,0.0038384653,trombone,875,0.0026421465,bassoon,432,0.00232826,electric guitar,546,0.0014383313
+5,a photo of a French horn,47,French horn,566,0.4204352,cornet,513,0.006878687,trombone,875,0.003286157,bassoon,432,0.0024185341,sax,776,0.0015199137
+5,a photo of a French horn,47,French horn,566,0.34710187,cornet,513,0.0021987602,eel,390,0.0018279997,electric guitar,546,0.0016237338,bassoon,432,0.0015882192
+5,a photo of a French horn,47,French horn,566,0.49172643,coil,506,0.00291241,chain,488,0.0015207528,bassoon,432,0.0013542131,vault,884,0.001306342
+5,a photo of a French horn,47,French horn,566,0.40740234,coil,506,0.002708855,cornet,513,0.0025180627,nematode,111,0.0019022713,jersey,610,0.001885888
+5,a photo of a French horn,47,French horn,566,0.43095526,cornet,513,0.005812265,coil,506,0.002070471,bookshop,454,0.0017247294,trombone,875,0.0015848303
+5,a photo of a French horn,47,French horn,566,0.5223932,cornet,513,0.0032289315,oboe,683,0.0015695413,stage,819,0.0015440434,electric guitar,546,0.0015324206
+5,a photo of a French horn,47,French horn,566,0.23591495,turnstile,877,0.008810735,trombone,875,0.006187485,cornet,513,0.0037102385,shopping cart,791,0.0035664549
+5,a photo of a French horn,47,French horn,566,0.41759598,coil,506,0.0024419432,cornet,513,0.0023714881,hook,600,0.0016073325,bassoon,432,0.0014935167
+5,a photo of a French horn,47,French horn,566,0.40914288,bassoon,432,0.0014611523,mixing bowl,659,0.001458935,hog,341,0.0014077745,oboe,683,0.0013463326
+5,a photo of a French horn,47,French horn,566,0.5263079,cornet,513,0.009113692,trombone,875,0.0030163885,bassoon,432,0.0017873633,oboe,683,0.0016252344
+5,a photo of a French horn,47,French horn,566,0.40464202,bassoon,432,0.0042143376,trombone,875,0.0032245126,oboe,683,0.0023782514,hair slide,584,0.0015184832
+5,a photo of a French horn,47,French horn,566,0.2617818,cornet,513,0.003321522,turnstile,877,0.0026498572,bassoon,432,0.0025877536,eel,390,0.0024200617
+5,a photo of a French horn,47,French horn,566,0.51628137,cornet,513,0.002424569,bassoon,432,0.0016482578,electric guitar,546,0.0015234556,carpenter's kit,477,0.0011593173
+5,a photo of a French horn,47,French horn,566,0.60087675,cornet,513,0.0049706986,trombone,875,0.0018451504,bassoon,432,0.0010380609,carpenter's kit,477,0.0009594714
+5,a photo of a French horn,47,French horn,566,0.50403744,cornet,513,0.0050577517,trombone,875,0.001656691,bassoon,432,0.0014044755,electric guitar,546,0.0011703438
+5,a photo of a French horn,47,French horn,566,0.5739069,cornet,513,0.0022678063,bassoon,432,0.0016258103,electric guitar,546,0.0013796883,trombone,875,0.0013340405
+5,a photo of a French horn,47,French horn,566,0.4251234,cornet,513,0.00741603,trombone,875,0.003813055,sax,776,0.0024267368,bassoon,432,0.0014630574
+5,a photo of a French horn,47,French horn,566,0.4542523,turnstile,877,0.0049369684,cornet,513,0.0032315599,trombone,875,0.0024959345,bassoon,432,0.0021523999
+5,a photo of a French horn,47,French horn,566,0.41522837,cornet,513,0.0020942509,bassoon,432,0.0019979402,carpenter's kit,477,0.0014800862,electric guitar,546,0.0014226488
+5,a photo of a French horn,47,French horn,566,0.4594726,cornet,513,0.006409361,trombone,875,0.0030242333,bassoon,432,0.0016135527,oboe,683,0.0012995317
+5,a photo of a French horn,47,French horn,566,0.49140146,cornet,513,0.005822456,trombone,875,0.0016313178,electric guitar,546,0.0015209642,bassoon,432,0.0014948634
+5,a photo of a French horn,47,French horn,566,0.32915968,cornet,513,0.018158495,trombone,875,0.0024007743,espresso,967,0.001847602,bassoon,432,0.0017749078
+5,a photo of a French horn,47,French horn,566,0.57862145,cornet,513,0.0025673548,electric guitar,546,0.0012970341,bassoon,432,0.0011312052,trombone,875,0.0010413119
+5,a photo of a French horn,47,French horn,566,0.33909696,cornet,513,0.009436335,stethoscope,823,0.0028613391,trombone,875,0.0021775595,bassoon,432,0.0021218648
+5,a photo of a French horn,47,French horn,566,0.42519546,cornet,513,0.005142657,trombone,875,0.0023181497,bassoon,432,0.0020195383,oboe,683,0.001801143
+6,a photo of a garbage truck,48,garbage truck,569,0.28892547,tow truck,864,0.02054673,trailer truck,867,0.01790823,snowplow,803,0.01144431,crane,517,0.0067256647
+6,a photo of a garbage truck,48,garbage truck,569,0.3218371,trailer truck,867,0.051976908,snowplow,803,0.011895129,crane,517,0.007894313,tow truck,864,0.0074614584
+6,a photo of a garbage truck,48,garbage truck,569,0.55761737,snowplow,803,0.025982039,tow truck,864,0.0045179497,trailer truck,867,0.0041746646,fire engine,555,0.003290259
+6,a photo of a garbage truck,48,garbage truck,569,0.35961062,tow truck,864,0.01965582,trailer truck,867,0.007615977,police van,734,0.0049397065,snowplow,803,0.0031464375
+6,a photo of a garbage truck,48,garbage truck,569,0.64321077,snowplow,803,0.020163676,crane,517,0.017791444,trailer truck,867,0.0034635733,school bus,779,0.002723323
+6,a photo of a garbage truck,48,garbage truck,569,0.5782467,fire engine,555,0.00610352,ambulance,407,0.003573852,snowplow,803,0.0026794304,tow truck,864,0.0024402475
+6,a photo of a garbage truck,48,garbage truck,569,0.3939294,trailer truck,867,0.033310175,snowplow,803,0.0211492,tow truck,864,0.011841406,crane,517,0.008097163
+6,a photo of a garbage truck,48,garbage truck,569,0.30951515,trailer truck,867,0.010696266,snowplow,803,0.01005059,harvester,595,0.0032268998,tow truck,864,0.0028618167
+6,a photo of a garbage truck,48,garbage truck,569,0.46450314,trailer truck,867,0.009646221,snowplow,803,0.006299122,ambulance,407,0.004962486,fire engine,555,0.0028305282
+6,a photo of a garbage truck,48,garbage truck,569,0.37927812,trailer truck,867,0.01068473,tow truck,864,0.008950336,snowplow,803,0.0043214657,fire engine,555,0.0034331684
+6,a photo of a garbage truck,48,garbage truck,569,0.35592636,snowplow,803,0.05112184,tow truck,864,0.028539231,trailer truck,867,0.011414465,crane,517,0.006295137
+6,a photo of a garbage truck,48,garbage truck,569,0.41109762,snowplow,803,0.051497933,trailer truck,867,0.010456786,tow truck,864,0.010333551,crane,517,0.0052050785
+6,a photo of a garbage truck,48,garbage truck,569,0.30236962,snowplow,803,0.026736856,tow truck,864,0.011075845,trailer truck,867,0.010795516,crane,517,0.008747956
+6,a photo of a garbage truck,48,garbage truck,569,0.644919,snowplow,803,0.011799773,crane,517,0.006083226,trailer truck,867,0.0023475806,moving van,675,0.0023277996
+6,a photo of a garbage truck,48,garbage truck,569,0.3895674,crane,517,0.016660057,trailer truck,867,0.013574169,school bus,779,0.010112471,moving van,675,0.0070990874
+6,a photo of a garbage truck,48,garbage truck,569,0.29314324,tow truck,864,0.057615995,trailer truck,867,0.022305561,snowplow,803,0.008488697,police van,734,0.0063629607
+6,a photo of a garbage truck,48,garbage truck,569,0.30258915,tow truck,864,0.021037543,trailer truck,867,0.017997148,snowplow,803,0.017547373,crane,517,0.0046329414
+6,a photo of a garbage truck,48,garbage truck,569,0.35736138,tow truck,864,0.012938668,snowplow,803,0.00902962,trailer truck,867,0.008719346,moving van,675,0.0037941171
+6,a photo of a garbage truck,48,garbage truck,569,0.38472292,trailer truck,867,0.01928434,tow truck,864,0.017325956,thresher,856,0.006541443,snowplow,803,0.0061369506
+6,a photo of a garbage truck,48,garbage truck,569,0.109763734,trailer truck,867,0.04847989,school bus,779,0.019696897,moving van,675,0.01857771,snowplow,803,0.008873339
+6,a photo of a garbage truck,48,garbage truck,569,0.4412111,trailer truck,867,0.02303072,snowplow,803,0.0140508795,tow truck,864,0.0077701113,moving van,675,0.0042110654
+6,a photo of a garbage truck,48,snowplow,803,0.49996847,garbage truck,569,0.03875879,tow truck,864,0.03745748,trailer truck,867,0.017142858,crane,517,0.013804278
+6,a photo of a garbage truck,48,garbage truck,569,0.5455466,trailer truck,867,0.010913613,snowplow,803,0.00627463,crane,517,0.004753629,tow truck,864,0.004400281
+6,a photo of a garbage truck,48,garbage truck,569,0.19338025,tow truck,864,0.1627814,snowplow,803,0.042856522,fire engine,555,0.020424917,crane,517,0.0172137
+6,a photo of a garbage truck,48,garbage truck,569,0.49580172,trailer truck,867,0.012842066,snowplow,803,0.0070534693,missile,657,0.0040638386,projectile,744,0.003469069
+6,a photo of a garbage truck,48,garbage truck,569,0.40702444,trailer truck,867,0.016345007,snowplow,803,0.01182613,tow truck,864,0.01168264,crane,517,0.0023951214
+6,a photo of a garbage truck,48,garbage truck,569,0.4009524,snowplow,803,0.06731157,crane,517,0.05383192,trailer truck,867,0.008574119,tow truck,864,0.0070728003
+6,a photo of a garbage truck,48,garbage truck,569,0.3127395,snowplow,803,0.025963448,crane,517,0.024581177,trailer truck,867,0.0030459363,harvester,595,0.0030030392
+6,a photo of a garbage truck,48,garbage truck,569,0.3743348,trailer truck,867,0.044677038,snowplow,803,0.021872912,tow truck,864,0.01773781,thresher,856,0.0045495867
+6,a photo of a garbage truck,48,garbage truck,569,0.2039985,crane,517,0.04677952,snowplow,803,0.03513384,trailer truck,867,0.029393585,tow truck,864,0.013105305
+6,a photo of a garbage truck,48,garbage truck,569,0.21646403,tow truck,864,0.07278012,snowplow,803,0.017816015,trailer truck,867,0.009723741,crane,517,0.004917852
+6,a photo of a garbage truck,48,garbage truck,569,0.4056165,snowplow,803,0.05883601,crane,517,0.03330046,trailer truck,867,0.011559735,moving van,675,0.0038905216
+6,a photo of a garbage truck,48,garbage truck,569,0.36567876,snowplow,803,0.070446536,trailer truck,867,0.011418622,tow truck,864,0.007616524,crane,517,0.003655548
+6,a photo of a garbage truck,48,garbage truck,569,0.25042954,trailer truck,867,0.07496336,tow truck,864,0.034123763,recreational vehicle,757,0.0153688425,mobile home,660,0.008635803
+6,a photo of a garbage truck,48,garbage truck,569,0.54962367,snowplow,803,0.07506303,trailer truck,867,0.004964053,crane,517,0.003158891,moving van,675,0.0028396328
+6,a photo of a garbage truck,48,garbage truck,569,0.47589755,trailer truck,867,0.0138213,moving van,675,0.0047593405,snowplow,803,0.0032069227,tow truck,864,0.0025008228
+6,a photo of a garbage truck,48,garbage truck,569,0.18673111,snowplow,803,0.06983996,trailer truck,867,0.06074593,tow truck,864,0.028602077,crane,517,0.0073804636
+6,a photo of a garbage truck,48,garbage truck,569,0.30815718,snowplow,803,0.079455346,trailer truck,867,0.011687082,tow truck,864,0.011039396,crane,517,0.0074692476
+6,a photo of a garbage truck,48,garbage truck,569,0.4235703,snowplow,803,0.026762055,fire engine,555,0.026425824,trailer truck,867,0.01486414,tow truck,864,0.0113028735
+6,a photo of a garbage truck,48,garbage truck,569,0.42678285,fire engine,555,0.064251676,trailer truck,867,0.053386357,tow truck,864,0.019671343,crane,517,0.011323677
+6,a photo of a garbage truck,48,garbage truck,569,0.39137596,snowplow,803,0.069487095,trailer truck,867,0.004356689,tow truck,864,0.0029713945,ashcan,412,0.0024715334
+6,a photo of a garbage truck,48,garbage truck,569,0.33527908,tow truck,864,0.015311544,trailer truck,867,0.008576277,police van,734,0.0056166854,snowplow,803,0.0052288775
+6,a photo of a garbage truck,48,garbage truck,569,0.42870727,snowplow,803,0.012819675,tow truck,864,0.012762324,trailer truck,867,0.008623498,police van,734,0.0034982893
+6,a photo of a garbage truck,48,garbage truck,569,0.4263544,trailer truck,867,0.02265423,snowplow,803,0.02094851,tow truck,864,0.014497527,fire engine,555,0.004619626
+6,a photo of a garbage truck,48,garbage truck,569,0.2687292,snowplow,803,0.071897596,trailer truck,867,0.017157357,tow truck,864,0.006923182,harvester,595,0.0043399134
+6,a photo of a garbage truck,48,garbage truck,569,0.2174779,snowplow,803,0.046856835,crane,517,0.04112984,tow truck,864,0.027924769,trailer truck,867,0.011498095
+6,a photo of a garbage truck,48,garbage truck,569,0.21644692,snowplow,803,0.059124585,crane,517,0.048255302,trailer truck,867,0.017217685,tow truck,864,0.008816348
+6,a photo of a garbage truck,48,garbage truck,569,0.22193944,trailer truck,867,0.105615444,tow truck,864,0.06907145,snowplow,803,0.051603276,crane,517,0.01311875
+6,a photo of a garbage truck,48,garbage truck,569,0.24053687,snowplow,803,0.013022139,trailer truck,867,0.010383789,tow truck,864,0.009236321,crane,517,0.003121883
+6,a photo of a garbage truck,48,garbage truck,569,0.30265507,crane,517,0.013768449,tow truck,864,0.011244693,trailer truck,867,0.01039256,snowplow,803,0.0055004447
+6,a photo of a garbage truck,48,garbage truck,569,0.73788804,trailer truck,867,0.015858267,crane,517,0.007013112,snowplow,803,0.0067828554,moving van,675,0.0035558383
+6,a photo of a garbage truck,48,garbage truck,569,0.51532143,snowplow,803,0.062373787,trailer truck,867,0.009692545,tow truck,864,0.0074729896,fire engine,555,0.0022344175
+6,a photo of a garbage truck,48,garbage truck,569,0.41361305,snowplow,803,0.016809937,crane,517,0.004334388,tow truck,864,0.004118968,fire engine,555,0.0019804807
+6,a photo of a garbage truck,48,garbage truck,569,0.45552948,snowplow,803,0.10006616,trailer truck,867,0.019531736,crane,517,0.014125656,tow truck,864,0.008174429
+6,a photo of a garbage truck,48,garbage truck,569,0.2604944,tow truck,864,0.0226709,snowplow,803,0.004899804,trailer truck,867,0.004114541,crane,517,0.0022339264
+6,a photo of a garbage truck,48,trailer truck,867,0.18848962,garbage truck,569,0.12820502,tow truck,864,0.12706602,snowplow,803,0.029626187,moving van,675,0.020929283
+6,a photo of a garbage truck,48,garbage truck,569,0.3804101,trailer truck,867,0.018055571,snowplow,803,0.010135907,tow truck,864,0.00748173,moving van,675,0.0044432622
+6,a photo of a garbage truck,48,garbage truck,569,0.3448248,trailer truck,867,0.08080815,tow truck,864,0.018742198,snowplow,803,0.00711559,moving van,675,0.006783834
+6,a photo of a garbage truck,48,garbage truck,569,0.24578106,trailer truck,867,0.07948136,snowplow,803,0.045859195,tow truck,864,0.010310221,moving van,675,0.006494238
+6,a photo of a garbage truck,48,garbage truck,569,0.3180728,snowplow,803,0.019825894,tow truck,864,0.004832357,trailer truck,867,0.0035761548,mobile home,660,0.0028956037
+6,a photo of a garbage truck,48,garbage truck,569,0.5470081,snowplow,803,0.010903929,crane,517,0.006507663,trailer truck,867,0.0050415867,tow truck,864,0.0033280964
+6,a photo of a garbage truck,48,garbage truck,569,0.34465343,tow truck,864,0.014320406,snowplow,803,0.013395244,trailer truck,867,0.011561018,crane,517,0.0063792085
+6,a photo of a garbage truck,48,garbage truck,569,0.40338948,trailer truck,867,0.011538036,freight car,565,0.0057363287,snowplow,803,0.0044878945,moving van,675,0.0035485716
+6,a photo of a garbage truck,48,garbage truck,569,0.39433956,tow truck,864,0.009638374,snowplow,803,0.0086711915,crane,517,0.002489763,nematode,111,0.0014112934
+6,a photo of a garbage truck,48,garbage truck,569,0.20311573,snowplow,803,0.13321373,tow truck,864,0.029298643,trailer truck,867,0.023559669,amphibian,408,0.018084766
+6,a photo of a garbage truck,48,garbage truck,569,0.2806024,trailer truck,867,0.029237153,snowplow,803,0.0056552812,moving van,675,0.0035642728,freight car,565,0.0025916407
+6,a photo of a garbage truck,48,garbage truck,569,0.5576966,snowplow,803,0.020998936,tow truck,864,0.008224507,trailer truck,867,0.0074656736,crane,517,0.0050596874
+6,a photo of a garbage truck,48,garbage truck,569,0.34498918,trailer truck,867,0.07622037,snowplow,803,0.00948061,crane,517,0.0056738155,freight car,565,0.00551845
+6,a photo of a garbage truck,48,garbage truck,569,0.4146242,snowplow,803,0.057932675,trailer truck,867,0.008700747,crane,517,0.0076596616,tow truck,864,0.005525057
+6,a photo of a garbage truck,48,garbage truck,569,0.34172925,trailer truck,867,0.012181845,tow truck,864,0.0077638985,crane,517,0.0049887886,snowplow,803,0.00396545
+6,a photo of a garbage truck,48,garbage truck,569,0.4693406,tow truck,864,0.017433755,snowplow,803,0.0065640183,trailer truck,867,0.004626316,crane,517,0.0032173952
+6,a photo of a garbage truck,48,garbage truck,569,0.33373535,tow truck,864,0.025327673,trailer truck,867,0.01355423,snowplow,803,0.0050188266,crane,517,0.004915522
+6,a photo of a garbage truck,48,garbage truck,569,0.13925785,trailer truck,867,0.08355256,snowplow,803,0.06014801,tow truck,864,0.044348583,projectile,744,0.0111615565
+6,a photo of a garbage truck,48,garbage truck,569,0.51277393,snowplow,803,0.037817728,trailer truck,867,0.0063896524,crane,517,0.005041894,forklift,561,0.0018156334
+6,a photo of a garbage truck,48,garbage truck,569,0.34772357,snowplow,803,0.01826938,trailer truck,867,0.00736485,crane,517,0.005547806,moving van,675,0.004315863
+6,a photo of a garbage truck,48,garbage truck,569,0.32359973,trailer truck,867,0.017825317,crane,517,0.013082634,tow truck,864,0.012279211,harvester,595,0.005116672
+6,a photo of a garbage truck,48,garbage truck,569,0.42970058,snowplow,803,0.016177554,trailer truck,867,0.007173669,tow truck,864,0.003066021,crane,517,0.002163952
+6,a photo of a garbage truck,48,garbage truck,569,0.24634324,trailer truck,867,0.02165529,tow truck,864,0.016202196,snowplow,803,0.0051283087,mobile home,660,0.0042783343
+6,a photo of a garbage truck,48,garbage truck,569,0.5247595,snowplow,803,0.018910129,trailer truck,867,0.018169142,tow truck,864,0.012682082,fire engine,555,0.0036991152
+6,a photo of a garbage truck,48,garbage truck,569,0.2789355,snowplow,803,0.047702264,tow truck,864,0.040493187,crane,517,0.031151932,trailer truck,867,0.016545173
+6,a photo of a garbage truck,48,garbage truck,569,0.40090275,trailer truck,867,0.034187224,tow truck,864,0.011820732,snowplow,803,0.0057267244,crane,517,0.005680457
+6,a photo of a garbage truck,48,garbage truck,569,0.41249505,thresher,856,0.0038514968,snowplow,803,0.0033186798,ashcan,412,0.0022405756,pickup,717,0.0018579934
+6,a photo of a garbage truck,48,crane,517,0.25124538,garbage truck,569,0.058934152,trailer truck,867,0.018679457,tow truck,864,0.012995536,snowplow,803,0.0062437668
+6,a photo of a garbage truck,48,garbage truck,569,0.20312059,tow truck,864,0.06771173,trailer truck,867,0.06490112,crane,517,0.010254196,snowplow,803,0.01024727
+6,a photo of a garbage truck,48,garbage truck,569,0.43638802,tow truck,864,0.017811198,crane,517,0.0061093927,snowplow,803,0.0059514833,trailer truck,867,0.0031020727
+6,a photo of a garbage truck,48,garbage truck,569,0.26028094,tow truck,864,0.014070849,trailer truck,867,0.0057397466,snowplow,803,0.0032091904,fire engine,555,0.0031235917
+6,a photo of a garbage truck,48,garbage truck,569,0.52709377,trailer truck,867,0.03518663,snowplow,803,0.010620772,moving van,675,0.0095005715,tow truck,864,0.007713788
+6,a photo of a garbage truck,48,garbage truck,569,0.4486376,ambulance,407,0.013188075,trailer truck,867,0.009925592,moving van,675,0.008175407,police van,734,0.00736181
+6,a photo of a garbage truck,48,garbage truck,569,0.3200365,trailer truck,867,0.02285402,tow truck,864,0.014061503,crane,517,0.006994729,projectile,744,0.005238604
+6,a photo of a garbage truck,48,crane,517,0.21565385,snowplow,803,0.1919369,garbage truck,569,0.12784435,trailer truck,867,0.009689836,forklift,561,0.0033958964
+6,a photo of a garbage truck,48,garbage truck,569,0.2504114,trailer truck,867,0.05889558,snowplow,803,0.055946026,tow truck,864,0.006249021,crane,517,0.006208666
+6,a photo of a garbage truck,48,garbage truck,569,0.34143505,trailer truck,867,0.02200271,tow truck,864,0.021419348,snowplow,803,0.00548875,crane,517,0.0051674983
+6,a photo of a garbage truck,48,garbage truck,569,0.2389132,crane,517,0.02102039,trailer truck,867,0.008891378,tow truck,864,0.006910344,ashcan,412,0.0035382765
+6,a photo of a garbage truck,48,garbage truck,569,0.38647085,snowplow,803,0.043058712,crane,517,0.03949366,trailer truck,867,0.027589587,tow truck,864,0.011802263
+6,a photo of a garbage truck,48,garbage truck,569,0.59575856,trailer truck,867,0.025612371,moving van,675,0.011719795,snowplow,803,0.0035170175,crane,517,0.0034959363
+6,a photo of a garbage truck,48,garbage truck,569,0.46517384,trailer truck,867,0.021671034,snowplow,803,0.018832102,moving van,675,0.004120351,freight car,565,0.0028893438
+6,a photo of a garbage truck,48,garbage truck,569,0.5498367,trailer truck,867,0.015497431,crane,517,0.009591928,snowplow,803,0.009429747,tow truck,864,0.0064500268
+6,a photo of a garbage truck,48,garbage truck,569,0.47427273,trailer truck,867,0.0072761183,tow truck,864,0.004262794,snowplow,803,0.0023581875,crane,517,0.0018045501
+6,a photo of a garbage truck,48,garbage truck,569,0.51462597,tow truck,864,0.012891614,trailer truck,867,0.008787778,snowplow,803,0.006724462,fire engine,555,0.0044879005
+6,a photo of a garbage truck,48,garbage truck,569,0.2900312,trailer truck,867,0.08965079,snowplow,803,0.05022964,tow truck,864,0.018005414,fire engine,555,0.013145026
+7,a photo of a gas pump,49,gas pump,571,0.10835394,cash machine,480,0.021084314,turnstile,877,0.020021113,ashcan,412,0.010801608,refrigerator,760,0.00786545
+7,a photo of a gas pump,49,gas pump,571,0.16423176,fireboat,554,0.0020094106,forklift,561,0.0016302184,tow truck,864,0.0016247133,odometer,685,0.001585204
+7,a photo of a gas pump,49,gas pump,571,0.37213865,cash machine,480,0.023120737,vending machine,886,0.013455635,parking meter,704,0.006772781,pay-phone,707,0.0062963096
+7,a photo of a gas pump,49,gas pump,571,0.4132012,vending machine,886,0.041555114,pay-phone,707,0.026357496,cash machine,480,0.02278542,parking meter,704,0.0053707864
+7,a photo of a gas pump,49,gas pump,571,0.329971,mailbox,637,0.0020162007,forklift,561,0.0015910842,pay-phone,707,0.0015451673,traffic light,920,0.0015024664
+7,a photo of a gas pump,49,gas pump,571,0.4825332,iPod,605,0.004666008,vending machine,886,0.0032557559,turnstile,877,0.0021722424,parking meter,704,0.002110916
+7,a photo of a gas pump,49,gas pump,571,0.19403961,cash machine,480,0.034847356,pay-phone,707,0.031102443,vending machine,886,0.00417915,moving van,675,0.0032902705
+7,a photo of a gas pump,49,gas pump,571,0.1791792,refrigerator,760,0.006817595,water bottle,898,0.006392019,ashcan,412,0.0040427744,parking meter,704,0.004036323
+7,a photo of a gas pump,49,gas pump,571,0.13920122,pay-phone,707,0.037439592,cash machine,480,0.0046293964,traffic light,920,0.0036572902,vending machine,886,0.0035232708
+7,a photo of a gas pump,49,gas pump,571,0.44892693,vending machine,886,0.03893488,ashcan,412,0.0068890457,pay-phone,707,0.004503939,tow truck,864,0.0041105663
+7,a photo of a gas pump,49,gas pump,571,0.40366897,ashcan,412,0.005266654,cash machine,480,0.0052360743,vending machine,886,0.0033095628,pay-phone,707,0.0031471816
+7,a photo of a gas pump,49,gas pump,571,0.28089777,cash machine,480,0.0037767722,vending machine,886,0.0031102216,vacuum,882,0.0023959551,tow truck,864,0.0023196056
+7,a photo of a gas pump,49,gas pump,571,0.35246596,pay-phone,707,0.012610801,parking meter,704,0.009622754,cash machine,480,0.0068110595,vending machine,886,0.0022040417
+7,a photo of a gas pump,49,gas pump,571,0.26560938,forklift,561,0.0029527212,cash machine,480,0.002819771,crane,517,0.0019110227,matchstick,644,0.0016943531
+7,a photo of a gas pump,49,gas pump,571,0.29941627,vending machine,886,0.03158558,parking meter,704,0.025508545,pay-phone,707,0.018475018,ashcan,412,0.01675827
+7,a photo of a gas pump,49,gas pump,571,0.38949433,pay-phone,707,0.0038130663,forklift,561,0.003313579,cash machine,480,0.0030317346,fireboat,554,0.0024144533
+7,a photo of a gas pump,49,gas pump,571,0.18270937,parking meter,704,0.042666283,vending machine,886,0.017414557,cash machine,480,0.014146348,pay-phone,707,0.007887941
+7,a photo of a gas pump,49,gas pump,571,0.4823394,vending machine,886,0.02931014,cash machine,480,0.025366658,pay-phone,707,0.012262158,parking meter,704,0.008089467
+7,a photo of a gas pump,49,gas pump,571,0.45171142,cash machine,480,0.00845661,traffic light,920,0.008305311,pay-phone,707,0.007586756,pole,733,0.005564011
+7,a photo of a gas pump,49,gas pump,571,0.34359214,cash machine,480,0.013562039,vending machine,886,0.008266066,mailbox,637,0.0024191444,slot,800,0.0019897346
+7,a photo of a gas pump,49,gas pump,571,0.3343779,vending machine,886,0.016910173,parking meter,704,0.0089134555,ashcan,412,0.007696088,cash machine,480,0.00768566
+7,a photo of a gas pump,49,gas pump,571,0.4147846,stethoscope,823,0.0036845151,pay-phone,707,0.0018759111,vacuum,882,0.0018205629,backpack,414,0.0017768746
+7,a photo of a gas pump,49,gas pump,571,0.15016554,cash machine,480,0.004983902,switch,844,0.0049324105,vending machine,886,0.0045754104,parking meter,704,0.0032301182
+7,a photo of a gas pump,49,gas pump,571,0.31925416,pay-phone,707,0.13961974,cash machine,480,0.023604514,vending machine,886,0.02089095,parking meter,704,0.008126787
+7,a photo of a gas pump,49,gas pump,571,0.23497339,vending machine,886,0.02872502,cash machine,480,0.02615541,parking meter,704,0.022806795,pay-phone,707,0.02059734
+7,a photo of a gas pump,49,gas pump,571,0.47533804,pay-phone,707,0.016629368,monitor,664,0.004262544,Polaroid camera,732,0.0039934213,cash machine,480,0.002772564
+7,a photo of a gas pump,49,gas pump,571,0.2998417,cash machine,480,0.010433604,ambulance,407,0.005623964,vending machine,886,0.0040209824,stretcher,830,0.0027001416
+7,a photo of a gas pump,49,gas pump,571,0.28756702,cash machine,480,0.019810954,vending machine,886,0.013755776,pay-phone,707,0.0073848264,parking meter,704,0.0053188936
+7,a photo of a gas pump,49,gas pump,571,0.10625128,vacuum,882,0.04085498,vending machine,886,0.032307938,ashcan,412,0.026984602,cash machine,480,0.01529484
+7,a photo of a gas pump,49,gas pump,571,0.45722896,vending machine,886,0.0063095726,oscilloscope,688,0.005014547,modem,662,0.0049089068,radio,754,0.0046999883
+7,a photo of a gas pump,49,gas pump,571,0.41596806,vacuum,882,0.026190454,ashcan,412,0.022668306,pay-phone,707,0.021593101,vending machine,886,0.0066078743
+7,a photo of a gas pump,49,gas pump,571,0.07495612,vending machine,886,0.06396853,cash machine,480,0.03413572,parking meter,704,0.023273662,pay-phone,707,0.02228951
+7,a photo of a gas pump,49,gas pump,571,0.1369921,vending machine,886,0.10299527,cash machine,480,0.04254497,parking meter,704,0.021861352,pay-phone,707,0.021549935
+7,a photo of a gas pump,49,gas pump,571,0.59300363,vending machine,886,0.0018016188,cash machine,480,0.0017955971,vacuum,882,0.001239599,cellular telephone,487,0.0011917477
+7,a photo of a gas pump,49,gas pump,571,0.15984315,traffic light,920,0.0025655064,pole,733,0.0021704962,cash machine,480,0.0019784807,turnstile,877,0.0016795744
+7,a photo of a gas pump,49,gas pump,571,0.2452281,parking meter,704,0.042982083,cash machine,480,0.005612267,vending machine,886,0.0047650784,turnstile,877,0.004306519
+7,a photo of a gas pump,49,gas pump,571,0.37829602,cash machine,480,0.012155662,pay-phone,707,0.008550217,streetcar,829,0.0022133368,vending machine,886,0.0020468829
+7,a photo of a gas pump,49,gas pump,571,0.15798862,pay-phone,707,0.012156095,switch,844,0.002637637,dial telephone,528,0.0022826793,oscilloscope,688,0.0021560262
+7,a photo of a gas pump,49,gas pump,571,0.2559456,pay-phone,707,0.011228168,parking meter,704,0.006284159,forklift,561,0.0054909918,water bottle,898,0.005118792
+7,a photo of a gas pump,49,gas pump,571,0.13977776,cash machine,480,0.072726116,vending machine,886,0.041941304,pay-phone,707,0.0031191898,parking meter,704,0.002373676
+7,a photo of a gas pump,49,gas pump,571,0.57814854,cash machine,480,0.012250562,forklift,561,0.0062956684,vending machine,886,0.004857218,pay-phone,707,0.0048550824
+7,a photo of a gas pump,49,gas pump,571,0.3595322,cash machine,480,0.041928474,vending machine,886,0.037668876,pay-phone,707,0.03659062,ashcan,412,0.0075202584
+7,a photo of a gas pump,49,gas pump,571,0.41146368,trolleybus,874,0.0024329477,pay-phone,707,0.0023980534,streetcar,829,0.0019183558,cash machine,480,0.001792139
+7,a photo of a gas pump,49,gas pump,571,0.4877017,vending machine,886,0.05256916,parking meter,704,0.004970419,ashcan,412,0.004360666,pay-phone,707,0.003878823
+7,a photo of a gas pump,49,gas pump,571,0.0671815,water bottle,898,0.004228252,mailbag,636,0.0026727426,lawn mower,621,0.0024284825,fireboat,554,0.0023675528
+7,a photo of a gas pump,49,gas pump,571,0.43105713,vending machine,886,0.03262924,cash machine,480,0.030521886,pay-phone,707,0.014254727,turnstile,877,0.005012319
+7,a photo of a gas pump,49,gas pump,571,0.3155935,pay-phone,707,0.039477587,cash machine,480,0.025553549,parking meter,704,0.015428103,turnstile,877,0.0061994507
+7,a photo of a gas pump,49,gas pump,571,0.16681208,pay-phone,707,0.07009036,cash machine,480,0.015579106,vending machine,886,0.015489519,parking meter,704,0.011308149
+7,a photo of a gas pump,49,gas pump,571,0.24710116,vending machine,886,0.003948844,stethoscope,823,0.0034804817,cash machine,480,0.0028768328,mailbox,637,0.0024056986
+7,a photo of a gas pump,49,gas pump,571,0.38117045,ashcan,412,0.0037745899,pay-phone,707,0.0018972483,golfcart,575,0.0018480199,modem,662,0.0015871464
+7,a photo of a gas pump,49,gas pump,571,0.17099766,tow truck,864,0.004775104,forklift,561,0.0021353653,ambulance,407,0.001907405,maillot,638,0.0018489477
+7,a photo of a gas pump,49,gas pump,571,0.46050638,pole,733,0.0015585773,sewing machine,786,0.0015165517,barber chair,423,0.0015027872,moped,665,0.0013235575
+7,a photo of a gas pump,49,gas pump,571,0.3906726,cash machine,480,0.0077528316,vending machine,886,0.0045405007,pay-phone,707,0.0017521717,plunger,731,0.0017488629
+7,a photo of a gas pump,49,gas pump,571,0.49592054,cash machine,480,0.015502348,parking meter,704,0.015306211,turnstile,877,0.005474542,vending machine,886,0.0033406867
+7,a photo of a gas pump,49,gas pump,571,0.19208531,pay-phone,707,0.026878307,cash machine,480,0.018960608,parking meter,704,0.017335497,vending machine,886,0.005839796
+7,a photo of a gas pump,49,gas pump,571,0.23898809,vending machine,886,0.050390065,cash machine,480,0.00552135,parking meter,704,0.0022577508,vacuum,882,0.002221431
+7,a photo of a gas pump,49,gas pump,571,0.3194563,cash machine,480,0.026328003,parking meter,704,0.012987615,pay-phone,707,0.0060766824,vending machine,886,0.003681751
+7,a photo of a gas pump,49,gas pump,571,0.37449652,vending machine,886,0.033694997,parking meter,704,0.028515853,cash machine,480,0.007650412,pay-phone,707,0.0043296106
+7,a photo of a gas pump,49,vending machine,886,0.27578202,gas pump,571,0.12871347,pay-phone,707,0.020234363,parking meter,704,0.012751394,cash machine,480,0.012223461
+7,a photo of a gas pump,49,gas pump,571,0.44060975,cash machine,480,0.012859255,pay-phone,707,0.008500626,vending machine,886,0.007813741,lawn mower,621,0.0025668303
+7,a photo of a gas pump,49,gas pump,571,0.27255943,cash machine,480,0.048211236,mailbox,637,0.0040402208,vending machine,886,0.0033194514,pay-phone,707,0.0031429536
+7,a photo of a gas pump,49,gas pump,571,0.31625766,vending machine,886,0.050360754,cash machine,480,0.030049244,ashcan,412,0.0056611127,parking meter,704,0.0050082696
+7,a photo of a gas pump,49,gas pump,571,0.4951732,vending machine,886,0.005989176,cash machine,480,0.0046882275,vacuum,882,0.0038814766,parking meter,704,0.002853189
+7,a photo of a gas pump,49,gas pump,571,0.27292144,vending machine,886,0.081627764,pay-phone,707,0.011241791,cash machine,480,0.01010476,parking meter,704,0.005270854
+7,a photo of a gas pump,49,gas pump,571,0.20295325,pay-phone,707,0.02121963,cash machine,480,0.011372957,parking meter,704,0.0034132348,ambulance,407,0.0033265462
+7,a photo of a gas pump,49,gas pump,571,0.36476615,pay-phone,707,0.09962109,cash machine,480,0.012513881,parking meter,704,0.0038702586,vending machine,886,0.0037411135
+7,a photo of a gas pump,49,gas pump,571,0.43181378,parking meter,704,0.033374492,cash machine,480,0.017984688,vending machine,886,0.017833842,ashcan,412,0.0068502706
+7,a photo of a gas pump,49,gas pump,571,0.21142572,cash machine,480,0.006790116,parking meter,704,0.0036706151,pay-phone,707,0.00313938,mailbox,637,0.0027877605
+7,a photo of a gas pump,49,gas pump,571,0.35067567,pay-phone,707,0.019598473,cash machine,480,0.01788808,vending machine,886,0.015972314,parking meter,704,0.0048853117
+7,a photo of a gas pump,49,gas pump,571,0.11952998,parking meter,704,0.039663363,vending machine,886,0.008665048,ashcan,412,0.007955616,pay-phone,707,0.006529975
+7,a photo of a gas pump,49,gas pump,571,0.15509944,pay-phone,707,0.014897806,parking meter,704,0.0061904597,cash machine,480,0.004346249,vending machine,886,0.0022401896
+7,a photo of a gas pump,49,gas pump,571,0.5925901,vending machine,886,0.02902183,ashcan,412,0.0057123774,cash machine,480,0.0038291644,mailbox,637,0.0033262158
+7,a photo of a gas pump,49,gas pump,571,0.24212247,pole,733,0.008300604,pay-phone,707,0.007395326,cash machine,480,0.007231384,traffic light,920,0.004797926
+7,a photo of a gas pump,49,gas pump,571,0.24229719,vending machine,886,0.08164502,ashcan,412,0.03837014,refrigerator,760,0.01775328,cash machine,480,0.01592652
+7,a photo of a gas pump,49,gas pump,571,0.25247398,cash machine,480,0.019671496,vending machine,886,0.014400366,pay-phone,707,0.011349938,parking meter,704,0.0058406936
+7,a photo of a gas pump,49,gas pump,571,0.35760975,vending machine,886,0.036835432,cash machine,480,0.014105514,pay-phone,707,0.003874723,slot,800,0.0033325267
+7,a photo of a gas pump,49,vending machine,886,0.18549821,parking meter,704,0.069011874,ashcan,412,0.058043536,cash machine,480,0.056211572,gas pump,571,0.020671017
+7,a photo of a gas pump,49,gas pump,571,0.5071439,cash machine,480,0.010656102,mailbox,637,0.010111231,vending machine,886,0.0063606338,switch,844,0.0056929826
+7,a photo of a gas pump,49,gas pump,571,0.19501127,vending machine,886,0.042229485,cash machine,480,0.020741249,hard disc,592,0.019899283,mailbox,637,0.013006518
+7,a photo of a gas pump,49,gas pump,571,0.7047919,cash machine,480,0.003431234,pay-phone,707,0.0020471998,tow truck,864,0.0011173452,ambulance,407,0.0007727569
+7,a photo of a gas pump,49,gas pump,571,0.40443394,vacuum,882,0.01071864,forklift,561,0.005272127,pay-phone,707,0.004562711,parking meter,704,0.003633834
+7,a photo of a gas pump,49,gas pump,571,0.2896334,cash machine,480,0.022109931,vending machine,886,0.013082013,parking meter,704,0.009951146,mailbox,637,0.0049895546
+7,a photo of a gas pump,49,pay-phone,707,0.22955424,gas pump,571,0.05572564,dial telephone,528,0.010418142,cash machine,480,0.0066336957,vending machine,886,0.006097908
+7,a photo of a gas pump,49,gas pump,571,0.35795096,vending machine,886,0.04166735,cash machine,480,0.02384019,parking meter,704,0.012135183,golfcart,575,0.005960137
+7,a photo of a gas pump,49,gas pump,571,0.33669066,pay-phone,707,0.010366152,forklift,561,0.0067550098,turnstile,877,0.0055528795,parking meter,704,0.0053208806
+7,a photo of a gas pump,49,gas pump,571,0.15169774,cash machine,480,0.0233067,vacuum,882,0.006322382,tape player,848,0.0050495192,vending machine,886,0.004810365
+7,a photo of a gas pump,49,gas pump,571,0.15546496,pay-phone,707,0.08413904,parking meter,704,0.008378743,dial telephone,528,0.0043854103,cash machine,480,0.004077134
+7,a photo of a gas pump,49,gas pump,571,0.18527597,Polaroid camera,732,0.021252606,vacuum,882,0.0135996435,pay-phone,707,0.010521503,radio,754,0.010059562
+7,a photo of a gas pump,49,gas pump,571,0.27342445,vending machine,886,0.016119113,parking meter,704,0.015932048,ashcan,412,0.009916005,vacuum,882,0.0033967716
+7,a photo of a gas pump,49,gas pump,571,0.22610945,pay-phone,707,0.016635435,vending machine,886,0.0058283033,cash machine,480,0.0058085467,turnstile,877,0.0029980785
+7,a photo of a gas pump,49,gas pump,571,0.22233178,vending machine,886,0.07140528,parking meter,704,0.062239848,pay-phone,707,0.01485077,motor scooter,670,0.012513154
+7,a photo of a gas pump,49,gas pump,571,0.2730617,cash machine,480,0.039002698,vending machine,886,0.031339556,parking meter,704,0.007241349,mailbox,637,0.0071134707
+7,a photo of a gas pump,49,gas pump,571,0.34619212,parking meter,704,0.0455668,vending machine,886,0.029833103,cash machine,480,0.006273567,scale,778,0.0037981824
+7,a photo of a gas pump,49,gas pump,571,0.35120004,vending machine,886,0.0039343587,pay-phone,707,0.0034070734,cash machine,480,0.0026646892,stopwatch,826,0.0022430245
+7,a photo of a gas pump,49,gas pump,571,0.47762662,pay-phone,707,0.043971308,vacuum,882,0.0025940803,traffic light,920,0.0016958787,passenger car,705,0.0016435656
+7,a photo of a gas pump,49,vending machine,886,0.11824926,gas pump,571,0.08252774,parking meter,704,0.05527491,cash machine,480,0.049321696,pay-phone,707,0.022026956
+7,a photo of a gas pump,49,gas pump,571,0.16358192,street sign,919,0.016372828,traffic light,920,0.008992614,pole,733,0.0048728907,microphone,650,0.0040577375
+7,a photo of a gas pump,49,gas pump,571,0.49356353,forklift,561,0.00809866,tractor,866,0.003211967,cash machine,480,0.0031389894,golfcart,575,0.0021765083
+7,a photo of a gas pump,49,ashcan,412,0.13853379,gas pump,571,0.053043347,parking meter,704,0.038655452,cash machine,480,0.03714202,vacuum,882,0.035919752
+7,a photo of a gas pump,49,gas pump,571,0.283577,vending machine,886,0.039562985,cash machine,480,0.013336493,pay-phone,707,0.011840454,ashcan,412,0.007212686
+8,a photo of a golf ball,50,golf ball,574,0.54032683,ping-pong ball,722,0.026498435,baseball,429,0.0023343398,tennis ball,852,0.001623623,bottlecap,455,0.0016215665
+8,a photo of a golf ball,50,golf ball,574,0.5051331,ballpoint,418,0.0011046744,Shih-Tzu,155,0.0010505015,gibbon,368,0.0010223648,tennis ball,852,0.0010163421
+8,a photo of a golf ball,50,golf ball,574,0.4875219,ping-pong ball,722,0.0020492265,thimble,855,0.0019074515,Shih-Tzu,155,0.0012652086,gibbon,368,0.0011618541
+8,a photo of a golf ball,50,golf ball,574,0.42033598,thimble,855,0.004282002,ping-pong ball,722,0.0018237077,tennis ball,852,0.0015892073,hermit crab,125,0.0015491664
+8,a photo of a golf ball,50,golf ball,574,0.46217024,thimble,855,0.0012328317,sunglasses,837,0.0011482438,ptarmigan,81,0.0011149041,tennis ball,852,0.001039939
+8,a photo of a golf ball,50,golf ball,574,0.46736088,thimble,855,0.0026534784,ping-pong ball,722,0.0023088916,sweatshirt,841,0.0017276305,tennis ball,852,0.0014211773
+8,a photo of a golf ball,50,golf ball,574,0.53857607,baseball,429,0.005315925,ping-pong ball,722,0.0032023117,croquet ball,522,0.0019478272,switch,844,0.0017437795
+8,a photo of a golf ball,50,golf ball,574,0.4471388,baseball,429,0.0017874459,silky terrier,201,0.0015197961,tennis ball,852,0.0014967463,croquet ball,522,0.0014484912
+8,a photo of a golf ball,50,golf ball,574,0.4035881,tennis ball,852,0.0019918093,thimble,855,0.0017645797,hermit crab,125,0.0011689616,lycaenid,326,0.0011634403
+8,a photo of a golf ball,50,golf ball,574,0.5590449,ping-pong ball,722,0.0023489075,mortar,666,0.0017733054,leatherback turtle,34,0.0015115429,thimble,855,0.0014705402
+8,a photo of a golf ball,50,golf ball,574,0.39244288,ping-pong ball,722,0.0023532843,croquet ball,522,0.0016963154,tennis ball,852,0.0015140477,baseball,429,0.0014416624
+8,a photo of a golf ball,50,golf ball,574,0.5075204,Weimaraner,178,0.0013977009,tennis ball,852,0.0012791253,thimble,855,0.0012529381,hog,341,0.0012506287
+8,a photo of a golf ball,50,golf ball,574,0.44344893,croquet ball,522,0.0015383273,thimble,855,0.0013090385,binder,446,0.0012828804,malamute,249,0.0012301074
+8,a photo of a golf ball,50,golf ball,574,0.44935825,wombat,106,0.002318334,ping-pong ball,722,0.002019826,tennis ball,852,0.0018704332,wild boar,342,0.0017295736
+8,a photo of a golf ball,50,golf ball,574,0.46437287,zucchini,939,0.0017610954,gibbon,368,0.001670088,binder,446,0.0016228126,tennis ball,852,0.0014495662
+8,a photo of a golf ball,50,golf ball,574,0.52161896,wombat,106,0.0027364532,black-footed ferret,359,0.0025322177,polecat,358,0.0021611287,keeshond,261,0.0019480659
+8,a photo of a golf ball,50,golf ball,574,0.54941154,zucchini,939,0.002109001,soccer ball,805,0.0014882493,football helmet,560,0.0014751821,reflex camera,759,0.0012790981
+8,a photo of a golf ball,50,golf ball,574,0.53691494,thimble,855,0.0012609134,Shih-Tzu,155,0.00096752757,tennis ball,852,0.0009581731,Siamese cat,284,0.0009570201
+8,a photo of a golf ball,50,golf ball,574,0.4459311,thimble,855,0.0018452182,sidewinder,68,0.0012695673,Lhasa,204,0.0011762278,Shih-Tzu,155,0.0011563676
+8,a photo of a golf ball,50,golf ball,574,0.55239975,ping-pong ball,722,0.006523217,baseball,429,0.006274256,tennis ball,852,0.0040190276,croquet ball,522,0.0021177714
+8,a photo of a golf ball,50,golf ball,574,0.59702146,thimble,855,0.0016656142,ping-pong ball,722,0.0010345206,Shih-Tzu,155,0.0009779523,tennis ball,852,0.0008606641
+8,a photo of a golf ball,50,golf ball,574,0.49040735,ptarmigan,81,0.0012854236,Lhasa,204,0.0011428297,cardigan,474,0.0010901755,thimble,855,0.0010848742
+8,a photo of a golf ball,50,golf ball,574,0.39394876,tennis ball,852,0.0020477434,Bedlington terrier,181,0.0015372708,thimble,855,0.0014917982,soccer ball,805,0.0013067058
+8,a photo of a golf ball,50,golf ball,574,0.42073742,thimble,855,0.003852367,tennis ball,852,0.0015250761,ping-pong ball,722,0.0014159994,Shih-Tzu,155,0.0013595953
+8,a photo of a golf ball,50,golf ball,574,0.44972476,Shih-Tzu,155,0.0017567885,ping-pong ball,722,0.0015407766,tennis ball,852,0.0014589846,sunglasses,837,0.0014400211
+8,a photo of a golf ball,50,golf ball,574,0.3802178,thimble,855,0.0019688355,tennis ball,852,0.0016472397,matchstick,644,0.001469915,hermit crab,125,0.0014177591
+8,a photo of a golf ball,50,golf ball,574,0.8579723,tennis ball,852,0.00064312766,thimble,855,0.00045786522,joystick,613,0.0004524457,croquet ball,522,0.00036684747
+8,a photo of a golf ball,50,golf ball,574,0.42190802,tennis ball,852,0.0018353058,Bedlington terrier,181,0.0014930537,thimble,855,0.0012809541,soccer ball,805,0.0012378098
+8,a photo of a golf ball,50,golf ball,574,0.50772583,ping-pong ball,722,0.0020054467,tennis ball,852,0.0014420281,thimble,855,0.001387136,cardigan,474,0.001146161
+8,a photo of a golf ball,50,golf ball,574,0.40802333,thimble,855,0.0024011938,dung beetle,305,0.0018173201,wool,911,0.0016388646,leatherback turtle,34,0.0015673803
+8,a photo of a golf ball,50,golf ball,574,0.29357037,tennis ball,852,0.0017837487,thimble,855,0.0017014636,silky terrier,201,0.0013590449,croquet ball,522,0.0013288883
+8,a photo of a golf ball,50,golf ball,574,0.5056968,thimble,855,0.002094612,tennis ball,852,0.0014864308,Lhasa,204,0.0011103043,sidewinder,68,0.0010262772
+8,a photo of a golf ball,50,golf ball,574,0.40907052,tennis ball,852,0.002284997,thimble,855,0.0020108146,hermit crab,125,0.0018526753,lens cap,622,0.0014236561
+8,a photo of a golf ball,50,golf ball,574,0.579128,ping-pong ball,722,0.003664919,thimble,855,0.0026027628,tennis ball,852,0.0015095387,baseball,429,0.0013263782
+8,a photo of a golf ball,50,golf ball,574,0.4205305,thimble,855,0.0020839362,ping-pong ball,722,0.0013956022,gibbon,368,0.0013604829,tennis ball,852,0.001159942
+8,a photo of a golf ball,50,golf ball,574,0.47805178,thimble,855,0.0022718068,tennis ball,852,0.0014622448,Lhasa,204,0.0011971201,lens cap,622,0.0010669869
+8,a photo of a golf ball,50,golf ball,574,0.5314764,ping-pong ball,722,0.0032527095,leatherback turtle,34,0.0024965494,thimble,855,0.0021810601,puffer,397,0.0020835723
+8,a photo of a golf ball,50,golf ball,574,0.323086,tennis ball,852,0.0017290354,thimble,855,0.0013521122,wombat,106,0.0011586772,jellyfish,107,0.0011401713
+8,a photo of a golf ball,50,golf ball,574,0.5876108,ping-pong ball,722,0.0016242526,binder,446,0.0012758927,tennis ball,852,0.0011842542,ballplayer,981,0.0011382628
+8,a photo of a golf ball,50,golf ball,574,0.65966994,thimble,855,0.00085449684,silky terrier,201,0.0007568679,standard poodle,267,0.00067028473,baseball,429,0.00066139456
+8,a photo of a golf ball,50,golf ball,574,0.54491436,ballplayer,981,0.0020587428,binder,446,0.0015725773,weasel,356,0.0012980062,ping-pong ball,722,0.0012304997
+8,a photo of a golf ball,50,golf ball,574,0.50749564,mortar,666,0.002540035,ping-pong ball,722,0.001749376,croquet ball,522,0.0015839959,tennis ball,852,0.0015439094
+8,a photo of a golf ball,50,golf ball,574,0.41461432,wombat,106,0.0016018668,Irish wolfhound,170,0.0014516149,polecat,358,0.0013215779,black-footed ferret,359,0.0013076245
+8,a photo of a golf ball,50,golf ball,574,0.46862882,mortar,666,0.0050260467,thimble,855,0.002853645,sidewinder,68,0.0016126416,bottlecap,455,0.0013068017
+8,a photo of a golf ball,50,golf ball,574,0.34925714,tennis ball,852,0.0019580342,thimble,855,0.0017251763,ping-pong ball,722,0.0015797068,soccer ball,805,0.0012046199
+8,a photo of a golf ball,50,golf ball,574,0.5019663,thimble,855,0.0012103423,Shih-Tzu,155,0.0011341653,ping-pong ball,722,0.0010821072,analog clock,409,0.0009860727
+8,a photo of a golf ball,50,golf ball,574,0.3184984,tennis ball,852,0.0022779296,soccer ball,805,0.0018079033,thimble,855,0.0017284383,lycaenid,326,0.0015628033
+8,a photo of a golf ball,50,golf ball,574,0.47683305,ping-pong ball,722,0.003993266,gibbon,368,0.003556675,thimble,855,0.002925291,sweatshirt,841,0.0025167458
+8,a photo of a golf ball,50,golf ball,574,0.43092024,thimble,855,0.002125108,tennis ball,852,0.0016936215,lycaenid,326,0.0014470046,baseball,429,0.0013885237
+8,a photo of a golf ball,50,golf ball,574,0.5163713,thimble,855,0.0027992076,hermit crab,125,0.0021273918,tennis ball,852,0.0019473251,soccer ball,805,0.0014576337
+8,a photo of a golf ball,50,golf ball,574,0.42828354,thimble,855,0.0017608454,poncho,735,0.0012966708,Shih-Tzu,155,0.0011278943,ping-pong ball,722,0.0010801964
+8,a photo of a golf ball,50,golf ball,574,0.45699015,thimble,855,0.005092991,tennis ball,852,0.002572815,hermit crab,125,0.0020863344,ping-pong ball,722,0.001582785
+8,a photo of a golf ball,50,golf ball,574,0.332016,thimble,855,0.0018217803,tennis ball,852,0.001767279,soccer ball,805,0.0017525037,croquet ball,522,0.0015090094
+8,a photo of a golf ball,50,golf ball,574,0.4611503,Weimaraner,178,0.0016714224,Bedlington terrier,181,0.0016180472,tennis ball,852,0.0013572121,thimble,855,0.0013149063
+8,a photo of a golf ball,50,golf ball,574,0.5734726,thimble,855,0.0018038464,tennis ball,852,0.0010083058,Shih-Tzu,155,0.00095206,Lhasa,204,0.0008648316
+8,a photo of a golf ball,50,golf ball,574,0.4811806,thimble,855,0.0016107489,tennis ball,852,0.0013369933,matchstick,644,0.0011098543,lycaenid,326,0.0010500727
+8,a photo of a golf ball,50,golf ball,574,0.47397694,thimble,855,0.0031691382,ping-pong ball,722,0.002183945,tennis ball,852,0.002073715,Lhasa,204,0.001332285
+8,a photo of a golf ball,50,golf ball,574,0.511138,thimble,855,0.0029307012,ping-pong ball,722,0.0011790042,tennis ball,852,0.0010055549,remote control,761,0.00076674804
+8,a photo of a golf ball,50,golf ball,574,0.46175006,thimble,855,0.0026736406,ping-pong ball,722,0.0015225012,cardigan,474,0.0014815927,tennis ball,852,0.0014569438
+8,a photo of a golf ball,50,plate,923,0.12421761,remote control,761,0.098697186,switch,844,0.0785467,joystick,613,0.022018265,toilet seat,861,0.01383795
+8,a photo of a golf ball,50,golf ball,574,0.48069835,thimble,855,0.0014109315,ping-pong ball,722,0.0009994704,tennis ball,852,0.0009941848,remote control,761,0.00092543365
+8,a photo of a golf ball,50,golf ball,574,0.4702122,thimble,855,0.0014923422,tennis ball,852,0.0010277947,remote control,761,0.00094492023,lens cap,622,0.0009380856
+8,a photo of a golf ball,50,golf ball,574,0.56580275,gibbon,368,0.0019068727,thimble,855,0.0017135132,binder,446,0.0011213733,Petri dish,712,0.0009984949
+8,a photo of a golf ball,50,golf ball,574,0.4601087,thimble,855,0.0037529597,nail,677,0.0019799108,matchstick,644,0.0018152004,Shih-Tzu,155,0.0016351385
+8,a photo of a golf ball,50,golf ball,574,0.592123,ping-pong ball,722,0.0052969954,baseball,429,0.0013679179,tennis ball,852,0.0012767657,thimble,855,0.0009343312
+8,a photo of a golf ball,50,golf ball,574,0.47659698,ping-pong ball,722,0.00225688,tennis ball,852,0.0014528497,sweatshirt,841,0.0014078199,gibbon,368,0.0012668428
+8,a photo of a golf ball,50,golf ball,574,0.43826967,tennis ball,852,0.0032111574,thimble,855,0.0028041766,rugby ball,768,0.0022882407,soccer ball,805,0.0021776764
+8,a photo of a golf ball,50,golf ball,574,0.44665638,tennis ball,852,0.0017183889,ping-pong ball,722,0.0016216123,dung beetle,305,0.0015387087,baseball,429,0.0014436757
+8,a photo of a golf ball,50,golf ball,574,0.44354516,tennis ball,852,0.0013292009,ptarmigan,81,0.0012200197,Weimaraner,178,0.00109162,thimble,855,0.0010670274
+8,a photo of a golf ball,50,golf ball,574,0.33101836,rugby ball,768,0.0020189928,tennis ball,852,0.0018773999,racket,752,0.0013369191,whippet,172,0.001300891
+8,a photo of a golf ball,50,golf ball,574,0.41891372,thimble,855,0.002116652,ping-pong ball,722,0.0016190294,tennis ball,852,0.0013886817,Shih-Tzu,155,0.0012177976
+8,a photo of a golf ball,50,golf ball,574,0.56075484,thimble,855,0.0027771,matchstick,644,0.0011203801,tennis ball,852,0.0010495564,Weimaraner,178,0.0009692879
+8,a photo of a golf ball,50,golf ball,574,0.53391683,ping-pong ball,722,0.0011698417,tennis ball,852,0.0010718126,Bedlington terrier,181,0.0009630977,thimble,855,0.00082321564
+8,a photo of a golf ball,50,golf ball,574,0.43559462,tennis ball,852,0.0013699967,soccer ball,805,0.0011828453,thimble,855,0.0011426181,ping-pong ball,722,0.0010313321
+8,a photo of a golf ball,50,golf ball,574,0.44548893,cardigan,474,0.0029424664,wool,911,0.0016687697,thimble,855,0.001480772,Shih-Tzu,155,0.0014374242
+8,a photo of a golf ball,50,golf ball,574,0.36342615,thimble,855,0.0021484646,leatherback turtle,34,0.0020491213,tennis ball,852,0.001983664,hermit crab,125,0.0019148034
+8,a photo of a golf ball,50,golf ball,574,0.51584923,ballplayer,981,0.0017408758,binder,446,0.0014950796,thimble,855,0.0013447223,malamute,249,0.0012648291
+8,a photo of a golf ball,50,golf ball,574,0.4414122,thimble,855,0.0011753116,tennis ball,852,0.0011426824,saltshaker,773,0.0009769024,ping-pong ball,722,0.0009444042
+8,a photo of a golf ball,50,golf ball,574,0.39061353,thimble,855,0.00239182,tennis ball,852,0.0019758483,baseball,429,0.0015658593,croquet ball,522,0.001504881
+8,a photo of a golf ball,50,golf ball,574,0.48042595,tennis ball,852,0.0016157732,thimble,855,0.0013289904,lens cap,622,0.0010166253,ping-pong ball,722,0.001015069
+8,a photo of a golf ball,50,golf ball,574,0.48920366,ping-pong ball,722,0.0026274046,gibbon,368,0.0017583697,thimble,855,0.001599211,binder,446,0.0014392007
+8,a photo of a golf ball,50,golf ball,574,0.5066865,thimble,855,0.0013450565,tennis ball,852,0.0012663201,hermit crab,125,0.0011874702,ping-pong ball,722,0.0010114237
+8,a photo of a golf ball,50,golf ball,574,0.45708632,thimble,855,0.0014712358,sidewinder,68,0.0014445273,tennis ball,852,0.0011782504,poncho,735,0.0011585184
+8,a photo of a golf ball,50,golf ball,574,0.29809874,tennis ball,852,0.0016527592,thimble,855,0.0016197079,baseball,429,0.0013807536,slug,114,0.0012647231
+8,a photo of a golf ball,50,golf ball,574,0.44330034,ping-pong ball,722,0.040311676,tennis ball,852,0.007081325,soccer ball,805,0.0049578156,hermit crab,125,0.0037987272
+8,a photo of a golf ball,50,golf ball,574,0.47675017,thimble,855,0.0011059125,tennis ball,852,0.0010474145,ping-pong ball,722,0.000989303,ptarmigan,81,0.0009132052
+8,a photo of a golf ball,50,golf ball,574,0.52117753,ping-pong ball,722,0.0022587322,Shih-Tzu,155,0.0013281689,tennis ball,852,0.0012484873,thimble,855,0.0011366666
+8,a photo of a golf ball,50,golf ball,574,0.43440998,ping-pong ball,722,0.0032639946,tennis ball,852,0.0020736698,dung beetle,305,0.002073635,baseball,429,0.0020453967
+8,a photo of a golf ball,50,golf ball,574,0.50241774,leatherback turtle,34,0.0017518282,tennis ball,852,0.0016715718,hermit crab,125,0.0014756186,sidewinder,68,0.0014709301
+8,a photo of a golf ball,50,golf ball,574,0.3930192,parachute,701,0.0019952033,kite,21,0.0019006416,white stork,127,0.0017122757,thimble,855,0.0016518431
+8,a photo of a golf ball,50,golf ball,574,0.34970847,croquet ball,522,0.0024303892,matchstick,644,0.0023451238,thimble,855,0.0022881767,tennis ball,852,0.0020448759
+8,a photo of a golf ball,50,golf ball,574,0.45768374,thimble,855,0.0029062808,ping-pong ball,722,0.0011811936,tennis ball,852,0.0010110635,remote control,761,0.00095493044
+8,a photo of a golf ball,50,golf ball,574,0.5658029,croquet ball,522,0.0010738837,thimble,855,0.0009655047,football helmet,560,0.00088640506,Shih-Tzu,155,0.00087729545
+8,a photo of a golf ball,50,golf ball,574,0.37324646,tennis ball,852,0.001388162,thimble,855,0.0012972954,soccer ball,805,0.0012237387,Shih-Tzu,155,0.0012022997
+8,a photo of a golf ball,50,golf ball,574,0.48803034,thimble,855,0.0031729203,ping-pong ball,722,0.0015810606,tennis ball,852,0.0015357389,sidewinder,68,0.0014166604
+8,a photo of a golf ball,50,golf ball,574,0.44233972,gibbon,368,0.0020509844,thimble,855,0.0017728948,tennis ball,852,0.0012482536,Shih-Tzu,155,0.0012089411
+8,a photo of a golf ball,50,golf ball,574,0.65611494,ping-pong ball,722,0.025228413,pick,714,0.015920993,tennis ball,852,0.0032938586,sidewinder,68,0.0022602784
+8,a photo of a golf ball,50,golf ball,574,0.5986988,baseball,429,0.0023998625,tennis ball,852,0.0017254301,ballpoint,418,0.0014694667,laptop,620,0.0013256232
+8,a photo of a golf ball,50,golf ball,574,0.63419896,ping-pong ball,722,0.003525909,pool table,736,0.0027030318,croquet ball,522,0.0014957319,tennis ball,852,0.0014208823
+8,a photo of a golf ball,50,golf ball,574,0.48446164,soccer ball,805,0.001801689,rugby ball,768,0.0017861975,football helmet,560,0.0014621578,croquet ball,522,0.0013128578
+9,a photo of a parachute,51,parachute,701,0.5782216,kite,21,0.003374162,seashore,978,0.0032561277,vulture,23,0.0019615118,white stork,127,0.0016077351
+9,a photo of a parachute,51,parachute,701,0.50245494,warplane,895,0.001572124,seashore,978,0.0014858821,snowmobile,802,0.0011944483,wing,908,0.001136153
+9,a photo of a parachute,51,parachute,701,0.4764376,Border terrier,182,0.0012538716,hamster,333,0.0012020236,polecat,358,0.0011918017,Irish wolfhound,170,0.0011467584
+9,a photo of a parachute,51,parachute,701,0.4540984,balloon,417,0.0025136056,butternut squash,942,0.0020498114,ant,310,0.0015072884,zucchini,939,0.0014678164
+9,a photo of a parachute,51,parachute,701,0.51532453,unicycle,880,0.004075693,ski,795,0.002118514,seashore,978,0.001608387,alp,970,0.0014177648
+9,a photo of a parachute,51,parachute,701,0.59483665,umbrella,879,0.0027039615,wing,908,0.0011998487,kite,21,0.0011177299,warplane,895,0.0010717198
+9,a photo of a parachute,51,parachute,701,0.41068467,balloon,417,0.0018379192,ant,310,0.0016870297,airship,405,0.0013968744,hip,989,0.0012880096
+9,a photo of a parachute,51,parachute,701,0.33289164,seashore,978,0.0023114234,Siamese cat,284,0.0016245107,balloon,417,0.0015836022,pug,254,0.0015585244
+9,a photo of a parachute,51,parachute,701,0.57495886,flagpole,557,0.0013797766,kite,21,0.0012155586,ant,310,0.0012071847,toucan,96,0.001183686
+9,a photo of a parachute,51,parachute,701,0.50124896,black-footed ferret,359,0.0013878018,polecat,358,0.0012919147,flagpole,557,0.001190196,Boston bull,195,0.0011794149
+9,a photo of a parachute,51,parachute,701,0.48572883,butternut squash,942,0.007926089,zucchini,939,0.0052593383,ice cream,928,0.0033279262,cucumber,943,0.0022958794
+9,a photo of a parachute,51,parachute,701,0.63965786,warplane,895,0.0059954855,ski,795,0.0034604003,snowmobile,802,0.0023821662,wing,908,0.002310346
+9,a photo of a parachute,51,parachute,701,0.5788912,umbrella,879,0.0022110967,ant,310,0.0021463765,tick,78,0.0010923787,ladybug,301,0.0010188553
+9,a photo of a parachute,51,parachute,701,0.6081856,airship,405,0.0014195027,balloon,417,0.0014115117,steel arch bridge,821,0.0013049016,snowmobile,802,0.0012565074
+9,a photo of a parachute,51,parachute,701,0.3591936,spider web,815,0.0018265411,sulphur butterfly,325,0.0016973795,wing,908,0.0014928296,ant,310,0.0014580681
+9,a photo of a parachute,51,parachute,701,0.4225902,balloon,417,0.0014724036,seashore,978,0.0013428216,ski,795,0.0012334369,airship,405,0.0011345395
+9,a photo of a parachute,51,parachute,701,0.44830495,balloon,417,0.004532837,Irish wolfhound,170,0.0016142101,flagpole,557,0.0013508869,Border terrier,182,0.0013206047
+9,a photo of a parachute,51,parachute,701,0.4666239,ant,310,0.0018917788,spider web,815,0.0013935425,balloon,417,0.0011510688,jellyfish,107,0.0010816808
+9,a photo of a parachute,51,parachute,701,0.5359596,ant,310,0.0014799595,sulphur butterfly,325,0.0014418754,llama,355,0.0010250959,Brabancon griffon,262,0.0010164045
+9,a photo of a parachute,51,parachute,701,0.41944697,umbrella,879,0.0024917668,gibbon,368,0.0019358643,balloon,417,0.0017630389,flagpole,557,0.0017264351
+9,a photo of a parachute,51,parachute,701,0.59810424,umbrella,879,0.03955939,balloon,417,0.0037522165,flagpole,557,0.0015041521,plastic bag,728,0.0014588082
+9,a photo of a parachute,51,parachute,701,0.66556317,balloon,417,0.0016793107,ant,310,0.0014350857,plastic bag,728,0.0011318383,sulphur butterfly,325,0.0010706886
+9,a photo of a parachute,51,parachute,701,0.4916504,kite,21,0.0034399866,balloon,417,0.001868887,vulture,23,0.001447723,white stork,127,0.0014232305
+9,a photo of a parachute,51,parachute,701,0.6539671,panpipe,699,0.0010050054,balloon,417,0.0008079193,steel arch bridge,821,0.0007922044,seashore,978,0.00076614914
+9,a photo of a parachute,51,parachute,701,0.6475449,ant,310,0.0012335038,balloon,417,0.0011213825,warplane,895,0.0009200691,jellyfish,107,0.00088565337
+9,a photo of a parachute,51,parachute,701,0.26004988,umbrella,879,0.0022874689,plastic bag,728,0.0017540959,flat-coated retriever,205,0.0016941112,isopod,126,0.001652132
+9,a photo of a parachute,51,parachute,701,0.5040548,hip,989,0.0019232495,ski,795,0.0018498559,gibbon,368,0.0016756898,balloon,417,0.0015976506
+9,a photo of a parachute,51,parachute,701,0.54725516,balloon,417,0.023487462,gibbon,368,0.0023155538,siamang,369,0.0020034728,jellyfish,107,0.0018491724
+9,a photo of a parachute,51,parachute,701,0.48549435,hamster,333,0.0018587403,balloon,417,0.0018455504,Irish wolfhound,170,0.001388851,wombat,106,0.0013341497
+9,a photo of a parachute,51,parachute,701,0.5400988,balloon,417,0.0013862458,bubble,971,0.0012966314,coil,506,0.0011032139,ski,795,0.001085577
+9,a photo of a parachute,51,parachute,701,0.44944736,airship,405,0.0031608806,balloon,417,0.0026851257,umbrella,879,0.0017345586,kite,21,0.0015390365
+9,a photo of a parachute,51,parachute,701,0.5452397,balloon,417,0.0017492444,ant,310,0.0013682032,jellyfish,107,0.0013200893,airship,405,0.0010955202
+9,a photo of a parachute,51,parachute,701,0.5220679,balloon,417,0.0024023538,airship,405,0.0022297467,seashore,978,0.0014907696,flagpole,557,0.0012654072
+9,a photo of a parachute,51,parachute,701,0.5925104,warplane,895,0.0028491588,kite,21,0.0016538858,eft,27,0.0014349093,balloon,417,0.0011335867
+9,a photo of a parachute,51,parachute,701,0.63428706,wing,908,0.001101251,warplane,895,0.0010238918,balloon,417,0.0009175591,Band Aid,419,0.0008739473
+9,a photo of a parachute,51,parachute,701,0.5595804,balloon,417,0.0018742852,hamster,333,0.0010406718,airship,405,0.0009907132,Weimaraner,178,0.00097496493
+9,a photo of a parachute,51,parachute,701,0.5141366,umbrella,879,0.0032373043,balloon,417,0.0015218487,kite,21,0.0013369313,seashore,978,0.0012766087
+9,a photo of a parachute,51,parachute,701,0.4669366,umbrella,879,0.006960948,ladybug,301,0.004134338,hip,989,0.00284927,leaf beetle,304,0.0018329408
+9,a photo of a parachute,51,parachute,701,0.7007997,warplane,895,0.0030012527,wing,908,0.0018206879,ant,310,0.0014351355,coil,506,0.0012641292
+9,a photo of a parachute,51,parachute,701,0.6422674,balloon,417,0.0066764606,ladybug,301,0.004034691,flagpole,557,0.0023429096,airship,405,0.0022109875
+9,a photo of a parachute,51,parachute,701,0.45577464,gibbon,368,0.0013320626,Pomeranian,259,0.0012126139,wing,908,0.001188165,flagpole,557,0.0011768967
+9,a photo of a parachute,51,parachute,701,0.47765654,balloon,417,0.0011783869,seashore,978,0.0010748338,sock,806,0.0009976825,airship,405,0.0009298807
+9,a photo of a parachute,51,parachute,701,0.6493936,balloon,417,0.0066354945,macaw,88,0.0020676905,umbrella,879,0.0020520745,quill,749,0.0013552879
+9,a photo of a parachute,51,parachute,701,0.56777024,ski,795,0.003027972,alp,970,0.0017136568,umbrella,879,0.0012071539,flagpole,557,0.001156209
+9,a photo of a parachute,51,parachute,701,0.29052854,radio telescope,755,0.0033074133,bassinet,431,0.0029315224,balloon,417,0.0024746412,cradle,516,0.0021018286
+9,a photo of a parachute,51,parachute,701,0.34757543,balloon,417,0.0040844283,crane,517,0.002153969,ski,795,0.001901546,airship,405,0.0018331193
+9,a photo of a parachute,51,parachute,701,0.6036582,airship,405,0.024918457,balloon,417,0.019190677,ice lolly,929,0.0023713983,umbrella,879,0.0014842153
+9,a photo of a parachute,51,parachute,701,0.72738254,balloon,417,0.00396162,kite,21,0.0025584921,warplane,895,0.0010969602,white stork,127,0.0010548423
+9,a photo of a parachute,51,parachute,701,0.47585782,balloon,417,0.0068639056,ant,310,0.002588803,orange,950,0.002566928,flagpole,557,0.0019597767
+9,a photo of a parachute,51,parachute,701,0.5806334,nematode,111,0.0009823432,balloon,417,0.0008844356,baseball,429,0.0008272518,fireboat,554,0.0007520721
+9,a photo of a parachute,51,parachute,701,0.46359107,balloon,417,0.0047718845,chimpanzee,367,0.0015711607,macaw,88,0.00143681,howler monkey,379,0.0013939646
+9,a photo of a parachute,51,parachute,701,0.4019699,balloon,417,0.0022536612,orange,950,0.0017818102,seashore,978,0.0015684186,nematode,111,0.0014826077
+9,a photo of a parachute,51,parachute,701,0.5684018,ant,310,0.0013351139,jellyfish,107,0.0010791648,orange,950,0.0010321595,sulphur butterfly,325,0.0009687327
+9,a photo of a parachute,51,parachute,701,0.37071073,umbrella,879,0.0037131258,balloon,417,0.003357626,seashore,978,0.0013940093,necklace,679,0.0013308714
+9,a photo of a parachute,51,parachute,701,0.69535935,airship,405,0.0015514462,balloon,417,0.0015196872,banana,954,0.0014475231,soccer ball,805,0.001444891
+9,a photo of a parachute,51,parachute,701,0.47555557,balloon,417,0.0012945074,jellyfish,107,0.0012142074,airship,405,0.0011867025,seashore,978,0.0011580026
+9,a photo of a parachute,51,parachute,701,0.41780055,flamingo,130,0.0017971656,baseball,429,0.0011751986,whistle,902,0.001171702,stinkhorn,994,0.0011601564
+9,a photo of a parachute,51,parachute,701,0.48605543,seashore,978,0.0014255382,umbrella,879,0.0014027702,balloon,417,0.0012810159,kite,21,0.0011160237
+9,a photo of a parachute,51,parachute,701,0.38547787,balloon,417,0.002119155,airship,405,0.0020316131,flagpole,557,0.0016877162,seashore,978,0.0016301195
+9,a photo of a parachute,51,parachute,701,0.48115218,kite,21,0.0022659756,warplane,895,0.0015940355,balloon,417,0.0014772762,airship,405,0.0014669197
+9,a photo of a parachute,51,parachute,701,0.28560045,balloon,417,0.015014816,umbrella,879,0.0021155889,butternut squash,942,0.0017295495,airship,405,0.0016763224
+9,a photo of a parachute,51,parachute,701,0.43619654,balloon,417,0.007936701,seashore,978,0.0034706262,kite,21,0.002432048,airship,405,0.0023444113
+9,a photo of a parachute,51,parachute,701,0.5260984,quill,749,0.005482768,coucal,91,0.0022935362,balloon,417,0.0021630211,hip,989,0.0014955807
+9,a photo of a parachute,51,parachute,701,0.4506976,flat-coated retriever,205,0.0014513655,balloon,417,0.0014085602,schipperke,223,0.0012364562,Labrador retriever,208,0.0012278442
+9,a photo of a parachute,51,parachute,701,0.47659284,balloon,417,0.013080739,sleeping bag,797,0.0018751064,sulphur butterfly,325,0.0017699864,corn,987,0.0013104767
+9,a photo of a parachute,51,parachute,701,0.5450254,fireboat,554,0.0013418457,chow,260,0.0010752326,Siamese cat,284,0.001053253,balloon,417,0.0010350307
+9,a photo of a parachute,51,parachute,701,0.5572627,balloon,417,0.0037833143,airship,405,0.003087371,chime,494,0.0023075603,hook,600,0.0022962426
+9,a photo of a parachute,51,parachute,701,0.43612587,wing,908,0.0015396524,ski,795,0.0015174478,seashore,978,0.0013598953,alp,970,0.001247376
+9,a photo of a parachute,51,parachute,701,0.713293,warplane,895,0.0024252166,kite,21,0.0010798288,balloon,417,0.001064343,umbrella,879,0.001005969
+9,a photo of a parachute,51,parachute,701,0.28947747,neck brace,678,0.00472561,ant,310,0.003133662,nematode,111,0.002640822,mitten,658,0.0024895207
+9,a photo of a parachute,51,parachute,701,0.62406015,snowmobile,802,0.0056557655,volcano,980,0.0023550289,tiger beetle,300,0.0020731064,warplane,895,0.0019453407
+9,a photo of a parachute,51,parachute,701,0.38069955,ski,795,0.0036514057,warplane,895,0.0026648275,flagpole,557,0.002652824,bib,443,0.0020128684
+9,a photo of a parachute,51,parachute,701,0.468559,steel arch bridge,821,0.0038326825,ski,795,0.0027228976,crane,517,0.0022413863,ant,310,0.0019213059
+9,a photo of a parachute,51,parachute,701,0.5387818,hammerhead,4,0.0011570887,ant,310,0.000964208,balloon,417,0.00095928815,jellyfish,107,0.000846541
+9,a photo of a parachute,51,parachute,701,0.41459417,sulphur butterfly,325,0.002827776,tick,78,0.0020356907,ant,310,0.0019780793,hamster,333,0.0018327647
+9,a photo of a parachute,51,parachute,701,0.5544407,balloon,417,0.002217145,umbrella,879,0.0016191753,orange,950,0.0011573428,nematode,111,0.0009206854
+9,a photo of a parachute,51,parachute,701,0.44682935,balloon,417,0.0026361383,ant,310,0.0016026549,hamster,333,0.0011839747,chimpanzee,367,0.0011558037
+9,a photo of a parachute,51,parachute,701,0.54654753,flagpole,557,0.00284565,spider web,815,0.0014563157,balloon,417,0.001301199,garden spider,74,0.0011911645
+9,a photo of a parachute,51,parachute,701,0.3263057,macaw,88,0.012744126,toucan,96,0.009432273,lorikeet,90,0.00614,hip,989,0.005770402
+9,a photo of a parachute,51,parachute,701,0.6265442,coil,506,0.0014152183,nematode,111,0.0013155292,flamingo,130,0.001227519,hamster,333,0.0011319695
+9,a photo of a parachute,51,parachute,701,0.4511955,steel arch bridge,821,0.0015038751,balloon,417,0.0012404113,airship,405,0.0010752596,seashore,978,0.0009515409
+9,a photo of a parachute,51,parachute,701,0.47030932,balloon,417,0.012288195,lorikeet,90,0.004891203,coil,506,0.0029480981,red wine,966,0.0015912065
+9,a photo of a parachute,51,parachute,701,0.48932466,balloon,417,0.0011421721,ski,795,0.0011189424,airship,405,0.0010889712,seashore,978,0.0010500895
+9,a photo of a parachute,51,parachute,701,0.41909394,ski,795,0.0024175486,seashore,978,0.0014544568,balloon,417,0.001431943,alp,970,0.0013778678
+9,a photo of a parachute,51,parachute,701,0.49700645,nematode,111,0.0024396365,wombat,106,0.0012869968,chimpanzee,367,0.0012841038,ski,795,0.0011577234
+9,a photo of a parachute,51,parachute,701,0.49321374,balloon,417,0.0032968642,spider web,815,0.0016447123,chimpanzee,367,0.001303178,sulphur butterfly,325,0.0012010424
+9,a photo of a parachute,51,parachute,701,0.44496134,ladybug,301,0.0021882025,balloon,417,0.0016459574,nematode,111,0.0012714867,airship,405,0.0011719492
+9,a photo of a parachute,51,parachute,701,0.44348314,fireboat,554,0.005637648,wing,908,0.0038344301,ant,310,0.0028177958,spider web,815,0.0025482168
+9,a photo of a parachute,51,parachute,701,0.46187815,balloon,417,0.015566924,sulphur butterfly,325,0.0017666686,umbrella,879,0.0016932229,seashore,978,0.0015401584
+9,a photo of a parachute,51,parachute,701,0.5962717,ant,310,0.0018112408,kite,21,0.0015332812,spider monkey,381,0.0013742971,warplane,895,0.0012407704
+9,a photo of a parachute,51,parachute,701,0.5034,steel arch bridge,821,0.0014755898,balloon,417,0.0012753047,three-toed sloth,364,0.0012403377,gibbon,368,0.0012045354
+9,a photo of a parachute,51,parachute,701,0.5557213,balloon,417,0.0011876457,ski,795,0.0011017239,unicycle,880,0.0008500851,flagpole,557,0.00084528
+9,a photo of a parachute,51,parachute,701,0.39947563,umbrella,879,0.0019308337,balloon,417,0.0015280773,seashore,978,0.0015061186,Siamese cat,284,0.0013349185
+9,a photo of a parachute,51,parachute,701,0.44768277,ski,795,0.0055864444,plastic bag,728,0.0023733152,diaper,529,0.0022817985,jellyfish,107,0.0019165048
+9,a photo of a parachute,51,parachute,701,0.46910238,balloon,417,0.0025761377,ski,795,0.0022883513,snowmobile,802,0.0016191194,jellyfish,107,0.0012935302
+9,a photo of a parachute,51,parachute,701,0.47082824,warplane,895,0.0034681156,balloon,417,0.0033304656,ant,310,0.0028091224,flagpole,557,0.002800603
+9,a photo of a parachute,51,parachute,701,0.42016864,seashore,978,0.0016001794,balloon,417,0.0011711891,sulphur butterfly,325,0.0010283706,Brabancon griffon,262,0.0009928872
+9,a photo of a parachute,51,parachute,701,0.34073013,ant,310,0.002686137,sulphur butterfly,325,0.0019418576,sulphur-crested cockatoo,89,0.0018442685,mushroom,947,0.0013912941
+9,a photo of a parachute,51,parachute,701,0.49985716,balloon,417,0.010286502,airship,405,0.0022742457,kite,21,0.0018344735,ant,310,0.0016386223
+9,a photo of a parachute,51,parachute,701,0.5951127,jellyfish,107,0.013629434,balloon,417,0.011242444,mushroom,947,0.0025521156,orange,950,0.0020858257
