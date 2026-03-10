@@ -547,7 +547,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="7",
+        default="9",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -602,7 +602,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="1",
+        default="3",
     )
     parser.add_argument(
         "--image_size",

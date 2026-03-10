@@ -25,7 +25,7 @@ if __name__ == "__main__":
         help="base path to save results",
         type=str,
         required=False,
-        default="CLASS/UA/abalation2",
+        default="CLASS/UA/abalation3",
     )
 
     parser.add_argument("--device", type=str, required=False, default="cuda:0")
@@ -42,15 +42,12 @@ if __name__ == "__main__":
 
     # -------- LIST OF IMAGE FOLDERS --------
     folders = [
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_difference.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask_ratio.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_frequent_mask.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_difference.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask_ratio.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_frequent_mask.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_difference.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask_ratio.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_frequent_mask.pt"
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_masked_nash_topk10_single_mask.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U858_masked_nash_topk10_single_mask.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_5-MUNBa-method_full-lr_1e-05_E5_U956_masked_nash_topk10_single_mask.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk10_single_mask.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_9-MUNBa-method_full-lr_1e-05_E5_U960_masked_nash_topk10_single_mask.pt"
+
 
     ]
 
