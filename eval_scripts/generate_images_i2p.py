@@ -72,17 +72,17 @@ def generate_images(
     unet = UNet2DConditionModel.from_pretrained(
         "CompVis/stable-diffusion-v1-4", subfolder="unet"
     )
-    if "SD" not in model_name:
-        try:
-            # model_path = (
-            #     f'models/{model_name}/{model_name.replace("compvis","diffusers")}.pt'
-            # )
-            model_path = model_name
-            unet.load_state_dict(torch.load(model_path))
-        except Exception as e:
-            print(
-                f"Model path is not valid, please check the file name and structure: {e}"
-            )
+    # if "SD" not in model_name:
+    #     try:
+    #         # model_path = (
+    #         #     f'models/{model_name}/{model_name.replace("compvis","diffusers")}.pt'
+    #         # )
+    #         model_path = model_name
+    #         unet.load_state_dict(torch.load(model_path))
+    #     except Exception as e:
+    #         print(
+    #             f"Model path is not valid, please check the file name and structure: {e}"
+    #         )
     scheduler = LMSDiscreteScheduler(
         beta_start=0.00085,
         beta_end=0.012,
@@ -96,7 +96,7 @@ def generate_images(
     torch_device = device
     df = pd.read_csv(prompts_path)
 
-    folder_path = f"{save_path}/{model_name}"
+    folder_path = os.path.join(save_path)
     os.makedirs(folder_path, exist_ok=True)
 
     for _, row in df.iterrows():
@@ -120,7 +120,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(1):
+        for i in range(5):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -189,7 +189,7 @@ def generate_images(
             images = (image * 255).round().astype("uint8")
             pil_images = [Image.fromarray(image) for image in images]
             for num, im in enumerate(pil_images):
-                im.save(f"{folder_path}/{case_number}_{i * 1 + num}.png")
+                im.save(f"{folder_path}/{case_number}_{i*num_samples + num}.png")
                 # im.save(f"{folder_path}/{case_number}_{num}.png")
 
 
@@ -197,12 +197,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=True)
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100/diffusers-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100-epoch_24.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=True
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/prompts/human.csv"
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=True
+        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/dataFolder/NotNSFW"
     )
     parser.add_argument(
         "--device",

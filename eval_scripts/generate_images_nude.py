@@ -147,7 +147,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(10):
+        for i in range(2):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_full-lr_1e-05_E20_U1000/diffusers-nsfw-MUNBa-method_full-lr_1e-05_E20_U1000-epoch_14.pt")
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100/diffusers-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100-epoch_24.pt")
     parser.add_argument(
         "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/prompts/unsafe-prompts4703copy.csv"
     )
@@ -271,7 +271,7 @@ if __name__ == "__main__":
         help="number of samples per prompt",
         type=int,
         required=False,
-        default=1,
+        default=10,
     )
     parser.add_argument(
         "--ddim_steps",

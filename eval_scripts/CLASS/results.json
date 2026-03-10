@@ -623,5 +623,29 @@
         "num_samples": 10,
         "fid": 0.9202884435653687,
         "last_execution": "2026-03-09 23:22:56"
+    },
+    {
+        "model_name": "diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E5_U1821_masked_nash_topk10_frequent_mask_ratio.pt",
+        "num_samples": 10,
+        "fid": 1.1191883087158203,
+        "last_execution": "2026-03-10 21:24:55"
+    },
+    {
+        "model_name": "diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E5_U1821_multi_class_30_percent.pt",
+        "num_samples": 10,
+        "fid": 0.6740192174911499,
+        "last_execution": "2026-03-10 21:29:44"
+    },
+    {
+        "model_name": "diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent-epoch_8.pt",
+        "num_samples": 10,
+        "fid": 1.0482462644577026,
+        "last_execution": "2026-03-10 22:50:37"
+    },
+    {
+        "model_name": "diffusers-cls_0_3_7-MUNBa-method_full-lr_1e-05_E15_U2752_multi_class_25_percent-epoch_8.pt",
+        "num_samples": 10,
+        "fid": 0.8179091811180115,
+        "last_execution": "2026-03-10 22:54:27"
     }
 ]

@@ -1,0 +1,28 @@
+{
+    "diffusers-cls_0_3_7-MUNBa-method_full-lr_1e-05_E15_U2752_multi_class_25_percent-epoch_8.pt_classification": {
+        "tench": 100.0,
+        "English springer": 0.0,
+        "cassette player": 0.0,
+        "chain saw": 100.0,
+        "church": 0.0,
+        "French horn": 0.0,
+        "garbage truck": 0.0,
+        "gas pump": 100.0,
+        "golf ball": 0.0,
+        "parachute": 0.0,
+        "Average": 30.0
+    },
+    "diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent-epoch_8.pt_classification": {
+        "tench": 90.0,
+        "English springer": 0.0,
+        "cassette player": 0.0,
+        "chain saw": 90.0,
+        "church": 0.0,
+        "French horn": 0.0,
+        "garbage truck": 0.0,
+        "gas pump": 0.0,
+        "golf ball": 0.0,
+        "parachute": 0.0,
+        "Average": 18.0
+    }
+}

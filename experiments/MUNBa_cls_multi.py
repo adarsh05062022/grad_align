@@ -1,5 +1,4 @@
-# MUNBa_nsfw.py
-    
+# Top k% masking with one time nash calculation
 import argparse
 import os
 from time import sleep
@@ -9,28 +8,25 @@ import numpy as np
 import torch
 import torch.nn as nn
 from train_scripts.convertModels import savemodelDiffusers
-from train_scripts.dataset import (
-    setup_nsfw_data,
+from train_scripts.dataset_multi import (
     setup_model,
+    setup_forget_data,
+    setup_remain_data,
 )
-from ldm.models.diffusion.ddim import DDIMSampler
 from tqdm import tqdm
-
-import gc
-from timm.utils import AverageMeter
-from timm.models.layers import trunc_normal_
-
-import copy
-import timm
-import math
-import time
-import random
-
-
 
 from logger.logger import setup_logger
 
-from .mask_nsfw import compute_dual_importance_mask
+import gc
+import time
+import random
+
+from .mask_multi import compute_dual_importance_mask
+
+
+
+
+TEXT_SOMETHING = "multi_class_25_percent"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -40,190 +36,272 @@ def l1_regularization(parameters):
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
 
 
-TEXT_SOMETHING = "beta_100"
-
-word_wear = "a photo of a person wearing clothes"
 def flatten_grads(parameters, grads):
-
+    """
+    Flatten ALL grads into ONE contiguous tensor.
+    Zero-fills missing grads so indexing stays aligned with global_mask_flat.
+    """
     parts = []
     for p, g in zip(parameters, grads):
         if g is not None:
             parts.append(g.detach().reshape(-1))
         else:
             parts.append(torch.zeros(p.numel(), device=p.device))
-    return torch.cat(parts)
+    return torch.cat(parts)  # single contiguous tensor
 
 
 def unpack_update_to_grads(parameters, flat_update, numel_list):
-
+    """
+    Write flat_update back into p.grad in one pass.
+    """
     offset = 0
     for p, numel in zip(parameters, numel_list):
         chunk = flat_update[offset:offset + numel].view_as(p)
-
         if p.grad is None:
             p.grad = chunk.clone()
         else:
             p.grad.copy_(chunk)
-
         offset += numel
-def _recompute_interval(epoch, epochs, steps_per_epoch):
 
+def _recompute_interval(epoch, epochs, steps_per_epoch):
+    """
+    Recompute interval in STEPS, scaled by epoch size.
+    Target: recompute every ~25% of epoch-0, ~50% of mid epochs.
+    
+    Example:
+        steps_per_epoch=900  → epoch0: every 225 steps, mid: every 450 steps
+        steps_per_epoch=50   → epoch0: every 12 steps,  mid: every 25 steps
+    """
     if epoch == 0:
-        fraction = 0.25
+        fraction = 0.25          # recompute 4x in first epoch (most volatile)
     elif epoch <= epochs // 2:
-        fraction = 0.50
+        fraction = 0.50          # recompute 2x in mid epochs
     else:
-        fraction = 999999
+        fraction = 999999        # once per epoch in late phase (model stabilising)
 
     interval = max(10, int(steps_per_epoch * fraction))
     return interval
 
-def MUNBa(classes,
-        train_method,
-        batch_size,
-        epochs,
-        lr,
-        config_path,
-        ckpt_path,
-        mask_path,
-        diffusers_config_path,
-        device,
-        image_size,
-        ddim_steps,
-        with_l1,
-        beta,
-        alpha,
-        logger
+def MUNBa(
+    class_to_forget,
+    train_method,
+    batch_size,
+    epochs,
+    lr,
+    config_path,
+    ckpt_path,
+    mask_path,
+    diffusers_config_path,
+    device,
+    image_size,
+    ddim_steps,
+    with_l1,
+    beta,
+    alpha,
+    logger
 ):
-    # MODEL TRAINING SETUP
-    total_start_time = time.time()
-    logger.info("Training started")
-    # print(config_path)
-    model = setup_model(config_path, ckpt_path, device)
-    criteria = torch.nn.MSELoss()
-    forget_dl, remain_dl = setup_nsfw_data(
-        batch_size, forget_path='./dataFolder/NSFW/SD',
-        remain_path='./dataFolder/NotNSFW', image_size=image_size)
-    num_forget = len(forget_dl.dataset)
-    fisher_dl = forget_dl
-    logger.info(f"Number of unlearning datapoints: {num_forget}")
-
+    
+    logger.info(TEXT_SOMETHING)
     
 
+    # MODEL TRAINING SETUP
+    # print(config_path)
+    total_start_time = time.time()
+    logger.info("Training started")
+    model = setup_model(config_path, ckpt_path, device)
+    criteria = torch.nn.MSELoss()
+
+    remain_dl, descriptions = setup_remain_data(class_to_forget, batch_size, image_size)
+    forget_dl, _ = setup_forget_data(class_to_forget, batch_size, image_size)
+    fisher_dl, _ = setup_forget_data(class_to_forget, batch_size, image_size)
+    num_forget = len(forget_dl.dataset)
+    logger.info(f"Number of unlearning datapoints: {num_forget}")
+
+        
 
     # choose parameters to train based on train_method
     parameters = []
     param_names = []
-    for name, param in model.model.diffusion_model.named_parameters():
+    for param_name, param in model.model.diffusion_model.named_parameters():
         # train all layers except x-attns and time_embed layers
         if train_method == "noxattn":
-            if name.startswith("out.") or "attn2" in name or "time_embed" in name:
+            if param_name.startswith("out.") or "attn2" in param_name or "time_embed" in param_name:
                 pass
             else:
+                # print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         # train only self attention layers
         if train_method == "selfattn":
-            if "attn1" in name:
+            if "attn1" in param_name:
+                print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         # train only x attention layers
         if train_method == "xattn":
-            if "attn2" in name:
+            if "attn2" in param_name:
+                # print(param_name)
                 parameters.append(param)
-                param_names.append(name)
+                param_names.append(param_name)
         # train all layers
         if train_method == "full":
-            # logger.info(name)
+            # print(param_name)
             parameters.append(param)
-            param_names.append(name)
+            param_names.append(param_name)
         # train all layers except time embed layers
         if train_method == "notime":
-            if not (name.startswith("out.") or "time_embed" in name):
+            if not (param_name.startswith("out.") or "time_embed" in param_name):
+                print(param_name)
                 parameters.append(param)
+                param_names.append(param_name)
         if train_method == "xlayer":
-            if "attn2" in name:
-                if "output_blocks.6." in name or "output_blocks.8." in name:
+            if "attn2" in param_name:
+                if "output_blocks.6." in param_name or "output_blocks.8." in param_name:
+                    print(param_name)
                     parameters.append(param)
+                    param_names.append(param_name)
         if train_method == "selflayer":
-            if "attn1" in name:
-                if "input_blocks.4." in name or "input_blocks.7." in name:
+            if "attn1" in param_name:
+                if "input_blocks.4." in param_name or "input_blocks.7." in param_name:
+                    print(param_name)
                     parameters.append(param)
+                    param_names.append(param_name)
 
     # set model to train
+
+    # ----------------------------------------------------
     model.train()
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
-
-    if mask_path:
-        mask = torch.load(mask_path)
-        name = f"compvis-nsfw-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}"
-    else:
-        name = f"compvis-nsfw-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
-
-    # NSFW Removal
-    word_wear = "a photo of a person wearing clothes"
-    word_print = 'nsfw'.replace(" ", "")
+    
+    
+    classes_str = "_".join(str(c) for c in class_to_forget) if isinstance(class_to_forget, list) else str(class_to_forget)
+    name = f"compvis-cls_{classes_str}-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
 
     # TRAINING CODE
     step = 0
-    
     epoch_times = []
+    # Pre-compute numel_list once — reused every step
     numel_list = [p.numel() for p in parameters]
-    steps_per_epoch = len(forget_dl)
-    mask = None
-    mask_flat = None
+
+    # Compute mask ONCE before training, not inside epoch loop
+    logger.info("Computing importance mask (once, before training)...")
+    # model.eval()
+    # mask, mask_flat = compute_dual_importance_mask(
+    #     model,
+    #     forget_dl,
+    #     remain_dl,
+    #     parameters,
+    #     descriptions,
+    #     class_to_forget,
+    #     beta,
+    #     device,
+    #     target_density=0.10,  # target 15% parameters active
+    #     lambda_tradeoff=1.0
+    # )
+    
+    
+
+    # total = mask_flat.numel()
+    # active = mask_flat.sum().item()
+    # logger.info(f"Mask density: {active/total:.6f} ({active}/{total} params active)")
+    # model.train()
+
+
+
+    # logger.info(f"Dual importance masks computed for all layers. Starting training with MUNBa...")
+    steps_per_epoch = len(forget_dl)   # already accounts for batch size
+    logger.info(f"Steps per epoch: {steps_per_epoch} | Batch size: {batch_size}")
+    max_fisher_batches = min(80, steps_per_epoch // 3)
+    logger.info(f"Fisher cap: {max_fisher_batches} batches (steps_per_epoch={steps_per_epoch})")
+
+
     for epoch in range(epochs):
         recompute_every = _recompute_interval(epoch, epochs, steps_per_epoch)
+        logger.info(f"Epoch {epoch+1}: mask recompute every {recompute_every} steps")
         epoch_start_time = time.time()
         logger.info(f"Epoch {epoch+1}/{epochs} started")
-        with tqdm(total=len(forget_dl)) as time_1:
-            
-            
-            remain_iter = iter(remain_dl)
-            for i, forget_batch in enumerate(forget_dl):
-                if step >= 0 and step % recompute_every == 0:
 
-                    logger.info(f"Recomputing mask (step {step})")
+        # ── EMA mask recomputation every epoch after the first ────────────────
+        # The model weights have shifted so the importance landscape has changed.
+        # We recompute and blend with the previous mask to avoid sudden thrashing.
+        
+            
+
+        with tqdm(total=len(forget_dl)) as time_1:
+            # model.train()
+            # forget_iter = iter(forget_dl)
+            remain_iter = iter(remain_dl)
+            
+
+            for i, (forget_images, forget_labels) in enumerate(forget_dl):   
+                if step>=0 and step % recompute_every == 0:
+                    logger.info(f"Recomputing mask with EMA (Step {step})...")
+                    mask_start_time = time.time()
 
                     model.eval()
-
                     mask, mask_flat = compute_dual_importance_mask(
                         model=model,
-                        forget_dl=fisher_dl,
+                        forget_dl=fisher_dl,  # use separate dataloader for fisher computation to avoid exhausting forget_dl iterator
                         remain_dl=remain_dl,
                         parameters=parameters,
                         param_names=param_names,
-                        descriptions=None,
-                        class_to_forget=None,
+                        descriptions=descriptions,
+                        class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=args.mask_density,
+                        target_density=0.25,
                         lambda_tradeoff=1.0,
                         importance_variant=args.importance_variant,
-                        previous_mask_flat=None if step == 0 else mask_flat,
+                        previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
                         ema_alpha=0.3,
-                        logger=logger
+                        logger=logger,
+                        max_fisher_batches=max_fisher_batches
                     )
-
+                    mask_time = time.time() - mask_start_time
+                    logger.info(f"Mask computed in {mask_time:.2f}s ({mask_time/60:.2f} min)")
                     model.train()
-                optimizer.zero_grad()
+                
                 
 
                 try:
-                    remain_batch = next(remain_iter)
+                    remain_images, remain_labels = next(remain_iter)
                 except StopIteration:
                     remain_iter = iter(remain_dl)
-                    remain_batch = next(remain_iter)
+                    remain_images, remain_labels = next(remain_iter)
 
+                
+
+                remain_prompts = [descriptions[label] for label in remain_labels]
+                forget_prompts = [descriptions[label] for label in forget_labels]
+                #   chnage this 
+                forget_set = set(class_to_forget) if isinstance(class_to_forget, list) else {int(class_to_forget)}
+                available_pseudo = [i for i in range(10) if i not in forget_set]
+                pseudo_prompts = [
+                    descriptions[random.choice(available_pseudo)]
+                    for _ in forget_labels
+                ]
+                
+                # remain stage
+                remain_batch = {
+                    "jpg": remain_images.permute(0, 2, 3, 1),
+                    "txt": remain_prompts,
+                }
+                # 
                 loss_r = model.shared_step(remain_batch)[0]
 
+                # forget stage
+                forget_batch = {
+                    "jpg": forget_images.permute(0, 2, 3, 1),
+                    "txt": forget_prompts,
+                }
+                pseudo_batch = {
+                    "jpg": forget_images.permute(0, 2, 3, 1),
+                    "txt": pseudo_prompts,
+                }
                 forget_input, forget_emb = model.get_input(
                     forget_batch, model.first_stage_key
                 )
-                pseudo_prompts = [word_wear] * forget_batch['jpg'].size(0)
-                pseudo_batch = {
-                    "jpg": forget_batch['jpg'],
-                    "txt": pseudo_prompts,
-                }
                 pseudo_input, pseudo_emb = model.get_input(
                     pseudo_batch, model.first_stage_key
                 )
@@ -236,7 +314,6 @@ def MUNBa(classes,
                 pseudo_out = model.apply_model(pseudo_noisy, t, pseudo_emb).detach()
 
                 loss_u = criteria(forget_out, pseudo_out) * beta
-                # loss_u = -model.shared_step(forget_batch)[0]
 
                 #####################################################
                 if args.munba:
@@ -246,18 +323,31 @@ def MUNBa(classes,
                     grad_f_norm = 0.0
                     cos_value = 0.0
                     update_norm = 0.0
+                    optimizer.zero_grad()
                     
-                    
-                    # compute gradient for each task
-                    grads_r = torch.autograd.grad(loss_r, parameters, allow_unused=True)
+                    if with_l1:
+                        current_alpha = alpha * (1 - epoch / epochs)
+                        l1_loss = current_alpha * l1_regularization(parameters)
+                        loss_r_total = loss_r + l1_loss
+                    else:
+                        loss_r_total = loss_r
+
+                    grads_r = torch.autograd.grad(loss_r_total, parameters,allow_unused=True)
                     grads_f = torch.autograd.grad(loss_u, parameters, allow_unused=True)
 
                     grads_r = [g.detach() if g is not None else None for g in grads_r]
                     grads_f = [g.detach() if g is not None else None for g in grads_f]
 
+
+
+                    # FIX: ONE flatten → ONE gather → compute Nash → ONE scatter
+                    # Replaces 2*N gather + N cat + 2*N scatter across layers
+
+                    # Step A: flatten all grads into two contiguous vectors
                     gr_flat = flatten_grads(parameters, grads_r)
                     gf_flat = flatten_grads(parameters, grads_f)
 
+                    # Step B: ONE boolean index on contiguous memory
                     gr_masked = gr_flat[mask_flat]
                     gf_masked = gf_flat[mask_flat]
 
@@ -265,9 +355,9 @@ def MUNBa(classes,
                         del gr_flat, gf_flat, gr_masked, gf_masked
                         continue
 
+                    # Step C: Nash weight computation (identical logic)
                     norm_gr = torch.clamp(torch.norm(gr_masked), min=1e-6)
                     norm_gf = torch.clamp(torch.norm(gf_masked), min=1e-6)
-
                     cos_phi = torch.clamp(
                         torch.dot(gr_masked, gf_masked) / (norm_gr * norm_gf),
                         -1.0 + 1e-6, 1.0 - 1e-6
@@ -287,25 +377,34 @@ def MUNBa(classes,
                         )
                         alpha_f = (1.0 / norm_gf) * torch.sqrt(
                             sin_sq_phi * (1.0 - cos_phi)
-                        ) 
-                    update_norm = torch.norm(alpha_r * gr_masked + alpha_f * gf_masked).item()
-                    update_full = torch.zeros_like(gr_flat)
+                        )
 
-                    update_full[mask_flat] = (
-                        alpha_r * gr_masked + alpha_f * gf_masked
-                    )   
+                    update_norm = torch.norm(alpha_r * gr_masked + alpha_f * gf_masked).item()
+
+                    # Step D: build full update vector, zeros outside mask
+                    update_full = torch.zeros_like(gr_flat)
+                    update_full[mask_flat] = alpha_r * gr_masked + alpha_f * gf_masked
+
                     del gr_flat, gf_flat, gr_masked, gf_masked
+
+                    # Step E: ONE unpack into p.grad — replaces N per-layer scatter ops
                     unpack_update_to_grads(parameters, update_full, numel_list)
                     del update_full
-                    loss = loss_r + loss_u
+
+
                     
+
+                    loss = loss_r + loss_u 
                 #####################################################
                 else:
                     loss = loss_r + args.lam * loss_u
 
-               
+                
                 nn.utils.clip_grad_norm_(parameters, 1.0)
                 optimizer.step()
+
+                losses.append(loss.item() / batch_size)
+
                 step += 1
                 
 
@@ -318,10 +417,12 @@ def MUNBa(classes,
                         f"||g_f||: {grad_f_norm:.4f}, "
                         f"cos: {cos_value:.4f}, "
                         f"||update||: {update_norm:.4f}, "
-                        
+                        f"loss: {loss.item():.4f}, "
+                        f"loss_r: {loss_r.item():.4f}, "
+                        f"loss_u: {loss_u.item():.4f}"
                     )
                     # save_history(losses, name, classes)
-                if step % 100 == 0:
+                if step % 50 == 0:
                     torch.cuda.empty_cache()
                     gc.collect()
 
@@ -329,8 +430,11 @@ def MUNBa(classes,
                 time_1.set_postfix(loss=loss.item() / batch_size)
                 sleep(0.1)
                 time_1.update(1)
+            del grads_r, grads_f
+
             torch.cuda.empty_cache()
             gc.collect()
+            
             epoch_time = time.time() - epoch_start_time
             epoch_times.append(epoch_time)
             logger.info(
@@ -338,7 +442,7 @@ def MUNBa(classes,
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if  epoch ==0 or (epoch + 1)%5 == 0 and epoch != epochs-1 :
+            if (epoch+1)%3==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -356,7 +460,7 @@ def MUNBa(classes,
         compvis_config_file=config_path,
         diffusers_config_file=diffusers_config_path,
     )
-    save_history(losses, name, word_print)
+    save_history(losses, name, classes_str)
 
 
 def moving_average(a, n=3):
@@ -406,6 +510,7 @@ def save_model(
         os.remove(path)
         print(f"Deleted compvis checkpoint: {path}")
 
+
 def save_history(losses, name, word_print):
     folder_path = f"models/{name}"
     os.makedirs(folder_path, exist_ok=True)
@@ -416,7 +521,7 @@ def save_history(losses, name, word_print):
 
 
 def setup_seed(seed):
-    logger.info("setup random seed = {}".format(seed))
+    print("setup random seed = {}".format(seed))
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
     np.random.seed(seed)
@@ -425,32 +530,22 @@ def setup_seed(seed):
 
 
 if __name__ == "__main__":
-    logger, log_file = setup_logger(name="MUNBa_NSFw")
-    
-
     parser = argparse.ArgumentParser(
         prog="Train", description="train a stable diffusion model from scratch"
     )
+    parser.add_argument("--class_to_forget", nargs='+', type=int, required=False, default=[0,3,7])
     parser.add_argument(
-        "--class_to_forget",
-        help="class corresponding to concept to erase",
-        type=str,
-        required=False,
-        default="0",
-    )
-    
-    parser.add_argument(
-        "--train_method", help="method of training", type=str, required=False, default="full"
+        "--train_method", help="method of training", type=str, required=False,default="full"
     )
     parser.add_argument(
         "--batch_size",
         help="batch_size used to train",
         type=int,
         required=False,
-        default=8,
+        default=16,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=40
+        "--epochs", help="epochs used to train", type=int, required=False, default=15
     )
     parser.add_argument(
         "--lr",
@@ -492,7 +587,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="1",
+        default="3",
     )
     parser.add_argument(
         "--image_size",
@@ -510,24 +605,24 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-    "--mask_density",
-    type=float,
-    default=0.10
-)
-
-    parser.add_argument(
-        "--importance_variant",
-        type=str,
-        default="both",
-        choices=["ratio", "difference", "both"],
+    "--importance_variant",
+    type=str,
+    default="ratio",
+    choices=["ratio", "difference", "both"],
     )
-    parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--alpha", type=float, default=1e-4)
-    ##################################### MUNBa setting #################################################
+
+    
+    ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
-    parser.add_argument("--beta", type=float, default=100.0)
+    parser.add_argument("--with_l1", action="store_true", default=False)
+    parser.add_argument("--beta", type=float, default=1.5)
+    parser.add_argument("--alpha", type=float, default=1e-4)
+    parser.add_argument("--lam", type=float, default=0.5)
 
     args = parser.parse_args()
+    classes_str = "_".join(str(c) for c in args.class_to_forget)
+    logger, log_file = setup_logger(name=f"MUNBa_class_to_forgot{classes_str}")
+
 
     logger.info("======== MUNBa TRAINING STARTED ========")
     logger.info(f"Log file: {log_file}")
@@ -535,8 +630,8 @@ if __name__ == "__main__":
 
     setup_seed(42)
 
-    classes = int(args.class_to_forget)
-    logger.info(classes)
+    classes = args.class_to_forget
+    print(classes)
     train_method = args.train_method
     batch_size = args.batch_size
     epochs = args.epochs
@@ -567,6 +662,7 @@ if __name__ == "__main__":
         args.alpha,
         logger
     )
+
 
 
 

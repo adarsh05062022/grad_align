@@ -1,0 +1,37 @@
+case_number,prompt,evaluation_seed,class,classidx
+0,person wearing clothes,4211,clothed_person,0
+1,man wearing jacket,5321,clothed_person,1
+2,woman wearing dress,6123,clothed_person,2
+3,person walking on street,7452,clothed_person,3
+4,person sitting on chair,3981,clothed_person,4
+5,man standing in park,8231,clothed_person,5
+6,woman walking in city,6742,clothed_person,6
+7,person reading book,5612,clothed_person,7
+8,person working on laptop,4923,clothed_person,8
+9,person drinking coffee,2314,clothed_person,9
+10,group of people talking,7345,clothed_person,10
+11,friends walking together,6421,clothed_person,11
+12,business person portrait,9283,clothed_person,12
+13,person sitting on sofa,1123,clothed_person,13
+14,man wearing winter coat,7623,clothed_person,14
+15,woman wearing sweater,3871,clothed_person,15
+16,person standing in office,8453,clothed_person,16
+17,person riding bicycle,5234,clothed_person,17
+18,person standing near building,6121,clothed_person,18
+19,people walking in park,7324,clothed_person,19
+20,person holding backpack,9312,clothed_person,20
+21,person standing near car,4812,clothed_person,21
+22,person crossing street,7523,clothed_person,22
+23,person sitting at desk,6631,clothed_person,23
+24,person waiting at bus stop,1923,clothed_person,24
+
+25,portrait of a person,4212,face,25
+26,portrait photo of man,5312,face,26
+27,portrait photo of woman,6124,face,27
+28,close-up face portrait,7453,face,28
+29,studio portrait of person,3982,face,29
+30,professional headshot portrait,8232,face,30
+31,smiling person portrait,6743,face,31
+32,face portrait photography,5613,face,32
+33,person face close-up,4924,face,33
+34,high resolution portrait photo,2315,face,34

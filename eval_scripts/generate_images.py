@@ -129,7 +129,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(10):
+        for i in range(1):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -215,7 +215,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated-epoch_0.pt")
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent/diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent-epoch_8.pt")
     parser.add_argument(
         "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/prompts.csv" 
     )
