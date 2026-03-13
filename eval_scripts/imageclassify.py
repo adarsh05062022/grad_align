@@ -42,8 +42,10 @@ if __name__ == "__main__":
 
     # -------- LIST OF IMAGE FOLDERS --------
     folders = [
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0_3_7-MUNBa-method_full-lr_1e-05_E15_U2752_multi_class_25_percent-epoch_8.pt",
-      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent-epoch_8.pt"
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/gen/diffusers-cls_0_4-MUNBa-method_full-lr_1e-05_E8_U1904_multi_topk10_an_image.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/gen/diffusers-cls_0_7_4-MUNBa-method_full-lr_1e-05_E8_U2835_multi_topk10_an_image.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/gen/diffusers-cls_0_7-MUNBa-method_full-lr_1e-05_E8_U1894_multi_topk10_an_image.pt",
+      "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/gen/diffusers-cls_7_4-MUNBa-method_full-lr_1e-05_E8_U1872_multi_topk10_an_image.pt"
 
 
     ]

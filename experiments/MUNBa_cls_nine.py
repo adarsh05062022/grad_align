@@ -27,7 +27,7 @@ from .mask import compute_dual_importance_mask
 
 
 
-TEXT_SOMETHING = "masked_nash_topk10_frequent_mask_ratio"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "topk15_pseudo_an_image"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -250,7 +250,7 @@ def MUNBa(
                         class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=0.10,
+                        target_density=0.15,
                         lambda_tradeoff=1.0,
                         importance_variant=args.importance_variant,
                         previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
@@ -275,8 +275,12 @@ def MUNBa(
                 remain_prompts = [descriptions[label] for label in remain_labels]
                 forget_prompts = [descriptions[label] for label in forget_labels]
                 #   chnage this 
+                # pseudo_prompts = [
+                #     descriptions[(int(class_to_forget) + 1) % 10]
+                #     for label in forget_labels
+                # ]
                 pseudo_prompts = [
-                    descriptions[(int(class_to_forget) + 1) % 10]
+                    "an abstract texture"
                     for label in forget_labels
                 ]
                 # PSEUDO_TARGET = "a blurry unrecognizable texture with no specific features"
@@ -442,8 +446,8 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            # if epoch%5==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
-            #     save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
+            if (epoch+1)%3==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+                save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
     logger.info(
@@ -538,7 +542,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="7",
+        default="4",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -551,7 +555,7 @@ if __name__ == "__main__":
         default=8,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=5
+        "--epochs", help="epochs used to train", type=int, required=False, default=10
     )
     parser.add_argument(
         "--lr",
@@ -613,7 +617,7 @@ if __name__ == "__main__":
     parser.add_argument(
     "--importance_variant",
     type=str,
-    default="ratio",
+    default="both",
     choices=["ratio", "difference", "both"],
     )
 

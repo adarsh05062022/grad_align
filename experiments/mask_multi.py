@@ -14,6 +14,7 @@ def _accumulate_fisher(
     class_to_forget,
     beta,
     device,
+    pseudo_class_map, 
     max_batches=80,
 ):
     """
@@ -48,11 +49,14 @@ def _accumulate_fisher(
 
         # ── prompts ──────────────────────────────────────────────────────────
         forget_prompts = [descriptions[label] for label in forget_labels]
-        forget_set = set(class_to_forget) if isinstance(class_to_forget, (list, tuple)) else {int(class_to_forget)}
-        available_pseudo = [i for i in range(10) if i not in forget_set]
+        
+        # pseudo_prompts = [
+        #     "an abstract texture"
+        #     for label in forget_labels
+        # ]
         pseudo_prompts = [
-            descriptions[random.choice(available_pseudo)]
-            for _ in forget_labels
+            descriptions[pseudo_class_map[label.item()]]
+            for label in forget_labels
         ]
         remain_prompts = [descriptions[label] for label in remain_labels]
 
@@ -308,11 +312,13 @@ def compute_dual_importance_mask(
     class_to_forget,
     beta,
     device,
+    pseudo_class_map, 
     target_density=0.10,       # 10% is a safer default than 15% — sweep this
     lambda_tradeoff=1.0,
     importance_variant="both",
     previous_mask_flat=None,   # pass the previous mask for EMA smoothing
-    ema_alpha=0.3,             # weight of new mask in EMA:  new = α·new + (1-α)·old
+    ema_alpha=0.3,       
+          # weight of new mask in EMA:  new = α·new + (1-α)·old
     logger=None,
     max_fisher_batches=80,           # limit batches for faster mask computation during tuning
 ):
@@ -352,7 +358,7 @@ def compute_dual_importance_mask(
 
     accum_fisher_f, accum_fisher_r = _accumulate_fisher(
         model, forget_dl, remain_dl, parameters,
-        descriptions, class_to_forget, beta, device,
+        descriptions, class_to_forget, beta, device,pseudo_class_map=pseudo_class_map,
         max_batches=max_fisher_batches
     )
 

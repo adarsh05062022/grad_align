@@ -423,7 +423,7 @@ def MUNBa(
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if epoch%1==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
+            if epoch%3==0 and epoch != epochs - 1:  # save intermediate compvis checkpoints for all but last epoch
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -519,7 +519,7 @@ if __name__ == "__main__":
         help="class corresponding to concept to erase",
         type=str,
         required=False,
-        default="3",
+        default="1",
     )
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
@@ -574,7 +574,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="6",
+        default="1",
     )
     parser.add_argument(
         "--image_size",

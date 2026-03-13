@@ -26,7 +26,7 @@ from .mask_multi import compute_dual_importance_mask
 
 
 
-TEXT_SOMETHING = "multi_class_25_percent"  # used in logging and naming outputs, change to reflect your experiment setting
+TEXT_SOMETHING = "multi_topk10_an_image"  # used in logging and naming outputs, change to reflect your experiment setting
 
 
 def l1_regularization(parameters):
@@ -207,7 +207,13 @@ def MUNBa(
     # logger.info(f"Mask density: {active/total:.6f} ({active}/{total} params active)")
     # model.train()
 
-
+    forget_set = set(class_to_forget) if isinstance(class_to_forget, list) else {int(class_to_forget)}
+    available_pseudo = [i for i in range(10) if i not in forget_set]
+    pseudo_class_map = {
+        forget_cls: available_pseudo[idx % len(available_pseudo)]
+        for idx, forget_cls in enumerate(class_to_forget if isinstance(class_to_forget, list) else [int(class_to_forget)])
+    }
+    logger.info(f"Pseudo class mapping: {pseudo_class_map}")
 
     # logger.info(f"Dual importance masks computed for all layers. Starting training with MUNBa...")
     steps_per_epoch = len(forget_dl)   # already accounts for batch size
@@ -250,7 +256,8 @@ def MUNBa(
                         class_to_forget=class_to_forget,
                         beta=beta,
                         device=device,
-                        target_density=0.25,
+                        pseudo_class_map=pseudo_class_map, 
+                        target_density=0.10,
                         lambda_tradeoff=1.0,
                         importance_variant=args.importance_variant,
                         previous_mask_flat=None if step == 0 else mask_flat,  # FIX: pass previous mask for EMA
@@ -274,13 +281,15 @@ def MUNBa(
 
                 remain_prompts = [descriptions[label] for label in remain_labels]
                 forget_prompts = [descriptions[label] for label in forget_labels]
-                #   chnage this 
-                forget_set = set(class_to_forget) if isinstance(class_to_forget, list) else {int(class_to_forget)}
-                available_pseudo = [i for i in range(10) if i not in forget_set]
+                
                 pseudo_prompts = [
-                    descriptions[random.choice(available_pseudo)]
-                    for _ in forget_labels
+                    descriptions[pseudo_class_map[label.item()]]
+                    for label in forget_labels
                 ]
+                # pseudo_prompts = [
+                #     "an abstract texture"
+                #     for label in forget_labels
+                # ]
                 
                 # remain stage
                 remain_batch = {
@@ -533,7 +542,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="Train", description="train a stable diffusion model from scratch"
     )
-    parser.add_argument("--class_to_forget", nargs='+', type=int, required=False, default=[0,3,7])
+    parser.add_argument("--class_to_forget", nargs='+', type=int, required=False, default=[0,7,4])
     parser.add_argument(
         "--train_method", help="method of training", type=str, required=False,default="full"
     )
@@ -542,10 +551,10 @@ if __name__ == "__main__":
         help="batch_size used to train",
         type=int,
         required=False,
-        default=16,
+        default=8,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=15
+        "--epochs", help="epochs used to train", type=int, required=False, default=8
     )
     parser.add_argument(
         "--lr",
@@ -587,7 +596,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="3",
+        default="4",
     )
     parser.add_argument(
         "--image_size",
@@ -607,7 +616,7 @@ if __name__ == "__main__":
     parser.add_argument(
     "--importance_variant",
     type=str,
-    default="ratio",
+    default="both",
     choices=["ratio", "difference", "both"],
     )
 
@@ -615,7 +624,7 @@ if __name__ == "__main__":
     ##################################### Nash setting #################################################
     parser.add_argument("--munba", default=True, action='store_true',)
     parser.add_argument("--with_l1", action="store_true", default=False)
-    parser.add_argument("--beta", type=float, default=1.5)
+    parser.add_argument("--beta", type=float, default=1.0)
     parser.add_argument("--alpha", type=float, default=1e-4)
     parser.add_argument("--lam", type=float, default=0.5)
 

@@ -46,8 +46,12 @@ def _accumulate_fisher(
 
         # ── prompts ──────────────────────────────────────────────────────────
         forget_prompts = [descriptions[label] for label in forget_labels]
+        # pseudo_prompts = [
+        #     descriptions[(int(class_to_forget) + 1) % 10]
+        #     for _ in forget_labels
+        # ]
         pseudo_prompts = [
-            descriptions[(int(class_to_forget) + 1) % 10]
+            "an image"
             for _ in forget_labels
         ]
         remain_prompts = [descriptions[label] for label in remain_labels]

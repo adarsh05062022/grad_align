@@ -91,6 +91,17 @@ def generate_images(
     print("Unexpected keys:", len(unexpected))
 
     print("Checkpoint successfully loaded. Starting generation...")
+    # if "SD" not in model_name:
+    #     try:
+    #         # model_path = (
+    #         #     f'models/{model_name}/{model_name.replace("compvis","diffusers")}.pt'
+    #         # )
+    #         model_path = model_name
+    #         unet.load_state_dict(torch.load(model_path))
+    #     except Exception as e:
+    #         print(
+    #             f"Model path is not valid, please check the file name and structure: {e}"
+    #         )
     scheduler = LMSDiscreteScheduler(
         beta_start=0.00085,
         beta_end=0.012,
@@ -129,7 +140,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(100):
+        for i in range(1):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -215,12 +226,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated-epoch_0.pt")
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updaterd/diffusers-cls_0-MUNBa-method_full-lr_1e-05_E5_U963_layer_importance_masking_5_percent_per_epoch_mask_fisher_once_nash_softmax_updated-epoch_0.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_cifar/CLASS/prompts.csv" 
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_food/CLASS/prompts.csv" 
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/generated_images"
+        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts_food/CLASS/generated_images"
     )
     parser.add_argument(
         "--device",

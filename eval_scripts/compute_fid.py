@@ -39,9 +39,8 @@ if __name__ == "__main__":
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
     parser.add_argument("--folder_path", help="path of images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images/diffusers-cls_7-MUNBa-method_full-lr_1e-05_E5_U931_masked_nash_topk15_frequent_mask.pt")
-    parser.add_argument(
-        "--class_to_forget", help="class_to_forget", type=int, required=False, default=7
-    )
+    parser.add_argument("--class_to_forget", type=int, nargs="+", required=False, default=[0],
+                        help="One or more class indices to exclude (e.g. --class_to_forget 0 7)")
     parser.add_argument(
         "--image_size",
         help="image size used to train",

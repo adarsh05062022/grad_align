@@ -120,7 +120,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(5):
+        for i in range(1):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -199,10 +199,10 @@ if __name__ == "__main__":
     )
     parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100/diffusers-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100-epoch_24.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/prompts/human.csv"
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLIP/prompts.csv"
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/dataFolder/NotNSFW"
+        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLIP/before"
     )
     parser.add_argument(
         "--device",
@@ -237,7 +237,7 @@ if __name__ == "__main__":
         help="number of samples per prompt",
         type=int,
         required=False,
-        default=10,
+        default=2,
     )
     parser.add_argument(
         "--ddim_steps",
