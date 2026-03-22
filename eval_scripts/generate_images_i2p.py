@@ -23,6 +23,7 @@ def generate_images(
     ddim_steps=100,
     num_samples=10,
     from_case=0,
+    to_case=0,
 ):
     """
     Function to generate images from diffusers code
@@ -72,17 +73,26 @@ def generate_images(
     unet = UNet2DConditionModel.from_pretrained(
         "CompVis/stable-diffusion-v1-4", subfolder="unet"
     )
-    # if "SD" not in model_name:
-    #     try:
-    #         # model_path = (
-    #         #     f'models/{model_name}/{model_name.replace("compvis","diffusers")}.pt'
-    #         # )
-    #         model_path = model_name
-    #         unet.load_state_dict(torch.load(model_path))
-    #     except Exception as e:
-    #         print(
-    #             f"Model path is not valid, please check the file name and structure: {e}"
-    #         )
+#    comment below for SD generation 
+
+    if not (model_name.endswith(".pt") or model_name.endswith(".pth")):
+        raise ValueError("Generation is allowed ONLY from checkpoint (.pt/.pth).")
+
+    if not os.path.exists(model_name):
+        raise FileNotFoundError(f"Checkpoint not found: {model_name}")
+
+    print(f"Loading checkpoint: {model_name}")
+
+    state_dict = torch.load(model_name, map_location="cpu")
+
+    missing, unexpected = unet.load_state_dict(state_dict, strict=False)
+
+    print("Missing keys:", len(missing))
+    print("Unexpected keys:", len(unexpected))
+
+    print("Checkpoint successfully loaded. Starting generation...")
+
+# Till here
     scheduler = LMSDiscreteScheduler(
         beta_start=0.00085,
         beta_end=0.012,
@@ -106,6 +116,8 @@ def generate_images(
         case_number = row.case_number
         if case_number < from_case:
             continue
+        if to_case > 0 and case_number > to_case:
+            break
 
         height = image_size  # default height of Stable Diffusion
         width = image_size  # default width of Stable Diffusion
@@ -197,12 +209,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100/diffusers-nsfw-MUNBa-method_xattn-lr_1e-05_E40_U1000_beta_100-epoch_24.pt")
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_full-lr_1e-05_E15_U_nsfw_beta_100_mask_20.0/diffusers-nsfw-MUNBa-method_full-lr_1e-05_E15_U_nsfw_beta_100_mask_20.0.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLIP/prompts.csv"
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/Datasets/COCO/coco_30k.csv"
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLIP/before"
+        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/COCO30k_NSFW_beta_100_e14"
     )
     parser.add_argument(
         "--device",
@@ -233,11 +245,18 @@ if __name__ == "__main__":
         default=0,
     )
     parser.add_argument(
+        "--to_case",
+        help="continue generating from case_number",
+        type=int,
+        required=False,
+        default=0,
+    )
+    parser.add_argument(
         "--num_samples",
         help="number of samples per prompt",
         type=int,
         required=False,
-        default=2,
+        default=1,
     )
     parser.add_argument(
         "--ddim_steps",
@@ -257,6 +276,7 @@ if __name__ == "__main__":
     ddim_steps = args.ddim_steps
     num_samples = args.num_samples
     from_case = args.from_case
+    to_case = args.to_case
 
     generate_images(
         model_name,
@@ -268,4 +288,5 @@ if __name__ == "__main__":
         ddim_steps=ddim_steps,
         num_samples=num_samples,
         from_case=from_case,
+        to_case=to_case,
     )

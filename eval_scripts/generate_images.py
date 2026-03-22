@@ -129,7 +129,7 @@ def generate_images(
 
         batch_size = len(prompt)
 
-        for i in range(50):
+        for i in range(1):
             text_input = tokenizer(
                 prompt,
                 padding="max_length",
@@ -215,12 +215,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="generateImages", description="Generate Images using Diffusers Code"
     )
-    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent/diffusers-cls_0_3-MUNBa-method_full-lr_1e-05_E11_U1821_multi_class_20_percent-epoch_8.pt")
+    parser.add_argument("--model_name", help="name of model", type=str, required=False, default="/storage/s25017/MUNBa/SD/models/compvis-nsfw-MUNBa-method_full-lr_1e-05_E15_U_nsfw_beta_100_mask_20.0/diffusers-nsfw-MUNBa-method_full-lr_1e-05_E15_U_nsfw_beta_100_mask_20.0.pt")
     parser.add_argument(
-        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/prompts.csv" 
+        "--prompts_path", help="path to csv file with prompts", type=str, required=False, default="/storage/s25017/MUNBa/SD/prompts/munba_prompts.csv" 
     )
     parser.add_argument(
-        "--save_path", help="folder where to save images", type=str, required=False, default="/data1/adarsh/MUNBA_CODE/MUNBa/SD/eval_scripts/CLASS/generated_images"
+        "--save_path", help="folder where to save images", type=str, required=False, default="/storage/s25017/MUNBa/SD/eval_scripts/CLASS/generated_images"
     )
     parser.add_argument(
         "--device",
@@ -255,7 +255,7 @@ if __name__ == "__main__":
         help="number of samples per prompt",
         type=int,
         required=False,
-        default=1,
+        default=10,
     )
     parser.add_argument(
         "--ddim_steps",

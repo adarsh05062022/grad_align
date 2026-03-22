@@ -199,7 +199,7 @@ def setup_fid_data_i2p(real_path: str,
     interp    = INTERPOLATIONS[interpolation]
     transform = get_transform(interp, image_size)
 
-    real_set = [img for img in Fake_I2P(real_path, transform=transform)]
-    fake_set = [img for img in Fake_I2P(path,      transform=transform)]
+    real_set = Fake_I2P(real_path, transform=transform)
+    fake_set = Fake_I2P(path, transform=transform)
 
     return real_set, fake_set

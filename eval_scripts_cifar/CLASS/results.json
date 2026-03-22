@@ -1,9 +1,0 @@
-[
-    
-    {
-        "model_name": "diffusers-cls_3-MUNBa-method_full-lr_1e-05_E5_U5000_CIFAR10_masked_nash_topk10_frequent_mask-epoch_0.pt",
-        "num_samples": 1,
-        "fid": 0.13069821894168854,
-        "last_execution": "2026-03-07 22:06:51"
-    }
-]

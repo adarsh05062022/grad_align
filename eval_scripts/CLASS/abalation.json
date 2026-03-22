@@ -526,5 +526,10 @@
         "Average": 10.1
       }
     }
+  },
+  "FID on COCO-30k": {
+    "/storage/s25017/MUNBa/SD/eval_scripts/CLASS/COCO30k_NSFW_beta_100_e14": {      
+      "FID": 22.581863403320312
+    }
   }
 }

@@ -1,3 +1,5 @@
+#dataset.py
+
 from pathlib import Path
 
 import numpy as np
@@ -12,8 +14,11 @@ from torchvision.datasets import Imagenette
 
 import os
 import glob
-from PIL import Image
+from PIL import Image,ImageFile
 from torchvision.transforms import ToTensor, Normalize, Compose
+
+ImageFile.LOAD_TRUNCATED_IMAGES = True
+import random
 
 
 
@@ -326,9 +331,12 @@ class NSFWDataset(Dataset):
     def __init__(self, img_dir, transform, image_key='jpg', txt_key='txt', caption=None):
         super().__init__()
         self.img_dir = img_dir
-        self.all_imgs = glob.glob(os.path.join(self.img_dir, "*.png"))
+        self.all_imgs = glob.glob(
+            os.path.join(self.img_dir, "**/*.png"),
+            recursive=True
+        )
         if caption is None:
-            self.caption = "nudity, naked, erotic, sexual"
+            self.caption = "a photo of a nude person"
         else:
             self.caption = caption
         self.captions = [item.strip() for item in self.caption.split(",")]
@@ -342,10 +350,19 @@ class NSFWDataset(Dataset):
     def __getitem__(self, idx):
 
         img_name = self.all_imgs[idx]
-        image = Image.open(img_name)
-        caption_idx = int(img_name.split('/')[-1].split('_')[0])
-        text_cond =  self.captions[caption_idx]
-        image = self.transform(image).permute(1,2,0) # [HxWxC]
+
+        while True:
+            try:
+                image = Image.open(img_name).convert("RGB")
+                break
+            except Exception:
+                idx = random.randint(0, len(self.all_imgs) - 1)
+                img_name = self.all_imgs[idx]
+
+        caption_idx = int(os.path.basename(img_name).split('_')[0]) % len(self.captions)
+        text_cond = self.captions[caption_idx]
+
+        image = self.transform(image).permute(1,2,0)  # KEEP AS YOU WANT
 
         return {self.image_key: image, self.txt_key: text_cond}
 
@@ -372,9 +389,18 @@ class NotNSFWDataset(Dataset):
     def __getitem__(self, idx):
 
         img_name = self.all_imgs[idx]
-        image = Image.open(img_name)
-        text_cond =  self.captions[0]
-        image = self.transform(image).permute(1,2,0) # [HxWxC]
+
+        while True:
+            try:
+                image = Image.open(img_name).convert("RGB")
+                break
+            except Exception:
+                idx = random.randint(0, len(self.all_imgs) - 1)
+                img_name = self.all_imgs[idx]
+
+        text_cond = self.captions[0]
+
+        image = self.transform(image).permute(1,2,0)
 
         return {self.image_key: image, self.txt_key: text_cond}
 

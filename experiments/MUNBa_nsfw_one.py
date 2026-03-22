@@ -40,7 +40,8 @@ def l1_regularization(parameters):
     return torch.linalg.norm(torch.cat(params_vec), ord=1)
 
 
-TEXT_SOMETHING = "beta_100"
+TEXT_SOMETHING = "nsfw_beta_100_512_d_4"
+P_UPDATE = 20
 
 word_wear = "a photo of a person wearing clothes"
 def flatten_grads(parameters, grads):
@@ -102,8 +103,8 @@ def MUNBa(classes,
     model = setup_model(config_path, ckpt_path, device)
     criteria = torch.nn.MSELoss()
     forget_dl, remain_dl = setup_nsfw_data(
-        batch_size, forget_path='./dataFolder/NSFW/SD',
-        remain_path='./dataFolder/NotNSFW', image_size=image_size)
+        batch_size, forget_path='/storage/s25017/Datasets/NSFW_removal/nude',
+        remain_path='/storage/s25017/Datasets/NSFW_removal/with_dress', image_size=image_size)
     num_forget = len(forget_dl.dataset)
     fisher_dl = forget_dl
     logger.info(f"Number of unlearning datapoints: {num_forget}")
@@ -153,11 +154,9 @@ def MUNBa(classes,
     losses = []
     optimizer = torch.optim.Adam(parameters, lr=lr)
 
-    if mask_path:
-        mask = torch.load(mask_path)
-        name = f"compvis-nsfw-MUNBa-mask-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}"
-    else:
-        name = f"compvis-nsfw-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U{num_forget}_{TEXT_SOMETHING}"
+    
+    
+    name = f"compvis-nsfw-MUNBa-method_{train_method}-lr_{lr}_E{epochs}_U_{TEXT_SOMETHING}_mask_{args.mask_density * 100}"
 
     # NSFW Removal
     word_wear = "a photo of a person wearing clothes"
@@ -338,7 +337,7 @@ def MUNBa(classes,
                     f"Time: {epoch_time:.2f}s ({epoch_time/60:.2f} min)"
             )    
             model.eval()
-            if  epoch ==0 or (epoch + 1)%5 == 0 and epoch != epochs-1 :
+            if  (epoch+1)%3 ==0 and  epoch != epochs-1 :
                 save_model(model, name, epoch, save_compvis=False, save_diffusers=True, compvis_config_file=config_path, diffusers_config_file=diffusers_config_path)
     total_time = time.time() - total_start_time
     logger.info("======== TRAINING FINISHED ========")
@@ -447,10 +446,10 @@ if __name__ == "__main__":
         help="batch_size used to train",
         type=int,
         required=False,
-        default=8,
+        default=4,
     )
     parser.add_argument(
-        "--epochs", help="epochs used to train", type=int, required=False, default=40
+        "--epochs", help="epochs used to train", type=int, required=False, default=20
     )
     parser.add_argument(
         "--lr",
@@ -492,7 +491,7 @@ if __name__ == "__main__":
         help="cuda devices to train on",
         type=str,
         required=False,
-        default="1",
+        default="6",
     )
     parser.add_argument(
         "--image_size",
@@ -510,10 +509,10 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-    "--mask_density",
-    type=float,
-    default=0.10
-)
+        "--mask_density",
+        type=float,
+        default=0.20
+    )
 
     parser.add_argument(
         "--importance_variant",
